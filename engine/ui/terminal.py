@@ -2,7 +2,7 @@ import os
 import sys
 import textwrap
 
-VERSION_STRING = "v0.2.1"
+VERSION_STRING = "v0.2.2"
 
 # Standard ANSI Color Tokens
 C_RESET = "\033[0m"

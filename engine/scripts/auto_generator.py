@@ -270,6 +270,13 @@ def process_exercises():
             if ex["is_function"] and ex.get("prototype"):
                 ex["main_code"] = generate_function_wrapper(ex["prototype"], ex["name"])
 
+        # Append Git Note to ALL subjects (Official & Extended)
+        git_note_en = "\n\nNote: There is no git here! Just save your file and run `./examshelp grademe`."
+        git_note_th = "\n\nหมายเหตุ: ไม่ต้องใช้ git ในระบบนี้! แค่เซฟไฟล์แล้วพิมพ์ `./examshelp grademe` เพื่อตรวจได้เลย"
+        
+        ex["subject"] = ex.get("subject", "") + git_note_en
+        ex["subject_th"] = ex.get("subject_th", ex["subject"]) + git_note_th
+
     levels = map_to_10_levels(raw)
     
     official_count = len([e for e in raw if e.get("source_type") == "42_official"])
