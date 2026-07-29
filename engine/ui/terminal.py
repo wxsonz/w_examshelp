@@ -18,9 +18,34 @@ C_BLUE = "\033[1;34m"
 
 from engine.hints import HintEngine
 
+class ConsoleWrapper:
+    def print(self, text=""):
+        if not text:
+            print()
+            return
+            
+        clean_text = str(text)
+        tags = [
+            ("[bold cyan]", C_CYAN), ("[/bold cyan]", C_RESET),
+            ("[bold yellow]", C_YELLOW), ("[/bold yellow]", C_RESET),
+            ("[bold green]", C_GREEN), ("[/bold green]", C_RESET),
+            ("[bold red]", C_RED), ("[/bold red]", C_RESET),
+            ("[bold magenta]", C_MAGENTA), ("[/bold magenta]", C_RESET),
+            ("[bold white]", C_WHITE), ("[/bold white]", C_RESET),
+            ("[dim white]", C_DIM), ("[/dim white]", C_RESET),
+            ("[yellow]", C_YELLOW), ("[/yellow]", C_RESET),
+            ("[green]", C_GREEN), ("[/green]", C_RESET),
+            ("[red]", C_RED), ("[/red]", C_RESET),
+            ("[cyan]", C_CYAN), ("[/cyan]", C_RESET)
+        ]
+        for tag, replacement in tags:
+            clean_text = clean_text.replace(tag, replacement)
+            
+        print(clean_text)
+
 class TerminalUI:
     def __init__(self):
-        pass
+        self.console = ConsoleWrapper()
 
     def _draw_panel(self, title, content_lines, border_color=C_CYAN, subtitle=None):
         width = 76
@@ -35,7 +60,6 @@ class TerminalUI:
 
         # Content lines
         for line in content_lines:
-            # Simple stripping of ANSI codes to measure printable length accurately
             clean_line = line
             for code in [C_RESET, C_BOLD, C_DIM, C_CYAN, C_MAGENTA, C_YELLOW, C_GREEN, C_RED, C_WHITE, C_BLUE]:
                 clean_line = clean_line.replace(code, "")
