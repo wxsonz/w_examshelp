@@ -1,0 +1,9 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Local runtime workspace & user state
+.examshelp_state.json
+rendu/
+subjects/
+history/

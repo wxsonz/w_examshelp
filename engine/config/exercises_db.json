@@ -1,0 +1,1964 @@
+{
+  "total_exercises": 118,
+  "official_42_count": 18,
+  "extended_count": 100,
+  "total_levels": 10,
+  "levels": {
+    "0": [
+      {
+        "id": "beg_aff_a",
+        "name": "aff_a",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 0,
+        "expected_files": "aff_a.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : aff_a\nExpected files   : aff_a.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string, and displays the first 'a' character it\nencounters in it, followed by a newline. If there are no 'a' characters in the\nstring, the program just writes a newline. If the number of parameters is not\n1, the program displays 'a' followed by a newline.\n",
+        "test_cases": [
+          {
+            "cmd": "./aff_a \"abc\" | cat -e",
+            "args": [
+              "abc"
+            ],
+            "expected_stdout": "a\n"
+          },
+          {
+            "cmd": "./aff_a | cat -e",
+            "args": [],
+            "expected_stdout": "a\n"
+          }
+        ],
+        "hints": [
+          "Check argc != 2 first. Iterate over argv[1] looking for 'a'."
+        ]
+      },
+      {
+        "id": "beg_ft_countdown",
+        "name": "ft_countdown",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 0,
+        "expected_files": "ft_countdown.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : ft_countdown\nExpected files   : ft_countdown.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nWrite a program that displays all digits in descending order, followed by a newline.\n",
+        "test_cases": [
+          {
+            "cmd": "./ft_countdown | cat -e",
+            "args": [],
+            "expected_stdout": "9876543210\n"
+          }
+        ],
+        "hints": [
+          "Write digits '9' down to '0' followed by '\\n'."
+        ]
+      },
+      {
+        "id": "beg_ft_print_numbers",
+        "name": "ft_print_numbers",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 0,
+        "expected_files": "ft_print_numbers.c",
+        "allowed_functions": "write",
+        "is_function": true,
+        "prototype": "void ft_print_numbers(void);",
+        "subject": "Assignment name  : ft_print_numbers\nExpected files   : ft_print_numbers.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nWrite a function that displays all digits in ascending order.\n",
+        "test_cases": [],
+        "hints": [
+          "Use a loop from '0' to '9' with write(1, &c, 1)."
+        ]
+      },
+      {
+        "id": "beg_hello",
+        "name": "hello",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 0,
+        "expected_files": "hello.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : hello\nExpected files   : hello.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nWrite a program that displays \"Hello World!\" followed by a newline.\n",
+        "test_cases": [
+          {
+            "cmd": "./hello | cat -e",
+            "args": [],
+            "expected_stdout": "Hello World!\n"
+          }
+        ],
+        "hints": [
+          "write(1, \"Hello World!\\n\", 13);"
+        ]
+      },
+      {
+        "id": "beg_maff_alpha",
+        "name": "maff_alpha",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 0,
+        "expected_files": "maff_alpha.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : maff_alpha\nExpected files   : maff_alpha.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nWrite a program that displays the alphabet in alternating case (aBcDeFg...z) followed by a newline.\n",
+        "test_cases": [
+          {
+            "cmd": "./maff_alpha | cat -e",
+            "args": [],
+            "expected_stdout": "aBcDeFgHiJkLmNoPqRsTuVwXyZ\n"
+          }
+        ],
+        "hints": [
+          "Alternating lowercase and uppercase."
+        ]
+      },
+      {
+        "id": "ext_aff_vowels",
+        "name": "aff_vowels",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "aff_vowels.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : aff_vowels\nExpected files   : aff_vowels.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints all vowels in string.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints all vowels in string."
+        ]
+      },
+      {
+        "id": "ext_ft_isspace",
+        "name": "ft_isspace",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "ft_isspace.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_isspace(int c);",
+        "subject": "Assignment name  : ft_isspace\nExpected files   : ft_isspace.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nChecks if c is whitespace.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if c is whitespace."
+        ]
+      },
+      {
+        "id": "ext_only_even_digits",
+        "name": "only_even_digits",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "only_even_digits.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : only_even_digits\nExpected files   : only_even_digits.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints even digits 02468.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints even digits 02468."
+        ]
+      },
+      {
+        "id": "ext_aff_first_vowel",
+        "name": "aff_first_vowel",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "aff_first_vowel.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : aff_first_vowel\nExpected files   : aff_first_vowel.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints first vowel in string.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints first vowel in string."
+        ]
+      },
+      {
+        "id": "ext_ft_putchar_repeat",
+        "name": "ft_putchar_repeat",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "ft_putchar_repeat.c",
+        "allowed_functions": "write",
+        "is_function": true,
+        "prototype": "void ft_putchar_repeat(char c, int n);",
+        "subject": "Assignment name  : ft_putchar_repeat\nExpected files   : ft_putchar_repeat.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints char c n times.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints char c n times."
+        ]
+      },
+      {
+        "id": "ext_swap_case_char",
+        "name": "swap_case_char",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "swap_case_char.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : swap_case_char\nExpected files   : swap_case_char.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nSwaps case of single char parameter.\n",
+        "test_cases": [],
+        "hints": [
+          "Swaps case of single char parameter."
+        ]
+      },
+      {
+        "id": "ext_print_reverse_alphabet",
+        "name": "print_reverse_alphabet",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "print_reverse_alphabet.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : print_reverse_alphabet\nExpected files   : print_reverse_alphabet.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints z-a in lowercase.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints z-a in lowercase."
+        ]
+      },
+      {
+        "id": "ext_ft_is_digit",
+        "name": "ft_is_digit",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "ft_is_digit.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_is_digit(int c);",
+        "subject": "Assignment name  : ft_is_digit\nExpected files   : ft_is_digit.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns 1 if digit, else 0.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns 1 if digit, else 0."
+        ]
+      }
+    ],
+    "1": [
+      {
+        "id": "beg_ft_strcpy",
+        "name": "ft_strcpy",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 1,
+        "expected_files": "ft_strcpy.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_strcpy(char *s1, char *s2);",
+        "subject": "Assignment name  : ft_strcpy\nExpected files   : ft_strcpy.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReproduce the behavior of strcpy.\n",
+        "test_cases": [],
+        "hints": [
+          "Copy s2 into s1 including null terminator."
+        ]
+      },
+      {
+        "id": "beg_ft_strlen",
+        "name": "ft_strlen",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 1,
+        "expected_files": "ft_strlen.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_strlen(char *str);",
+        "subject": "Assignment name  : ft_strlen\nExpected files   : ft_strlen.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns string length.\n",
+        "test_cases": [],
+        "hints": [
+          "Count chars until '\\0'."
+        ]
+      },
+      {
+        "id": "beg_first_word",
+        "name": "first_word",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 1,
+        "expected_files": "first_word.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : first_word\nExpected files   : first_word.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nDisplays first word of a string.\n",
+        "test_cases": [
+          {
+            "cmd": "./first_word \"FOR MAXIMUS\" | cat -e",
+            "args": [
+              "FOR MAXIMUS"
+            ],
+            "expected_stdout": "FOR\n"
+          }
+        ],
+        "hints": [
+          "Skip leading spaces."
+        ]
+      },
+      {
+        "id": "ext_ft_strchr",
+        "name": "ft_strchr",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strchr.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_strchr(const char *s, int c);",
+        "subject": "Assignment name  : ft_strchr\nExpected files   : ft_strchr.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nLocates first occurrence of c in s.\n",
+        "test_cases": [],
+        "hints": [
+          "Locates first occurrence of c in s."
+        ]
+      },
+      {
+        "id": "ext_ft_strrchr",
+        "name": "ft_strrchr",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strrchr.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_strrchr(const char *s, int c);",
+        "subject": "Assignment name  : ft_strrchr\nExpected files   : ft_strrchr.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nLocates last occurrence of c in s.\n",
+        "test_cases": [],
+        "hints": [
+          "Locates last occurrence of c in s."
+        ]
+      },
+      {
+        "id": "ext_ft_is_palindrome",
+        "name": "ft_is_palindrome",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_is_palindrome.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : ft_is_palindrome\nExpected files   : ft_is_palindrome.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nChecks if string is palindrome.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if string is palindrome."
+        ]
+      },
+      {
+        "id": "ext_rot_n",
+        "name": "rot_n",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "rot_n.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : rot_n\nExpected files   : rot_n.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nRotates alphabetic chars by N positions.\n",
+        "test_cases": [],
+        "hints": [
+          "Rotates alphabetic chars by N positions."
+        ]
+      },
+      {
+        "id": "ext_clean_spaces",
+        "name": "clean_spaces",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "clean_spaces.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : clean_spaces\nExpected files   : clean_spaces.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nTrims extra whitespace from string.\n",
+        "test_cases": [],
+        "hints": [
+          "Trims extra whitespace from string."
+        ]
+      },
+      {
+        "id": "ext_ft_strncat",
+        "name": "ft_strncat",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strncat.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_strncat(char *s1, const char *s2, size_t n);",
+        "subject": "Assignment name  : ft_strncat\nExpected files   : ft_strncat.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nConcatenates n chars of s2 onto s1.\n",
+        "test_cases": [],
+        "hints": [
+          "Concatenates n chars of s2 onto s1."
+        ]
+      },
+      {
+        "id": "ext_ft_strncmp",
+        "name": "ft_strncmp",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strncmp.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_strncmp(const char *s1, const char *s2, size_t n);",
+        "subject": "Assignment name  : ft_strncmp\nExpected files   : ft_strncmp.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCompares up to n chars.\n",
+        "test_cases": [],
+        "hints": [
+          "Compares up to n chars."
+        ]
+      },
+      {
+        "id": "ext_ft_strequ",
+        "name": "ft_strequ",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strequ.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_strequ(char const *s1, char const *s2);",
+        "subject": "Assignment name  : ft_strequ\nExpected files   : ft_strequ.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns 1 if s1 and s2 are equal.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns 1 if s1 and s2 are equal."
+        ]
+      },
+      {
+        "id": "ext_ft_isupper",
+        "name": "ft_isupper",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_isupper.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_isupper(int c);",
+        "subject": "Assignment name  : ft_isupper\nExpected files   : ft_isupper.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns 1 if uppercase char.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns 1 if uppercase char."
+        ]
+      },
+      {
+        "id": "ext_ft_islower",
+        "name": "ft_islower",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_islower.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_islower(int c);",
+        "subject": "Assignment name  : ft_islower\nExpected files   : ft_islower.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns 1 if lowercase char.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns 1 if lowercase char."
+        ]
+      },
+      {
+        "id": "ext_ft_isalpha",
+        "name": "ft_isalpha",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_isalpha.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_isalpha(int c);",
+        "subject": "Assignment name  : ft_isalpha\nExpected files   : ft_isalpha.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns 1 if alphabetic char.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns 1 if alphabetic char."
+        ]
+      },
+      {
+        "id": "ext_ft_isalnum",
+        "name": "ft_isalnum",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_isalnum.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_isalnum(int c);",
+        "subject": "Assignment name  : ft_isalnum\nExpected files   : ft_isalnum.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns 1 if alphanumeric char.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns 1 if alphanumeric char."
+        ]
+      },
+      {
+        "id": "ext_ft_isprint",
+        "name": "ft_isprint",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_isprint.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_isprint(int c);",
+        "subject": "Assignment name  : ft_isprint\nExpected files   : ft_isprint.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns 1 if printable char.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns 1 if printable char."
+        ]
+      },
+      {
+        "id": "ext_ft_toupper",
+        "name": "ft_toupper",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_toupper.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_toupper(int c);",
+        "subject": "Assignment name  : ft_toupper\nExpected files   : ft_toupper.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nConverts char to uppercase.\n",
+        "test_cases": [],
+        "hints": [
+          "Converts char to uppercase."
+        ]
+      },
+      {
+        "id": "ext_ft_tolower",
+        "name": "ft_tolower",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_tolower.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_tolower(int c);",
+        "subject": "Assignment name  : ft_tolower\nExpected files   : ft_tolower.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nConverts char to lowercase.\n",
+        "test_cases": [],
+        "hints": [
+          "Converts char to lowercase."
+        ]
+      },
+      {
+        "id": "ext_ft_strcat",
+        "name": "ft_strcat",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strcat.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_strcat(char *s1, const char *s2);",
+        "subject": "Assignment name  : ft_strcat\nExpected files   : ft_strcat.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nAppends s2 to s1.\n",
+        "test_cases": [],
+        "hints": [
+          "Appends s2 to s1."
+        ]
+      },
+      {
+        "id": "ext_ft_strcmp",
+        "name": "ft_strcmp",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strcmp.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_strcmp(const char *s1, const char *s2);",
+        "subject": "Assignment name  : ft_strcmp\nExpected files   : ft_strcmp.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCompares two strings lexicographically.\n",
+        "test_cases": [],
+        "hints": [
+          "Compares two strings lexicographically."
+        ]
+      },
+      {
+        "id": "ext_ft_str_is_alpha",
+        "name": "ft_str_is_alpha",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_str_is_alpha.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_str_is_alpha(char *str);",
+        "subject": "Assignment name  : ft_str_is_alpha\nExpected files   : ft_str_is_alpha.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nChecks if string contains only letters.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if string contains only letters."
+        ]
+      },
+      {
+        "id": "ext_ft_str_is_numeric",
+        "name": "ft_str_is_numeric",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_str_is_numeric.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_str_is_numeric(char *str);",
+        "subject": "Assignment name  : ft_str_is_numeric\nExpected files   : ft_str_is_numeric.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nChecks if string contains only digits.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if string contains only digits."
+        ]
+      },
+      {
+        "id": "ext_ft_str_is_lowercase",
+        "name": "ft_str_is_lowercase",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_str_is_lowercase.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_str_is_lowercase(char *str);",
+        "subject": "Assignment name  : ft_str_is_lowercase\nExpected files   : ft_str_is_lowercase.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nChecks if string contains only lowercase.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if string contains only lowercase."
+        ]
+      },
+      {
+        "id": "ext_ft_str_is_uppercase",
+        "name": "ft_str_is_uppercase",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_str_is_uppercase.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_str_is_uppercase(char *str);",
+        "subject": "Assignment name  : ft_str_is_uppercase\nExpected files   : ft_str_is_uppercase.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nChecks if string contains only uppercase.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if string contains only uppercase."
+        ]
+      },
+      {
+        "id": "ext_ft_str_is_printable",
+        "name": "ft_str_is_printable",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_str_is_printable.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_str_is_printable(char *str);",
+        "subject": "Assignment name  : ft_str_is_printable\nExpected files   : ft_str_is_printable.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nChecks if string contains only printable chars.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if string contains only printable chars."
+        ]
+      },
+      {
+        "id": "ext_ft_strcapitalize",
+        "name": "ft_strcapitalize",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strcapitalize.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_strcapitalize(char *str);",
+        "subject": "Assignment name  : ft_strcapitalize\nExpected files   : ft_strcapitalize.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCapitalizes first letter of every word.\n",
+        "test_cases": [],
+        "hints": [
+          "Capitalizes first letter of every word."
+        ]
+      },
+      {
+        "id": "ext_ft_strlcpy",
+        "name": "ft_strlcpy",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strlcpy.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "size_t ft_strlcpy(char *dst, const char *src, size_t dstsize);",
+        "subject": "Assignment name  : ft_strlcpy\nExpected files   : ft_strlcpy.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nSize-bounded string copy.\n",
+        "test_cases": [],
+        "hints": [
+          "Size-bounded string copy."
+        ]
+      },
+      {
+        "id": "ext_ft_strlcat",
+        "name": "ft_strlcat",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_strlcat.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "size_t ft_strlcat(char *dst, const char *src, size_t dstsize);",
+        "subject": "Assignment name  : ft_strlcat\nExpected files   : ft_strlcat.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nSize-bounded string concat.\n",
+        "test_cases": [],
+        "hints": [
+          "Size-bounded string concat."
+        ]
+      },
+      {
+        "id": "ext_aff_last_vowel",
+        "name": "aff_last_vowel",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "aff_last_vowel.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : aff_last_vowel\nExpected files   : aff_last_vowel.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nDisplays last vowel in string.\n",
+        "test_cases": [],
+        "hints": [
+          "Displays last vowel in string."
+        ]
+      },
+      {
+        "id": "ext_count_vowels",
+        "name": "count_vowels",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "count_vowels.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : count_vowels\nExpected files   : count_vowels.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nDisplays total count of vowels in string.\n",
+        "test_cases": [],
+        "hints": [
+          "Displays total count of vowels in string."
+        ]
+      },
+      {
+        "id": "ext_count_consonants",
+        "name": "count_consonants",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "count_consonants.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : count_consonants\nExpected files   : count_consonants.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nDisplays total count of consonants in string.\n",
+        "test_cases": [],
+        "hints": [
+          "Displays total count of consonants in string."
+        ]
+      }
+    ],
+    "2": [
+      {
+        "id": "beg_ft_atoi",
+        "name": "ft_atoi",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 2,
+        "expected_files": "ft_atoi.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_atoi(const char *str);",
+        "subject": "Assignment name  : ft_atoi\nExpected files   : ft_atoi.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nConvert string to int.\n",
+        "test_cases": [],
+        "hints": [
+          "Skip whitespace, handle sign, parse digits."
+        ]
+      },
+      {
+        "id": "beg_inter",
+        "name": "inter",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 2,
+        "expected_files": "inter.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : inter\nExpected files   : inter.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nDisplays characters appearing in both s1 and s2 without doubles.\n",
+        "test_cases": [
+          {
+            "cmd": "./inter \"padinton\" \"paqefwtdjnty\" | cat -e",
+            "args": [
+              "padinton",
+              "paqefwtdjnty"
+            ],
+            "expected_stdout": "padinto\n"
+          }
+        ],
+        "hints": [
+          "256 lookup array."
+        ]
+      },
+      {
+        "id": "ext_count_set_bits",
+        "name": "count_set_bits",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "count_set_bits.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int count_set_bits(unsigned char octet);",
+        "subject": "Assignment name  : count_set_bits\nExpected files   : count_set_bits.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCounts set 1-bits in octet.\n",
+        "test_cases": [],
+        "hints": [
+          "Counts set 1-bits in octet."
+        ]
+      },
+      {
+        "id": "ext_ft_strpbrk",
+        "name": "ft_strpbrk",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_strpbrk.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_strpbrk(const char *s1, const char *s2);",
+        "subject": "Assignment name  : ft_strpbrk\nExpected files   : ft_strpbrk.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nFinds first match of s2 char in s1.\n",
+        "test_cases": [],
+        "hints": [
+          "Finds first match of s2 char in s1."
+        ]
+      },
+      {
+        "id": "ext_ft_strstr",
+        "name": "ft_strstr",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_strstr.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_strstr(char *haystack, char *needle);",
+        "subject": "Assignment name  : ft_strstr\nExpected files   : ft_strstr.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nLocates substring needle in haystack.\n",
+        "test_cases": [],
+        "hints": [
+          "Locates substring needle in haystack."
+        ]
+      },
+      {
+        "id": "ext_ft_count_words",
+        "name": "ft_count_words",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_count_words.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_count_words(const char *str);",
+        "subject": "Assignment name  : ft_count_words\nExpected files   : ft_count_words.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCounts words separated by whitespace.\n",
+        "test_cases": [],
+        "hints": [
+          "Counts words separated by whitespace."
+        ]
+      },
+      {
+        "id": "ext_ft_reverse_words",
+        "name": "ft_reverse_words",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_reverse_words.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : ft_reverse_words\nExpected files   : ft_reverse_words.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nReverses order of words in string.\n",
+        "test_cases": [],
+        "hints": [
+          "Reverses order of words in string."
+        ]
+      },
+      {
+        "id": "ext_toggle_bits",
+        "name": "toggle_bits",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "toggle_bits.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "unsigned char toggle_bits(unsigned char octet);",
+        "subject": "Assignment name  : toggle_bits\nExpected files   : toggle_bits.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nInverts all bits in octet.\n",
+        "test_cases": [],
+        "hints": [
+          "Inverts all bits in octet."
+        ]
+      },
+      {
+        "id": "ext_ft_strcasestr",
+        "name": "ft_strcasestr",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_strcasestr.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_strcasestr(const char *s1, const char *s2);",
+        "subject": "Assignment name  : ft_strcasestr\nExpected files   : ft_strcasestr.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCase-insensitive substring search.\n",
+        "test_cases": [],
+        "hints": [
+          "Case-insensitive substring search."
+        ]
+      },
+      {
+        "id": "ext_ft_is_anagram",
+        "name": "ft_is_anagram",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_is_anagram.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_is_anagram(char *s1, char *s2);",
+        "subject": "Assignment name  : ft_is_anagram\nExpected files   : ft_is_anagram.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nChecks if two strings are anagrams.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if two strings are anagrams."
+        ]
+      },
+      {
+        "id": "ext_ft_strdup",
+        "name": "ft_strdup",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_strdup.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char *ft_strdup(const char *s1);",
+        "subject": "Assignment name  : ft_strdup\nExpected files   : ft_strdup.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nDuplicates string with malloc.\n",
+        "test_cases": [],
+        "hints": [
+          "Duplicates string with malloc."
+        ]
+      },
+      {
+        "id": "ext_ft_ndup",
+        "name": "ft_ndup",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_ndup.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char *ft_ndup(const char *s1, size_t n);",
+        "subject": "Assignment name  : ft_ndup\nExpected files   : ft_ndup.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nDuplicates first n characters with malloc.\n",
+        "test_cases": [],
+        "hints": [
+          "Duplicates first n characters with malloc."
+        ]
+      },
+      {
+        "id": "ext_ft_memchr",
+        "name": "ft_memchr",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_memchr.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void *ft_memchr(const void *s, int c, size_t n);",
+        "subject": "Assignment name  : ft_memchr\nExpected files   : ft_memchr.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nLocates byte c in memory area s.\n",
+        "test_cases": [],
+        "hints": [
+          "Locates byte c in memory area s."
+        ]
+      },
+      {
+        "id": "ext_ft_memset",
+        "name": "ft_memset",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_memset.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void *ft_memset(void *b, int c, size_t len);",
+        "subject": "Assignment name  : ft_memset\nExpected files   : ft_memset.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nFills len bytes of b with byte c.\n",
+        "test_cases": [],
+        "hints": [
+          "Fills len bytes of b with byte c."
+        ]
+      },
+      {
+        "id": "ext_ft_bzero",
+        "name": "ft_bzero",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_bzero.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void ft_bzero(void *s, size_t n);",
+        "subject": "Assignment name  : ft_bzero\nExpected files   : ft_bzero.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nZeros out n bytes of memory area s.\n",
+        "test_cases": [],
+        "hints": [
+          "Zeros out n bytes of memory area s."
+        ]
+      },
+      {
+        "id": "ext_ft_memcpy",
+        "name": "ft_memcpy",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_memcpy.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void *ft_memcpy(void *dst, const void *src, size_t n);",
+        "subject": "Assignment name  : ft_memcpy\nExpected files   : ft_memcpy.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCopies n bytes from src to dst.\n",
+        "test_cases": [],
+        "hints": [
+          "Copies n bytes from src to dst."
+        ]
+      },
+      {
+        "id": "ext_print_hex_byte",
+        "name": "print_hex_byte",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "print_hex_byte.c",
+        "allowed_functions": "write",
+        "is_function": true,
+        "prototype": "void print_hex_byte(unsigned char c);",
+        "subject": "Assignment name  : print_hex_byte\nExpected files   : print_hex_byte.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints 2-digit hex representation of byte.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints 2-digit hex representation of byte."
+        ]
+      },
+      {
+        "id": "ext_swap_nibbles",
+        "name": "swap_nibbles",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "swap_nibbles.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "unsigned char swap_nibbles(unsigned char octet);",
+        "subject": "Assignment name  : swap_nibbles\nExpected files   : swap_nibbles.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nSwaps high and low 4 bits.\n",
+        "test_cases": [],
+        "hints": [
+          "Swaps high and low 4 bits."
+        ]
+      },
+      {
+        "id": "ext_is_power_of_4",
+        "name": "is_power_of_4",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "is_power_of_4.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int is_power_of_4(unsigned int n);",
+        "subject": "Assignment name  : is_power_of_4\nExpected files   : is_power_of_4.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns 1 if n is power of 4.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns 1 if n is power of 4."
+        ]
+      },
+      {
+        "id": "ext_ft_str_replace",
+        "name": "ft_str_replace",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_str_replace.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void ft_str_replace(char *str, char old_c, char new_c);",
+        "subject": "Assignment name  : ft_str_replace\nExpected files   : ft_str_replace.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReplaces occurrences of old_c with new_c.\n",
+        "test_cases": [],
+        "hints": [
+          "Replaces occurrences of old_c with new_c."
+        ]
+      },
+      {
+        "id": "ext_ft_count_char",
+        "name": "ft_count_char",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_count_char.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_count_char(const char *str, char c);",
+        "subject": "Assignment name  : ft_count_char\nExpected files   : ft_count_char.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCounts occurrences of char c in string.\n",
+        "test_cases": [],
+        "hints": [
+          "Counts occurrences of char c in string."
+        ]
+      },
+      {
+        "id": "ext_ft_str_reverse",
+        "name": "ft_str_reverse",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_str_reverse.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "char *ft_str_reverse(char *str);",
+        "subject": "Assignment name  : ft_str_reverse\nExpected files   : ft_str_reverse.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReverses string in-place.\n",
+        "test_cases": [],
+        "hints": [
+          "Reverses string in-place."
+        ]
+      },
+      {
+        "id": "ext_ft_is_sorted",
+        "name": "ft_is_sorted",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_is_sorted.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_is_sorted(int *tab, int length, int (*f)(int, int));",
+        "subject": "Assignment name  : ft_is_sorted\nExpected files   : ft_is_sorted.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nChecks if array is sorted by f.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if array is sorted by f."
+        ]
+      },
+      {
+        "id": "ext_ft_find_max",
+        "name": "ft_find_max",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_find_max.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_find_max(int *arr, int size);",
+        "subject": "Assignment name  : ft_find_max\nExpected files   : ft_find_max.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns max element in array.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns max element in array."
+        ]
+      },
+      {
+        "id": "ext_ft_find_min",
+        "name": "ft_find_min",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_find_min.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_find_min(int *arr, int size);",
+        "subject": "Assignment name  : ft_find_min\nExpected files   : ft_find_min.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns min element in array.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns min element in array."
+        ]
+      },
+      {
+        "id": "ext_ft_array_sum",
+        "name": "ft_array_sum",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 2,
+        "expected_files": "ft_array_sum.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "long ft_array_sum(int *arr, int size);",
+        "subject": "Assignment name  : ft_array_sum\nExpected files   : ft_array_sum.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns sum of array elements.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns sum of array elements."
+        ]
+      }
+    ],
+    "3": [
+      {
+        "id": "beg_ft_range",
+        "name": "ft_range",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 3,
+        "expected_files": "ft_range.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "int *ft_range(int start, int end);",
+        "subject": "Assignment name  : ft_range\nExpected files   : ft_range.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nReturns array of ints from start to end.\n",
+        "test_cases": [],
+        "hints": [
+          "Size = abs(end - start) + 1."
+        ]
+      },
+      {
+        "id": "ext_ft_strjoin",
+        "name": "ft_strjoin",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_strjoin.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char *ft_strjoin(char const *s1, char const *s2);",
+        "subject": "Assignment name  : ft_strjoin\nExpected files   : ft_strjoin.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nConcatenates s1 and s2 with malloc.\n",
+        "test_cases": [],
+        "hints": [
+          "Concatenates s1 and s2 with malloc."
+        ]
+      },
+      {
+        "id": "ext_ft_strtrim",
+        "name": "ft_strtrim",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_strtrim.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char *ft_strtrim(char const *s1, char const *set);",
+        "subject": "Assignment name  : ft_strtrim\nExpected files   : ft_strtrim.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nTrims characters in set from s1.\n",
+        "test_cases": [],
+        "hints": [
+          "Trims characters in set from s1."
+        ]
+      },
+      {
+        "id": "ext_ft_strmapi",
+        "name": "ft_strmapi",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_strmapi.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char *ft_strmapi(char const *s, char (*f)(unsigned int, char));",
+        "subject": "Assignment name  : ft_strmapi\nExpected files   : ft_strmapi.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nApplies f to each char in s.\n",
+        "test_cases": [],
+        "hints": [
+          "Applies f to each char in s."
+        ]
+      },
+      {
+        "id": "ext_ft_striteri",
+        "name": "ft_striteri",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_striteri.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void ft_striteri(char *s, void (*f)(unsigned int, char*));",
+        "subject": "Assignment name  : ft_striteri\nExpected files   : ft_striteri.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nApplies in-place f to each char in s.\n",
+        "test_cases": [],
+        "hints": [
+          "Applies in-place f to each char in s."
+        ]
+      },
+      {
+        "id": "ext_fibonacci_seq",
+        "name": "fibonacci_seq",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "fibonacci_seq.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : fibonacci_seq\nExpected files   : fibonacci_seq.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints Nth fibonacci number.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints Nth fibonacci number."
+        ]
+      },
+      {
+        "id": "ext_prime_factors",
+        "name": "prime_factors",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "prime_factors.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : prime_factors\nExpected files   : prime_factors.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints prime factors of integer parameter.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints prime factors of integer parameter."
+        ]
+      },
+      {
+        "id": "ext_ft_calloc",
+        "name": "ft_calloc",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_calloc.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "void *ft_calloc(size_t count, size_t size);",
+        "subject": "Assignment name  : ft_calloc\nExpected files   : ft_calloc.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nAllocates and zeros memory buffer.\n",
+        "test_cases": [],
+        "hints": [
+          "Allocates and zeros memory buffer."
+        ]
+      },
+      {
+        "id": "ext_ft_itoa",
+        "name": "ft_itoa",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_itoa.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char *ft_itoa(int n);",
+        "subject": "Assignment name  : ft_itoa\nExpected files   : ft_itoa.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nConverts integer to string with malloc.\n",
+        "test_cases": [],
+        "hints": [
+          "Converts integer to string with malloc."
+        ]
+      },
+      {
+        "id": "ext_ft_atoi_base",
+        "name": "ft_atoi_base",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_atoi_base.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_atoi_base(const char *str, int str_base);",
+        "subject": "Assignment name  : ft_atoi_base\nExpected files   : ft_atoi_base.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nConverts string in base str_base to int.\n",
+        "test_cases": [],
+        "hints": [
+          "Converts string in base str_base to int."
+        ]
+      },
+      {
+        "id": "ext_ft_itoa_base",
+        "name": "ft_itoa_base",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_itoa_base.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char *ft_itoa_base(int value, int base);",
+        "subject": "Assignment name  : ft_itoa_base\nExpected files   : ft_itoa_base.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nConverts int to string in specified base.\n",
+        "test_cases": [],
+        "hints": [
+          "Converts int to string in specified base."
+        ]
+      },
+      {
+        "id": "ext_ft_strndup",
+        "name": "ft_strndup",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_strndup.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char *ft_strndup(const char *s1, size_t n);",
+        "subject": "Assignment name  : ft_strndup\nExpected files   : ft_strndup.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nAllocates and copies n chars of s1.\n",
+        "test_cases": [],
+        "hints": [
+          "Allocates and copies n chars of s1."
+        ]
+      },
+      {
+        "id": "ext_ft_split_whitespaces",
+        "name": "ft_split_whitespaces",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_split_whitespaces.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char **ft_split_whitespaces(char *str);",
+        "subject": "Assignment name  : ft_split_whitespaces\nExpected files   : ft_split_whitespaces.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nSplits string by whitespace into char** array.\n",
+        "test_cases": [],
+        "hints": [
+          "Splits string by whitespace into char** array."
+        ]
+      },
+      {
+        "id": "ext_ft_range_step",
+        "name": "ft_range_step",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "ft_range_step.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "int *ft_range_step(int start, int end, int step);",
+        "subject": "Assignment name  : ft_range_step\nExpected files   : ft_range_step.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nReturns array from start to end by step.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns array from start to end by step."
+        ]
+      },
+      {
+        "id": "ext_gcd",
+        "name": "gcd",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "gcd.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : gcd\nExpected files   : gcd.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints Greatest Common Divisor of two ints.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints Greatest Common Divisor of two ints."
+        ]
+      },
+      {
+        "id": "ext_lcm",
+        "name": "lcm",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "lcm.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : lcm\nExpected files   : lcm.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nPrints Least Common Multiple of two ints.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints Least Common Multiple of two ints."
+        ]
+      },
+      {
+        "id": "ext_is_prime",
+        "name": "is_prime",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "is_prime.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int is_prime(int n);",
+        "subject": "Assignment name  : is_prime\nExpected files   : is_prime.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns 1 if n is prime number.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns 1 if n is prime number."
+        ]
+      },
+      {
+        "id": "ext_next_prime",
+        "name": "next_prime",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "next_prime.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int next_prime(int n);",
+        "subject": "Assignment name  : next_prime\nExpected files   : next_prime.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns next prime >= n.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns next prime >= n."
+        ]
+      },
+      {
+        "id": "ext_sqrt_int",
+        "name": "sqrt_int",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "sqrt_int.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int sqrt_int(int n);",
+        "subject": "Assignment name  : sqrt_int\nExpected files   : sqrt_int.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns integer square root of n or 0.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns integer square root of n or 0."
+        ]
+      },
+      {
+        "id": "ext_power_int",
+        "name": "power_int",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "power_int.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "long power_int(int nb, int power);",
+        "subject": "Assignment name  : power_int\nExpected files   : power_int.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nComputes nb raised to power.\n",
+        "test_cases": [],
+        "hints": [
+          "Computes nb raised to power."
+        ]
+      },
+      {
+        "id": "ext_factorial",
+        "name": "factorial",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "factorial.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "long factorial(int n);",
+        "subject": "Assignment name  : factorial\nExpected files   : factorial.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nComputes factorial of n.\n",
+        "test_cases": [],
+        "hints": [
+          "Computes factorial of n."
+        ]
+      }
+    ],
+    "4": [
+      {
+        "id": "beg_ft_split",
+        "name": "ft_split",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 4,
+        "expected_files": "ft_split.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char **ft_split(char *str);",
+        "subject": "Assignment name  : ft_split\nExpected files   : ft_split.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nSplits string into array of strings.\n",
+        "test_cases": [],
+        "hints": [
+          "Allocate char** array then allocate each word."
+        ]
+      },
+      {
+        "id": "ext_snake_to_camel",
+        "name": "snake_to_camel",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 4,
+        "expected_files": "snake_to_camel.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : snake_to_camel\nExpected files   : snake_to_camel.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nConverts snake_case to camelCase.\n",
+        "test_cases": [],
+        "hints": [
+          "Converts snake_case to camelCase."
+        ]
+      },
+      {
+        "id": "ext_camel_to_snake",
+        "name": "camel_to_snake",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 4,
+        "expected_files": "camel_to_snake.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : camel_to_snake\nExpected files   : camel_to_snake.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nConverts camelCase to snake_case.\n",
+        "test_cases": [],
+        "hints": [
+          "Converts camelCase to snake_case."
+        ]
+      },
+      {
+        "id": "ext_ft_matrix_transpose",
+        "name": "ft_matrix_transpose",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 4,
+        "expected_files": "ft_matrix_transpose.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "int **ft_matrix_transpose(int **m, int r, int c);",
+        "subject": "Assignment name  : ft_matrix_transpose\nExpected files   : ft_matrix_transpose.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nTransposes 2D matrix.\n",
+        "test_cases": [],
+        "hints": [
+          "Transposes 2D matrix."
+        ]
+      },
+      {
+        "id": "ext_ft_substr",
+        "name": "ft_substr",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 4,
+        "expected_files": "ft_substr.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "char *ft_substr(char const *s, unsigned int start, size_t len);",
+        "subject": "Assignment name  : ft_substr\nExpected files   : ft_substr.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nCreates substring.\n",
+        "test_cases": [],
+        "hints": [
+          "Creates substring."
+        ]
+      },
+      {
+        "id": "ext_ft_remove_duplicates",
+        "name": "ft_remove_duplicates",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 4,
+        "expected_files": "ft_remove_duplicates.c",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "int *ft_remove_duplicates(int *arr, int size, int *new_size);",
+        "subject": "Assignment name  : ft_remove_duplicates\nExpected files   : ft_remove_duplicates.c\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nRemoves duplicate ints.\n",
+        "test_cases": [],
+        "hints": [
+          "Removes duplicate ints."
+        ]
+      }
+    ],
+    "5": [
+      {
+        "id": "beg_print_memory",
+        "name": "print_memory",
+        "source": "beginner",
+        "source_type": "42_official",
+        "orig_level": 5,
+        "expected_files": "print_memory.c",
+        "allowed_functions": "write",
+        "is_function": true,
+        "prototype": "void print_memory(const void *addr, size_t size);",
+        "subject": "Assignment name  : print_memory\nExpected files   : print_memory.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nHex dump memory area.\n",
+        "test_cases": [],
+        "hints": [
+          "Process 16 bytes per row."
+        ]
+      },
+      {
+        "id": "ext_ft_memmove",
+        "name": "ft_memmove",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 5,
+        "expected_files": "ft_memmove.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void *ft_memmove(void *dest, const void *src, size_t n);",
+        "subject": "Assignment name  : ft_memmove\nExpected files   : ft_memmove.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCopies n bytes with memory overlap safety.\n",
+        "test_cases": [],
+        "hints": [
+          "Copies n bytes with memory overlap safety."
+        ]
+      },
+      {
+        "id": "ext_ft_memcmp",
+        "name": "ft_memcmp",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 5,
+        "expected_files": "ft_memcmp.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_memcmp(const void *s1, const void *s2, size_t n);",
+        "subject": "Assignment name  : ft_memcmp\nExpected files   : ft_memcmp.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCompares memory byte buffers.\n",
+        "test_cases": [],
+        "hints": [
+          "Compares memory byte buffers."
+        ]
+      },
+      {
+        "id": "ext_ft_sort_string_tab",
+        "name": "ft_sort_string_tab",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 5,
+        "expected_files": "ft_sort_string_tab.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void ft_sort_string_tab(char **tab);",
+        "subject": "Assignment name  : ft_sort_string_tab\nExpected files   : ft_sort_string_tab.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nSorts null-terminated array of strings.\n",
+        "test_cases": [],
+        "hints": [
+          "Sorts null-terminated array of strings."
+        ]
+      },
+      {
+        "id": "ext_ft_matrix_rotate",
+        "name": "ft_matrix_rotate",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 5,
+        "expected_files": "ft_matrix_rotate.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void ft_matrix_rotate(int **matrix, int n);",
+        "subject": "Assignment name  : ft_matrix_rotate\nExpected files   : ft_matrix_rotate.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nRotates square matrix 90 deg clockwise.\n",
+        "test_cases": [],
+        "hints": [
+          "Rotates square matrix 90 deg clockwise."
+        ]
+      },
+      {
+        "id": "ext_ft_spiral_matrix",
+        "name": "ft_spiral_matrix",
+        "source": "beginner",
+        "source_type": "examshelp_extended",
+        "orig_level": 5,
+        "expected_files": "ft_spiral_matrix.c",
+        "allowed_functions": "printf",
+        "is_function": true,
+        "prototype": "void ft_spiral_matrix(int **m, int r, int c);",
+        "subject": "Assignment name  : ft_spiral_matrix\nExpected files   : ft_spiral_matrix.c\nAllowed functions: printf\n--------------------------------------------------------------------------------\n\nPrints matrix in spiral order.\n",
+        "test_cases": [],
+        "hints": [
+          "Prints matrix in spiral order."
+        ]
+      }
+    ],
+    "6": [
+      {
+        "id": "inter_count_of_2",
+        "name": "count_of_2",
+        "source": "intermediate",
+        "source_type": "42_official",
+        "orig_level": 0,
+        "expected_files": "count_of_2.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int count_of_2(int n);",
+        "subject": "Assignment name  : count_of_2\nExpected files   : count_of_2.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCounts total '2' digits from 0 to n.\n",
+        "test_cases": [],
+        "hints": [
+          "Digit extraction with % 10."
+        ]
+      },
+      {
+        "id": "inter_equation",
+        "name": "equation",
+        "source": "intermediate",
+        "source_type": "42_official",
+        "orig_level": 0,
+        "expected_files": "equation.c",
+        "allowed_functions": "printf",
+        "is_function": true,
+        "prototype": "void equation(int n);",
+        "subject": "Assignment name  : equation\nExpected files   : equation.c\nAllowed functions: printf\n--------------------------------------------------------------------------------\n\nFinds digits A, B, C for AB + CA = n.\n",
+        "test_cases": [],
+        "hints": [
+          "Triple loop for A, B, C [0-9]."
+        ]
+      },
+      {
+        "id": "ext_ft_list_push_back",
+        "name": "ft_list_push_back",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "ft_list_push_back.c, ft_list.h",
+        "allowed_functions": "malloc",
+        "is_function": true,
+        "prototype": "void ft_list_push_back(t_list **begin_list, void *data);",
+        "subject": "Assignment name  : ft_list_push_back\nExpected files   : ft_list_push_back.c, ft_list.h\nAllowed functions: malloc\n--------------------------------------------------------------------------------\n\nAppends node to linked list.\n",
+        "test_cases": [],
+        "hints": [
+          "Appends node to linked list."
+        ]
+      },
+      {
+        "id": "ext_ft_list_reverse",
+        "name": "ft_list_reverse",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "ft_list_reverse.c, ft_list.h",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "void ft_list_reverse(t_list **begin_list);",
+        "subject": "Assignment name  : ft_list_reverse\nExpected files   : ft_list_reverse.c, ft_list.h\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReverses linked list in-place.\n",
+        "test_cases": [],
+        "hints": [
+          "Reverses linked list in-place."
+        ]
+      },
+      {
+        "id": "ext_ft_list_find",
+        "name": "ft_list_find",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "ft_list_find.c, ft_list.h",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "t_list *ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)());",
+        "subject": "Assignment name  : ft_list_find\nExpected files   : ft_list_find.c, ft_list.h\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nFinds node in list matching cmp.\n",
+        "test_cases": [],
+        "hints": [
+          "Finds node in list matching cmp."
+        ]
+      },
+      {
+        "id": "ext_ft_list_at",
+        "name": "ft_list_at",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 0,
+        "expected_files": "ft_list_at.c, ft_list.h",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "t_list *ft_list_at(t_list *begin_list, unsigned int n);",
+        "subject": "Assignment name  : ft_list_at\nExpected files   : ft_list_at.c, ft_list.h\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nReturns Nth node of linked list.\n",
+        "test_cases": [],
+        "hints": [
+          "Returns Nth node of linked list."
+        ]
+      }
+    ],
+    "7": [
+      {
+        "id": "inter_height_tree",
+        "name": "height_tree",
+        "source": "intermediate",
+        "source_type": "42_official",
+        "orig_level": 1,
+        "expected_files": "height_tree.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int height_tree(struct s_node *root);",
+        "subject": "Assignment name  : height_tree\nExpected files   : height_tree.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nMax height of binary tree.\n",
+        "test_cases": [],
+        "hints": [
+          "Recursive depth."
+        ]
+      },
+      {
+        "id": "ext_ft_tree_depth",
+        "name": "ft_tree_depth",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_tree_depth.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_tree_depth(t_node *root);",
+        "subject": "Assignment name  : ft_tree_depth\nExpected files   : ft_tree_depth.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nCalculates depth of binary tree.\n",
+        "test_cases": [],
+        "hints": [
+          "Calculates depth of binary tree."
+        ]
+      },
+      {
+        "id": "ext_ft_tree_is_balanced",
+        "name": "ft_tree_is_balanced",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_tree_is_balanced.c",
+        "allowed_functions": "None",
+        "is_function": true,
+        "prototype": "int ft_tree_is_balanced(t_node *root);",
+        "subject": "Assignment name  : ft_tree_is_balanced\nExpected files   : ft_tree_is_balanced.c\nAllowed functions: None\n--------------------------------------------------------------------------------\n\nChecks if binary tree is height balanced.\n",
+        "test_cases": [],
+        "hints": [
+          "Checks if binary tree is height balanced."
+        ]
+      },
+      {
+        "id": "ext_ft_parentheses_val",
+        "name": "ft_parentheses_val",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 1,
+        "expected_files": "ft_parentheses_val.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : ft_parentheses_val\nExpected files   : ft_parentheses_val.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nValidates nested parentheses/brackets using stack.\n",
+        "test_cases": [],
+        "hints": [
+          "Validates nested parentheses/brackets using stack."
+        ]
+      }
+    ],
+    "8": [
+      {
+        "id": "inter_perimeter",
+        "name": "perimeter",
+        "source": "intermediate",
+        "source_type": "42_official",
+        "orig_level": 3,
+        "expected_files": "perimeter.c",
+        "allowed_functions": "printf",
+        "is_function": true,
+        "prototype": "void perimeter(struct s_node *root);",
+        "subject": "Assignment name  : perimeter\nExpected files   : perimeter.c\nAllowed functions: printf\n--------------------------------------------------------------------------------\n\nPrints boundary of binary tree.\n",
+        "test_cases": [],
+        "hints": [
+          "Left boundary, leaves, right boundary."
+        ]
+      },
+      {
+        "id": "ext_eval_expr",
+        "name": "eval_expr",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "eval_expr.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : eval_expr\nExpected files   : eval_expr.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nEvaluates arithmetic expression string.\n",
+        "test_cases": [],
+        "hints": [
+          "Evaluates arithmetic expression string."
+        ]
+      },
+      {
+        "id": "ext_sudoku_solver",
+        "name": "sudoku_solver",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 3,
+        "expected_files": "sudoku_solver.c",
+        "allowed_functions": "write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : sudoku_solver\nExpected files   : sudoku_solver.c\nAllowed functions: write\n--------------------------------------------------------------------------------\n\nSolves 9x9 Sudoku puzzle using backtracking.\n",
+        "test_cases": [],
+        "hints": [
+          "Solves 9x9 Sudoku puzzle using backtracking."
+        ]
+      }
+    ],
+    "9": [
+      {
+        "id": "inter_g_diam",
+        "name": "g_diam",
+        "source": "intermediate",
+        "source_type": "42_official",
+        "orig_level": 5,
+        "expected_files": "g_diam.c",
+        "allowed_functions": "write, malloc, free",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : g_diam\nExpected files   : g_diam.c\nAllowed functions: write, malloc, free\n--------------------------------------------------------------------------------\n\nDiameter of graph.\n",
+        "test_cases": [],
+        "hints": [
+          "DFS with backtracking."
+        ]
+      },
+      {
+        "id": "ext_shortest_path",
+        "name": "shortest_path",
+        "source": "intermediate",
+        "source_type": "examshelp_extended",
+        "orig_level": 5,
+        "expected_files": "shortest_path.c",
+        "allowed_functions": "malloc, free, write",
+        "is_function": false,
+        "prototype": null,
+        "subject": "Assignment name  : shortest_path\nExpected files   : shortest_path.c\nAllowed functions: malloc, free, write\n--------------------------------------------------------------------------------\n\nFinds shortest path in weighted graph matrix.\n",
+        "test_cases": [],
+        "hints": [
+          "Finds shortest path in weighted graph matrix."
+        ]
+      }
+    ]
+  }
+}
