@@ -1,14 +1,16 @@
 # ExamsHelp CLI (Antigravity Edition) ⚡
 
-`ExamsHelp` is an educational, stress-free alternative to 42 Network's traditional "examshell". Designed for progressive learning and mastery, `ExamsHelp` guides users through C programming exercises using mechanical edge-case testing, non-punitive feedback, targeted debugging hints, exercise skipping, and session history archiving.
+`ExamsHelp` is a 100% standalone, zero-dependency educational alternative to 42 Network's traditional "examshell". Designed for progressive learning and mastery, `ExamsHelp` guides users through C programming exercises using mechanical edge-case testing, non-punitive feedback, targeted debugging hints, exercise skipping, randomized question pools, and passphrase session history archiving.
 
 ---
 
 ## 🚀 Key Features
 
-* **🔒 Encapsulated Engine (`engine/`)**: All application code, databases, and visual modules are encapsulated inside `engine/` to prevent accidental deletion.
-* **🐾 Cute Passphrase Session Naming**: Every session receives a passphrase name (e.g. `whistling-bear-macaron`, `brave-otter-mango`, `cosmic-fox-matcha`).
-* **💾 Automatic Session Archiving (`exit` / `quit`)**: When exiting, your C submissions, active subjects, and progress are automatically saved into `history/<session_name>/`. `rendu/` is cleaned so your workspace stays neat for the next session.
+* **⚡ 100% Zero External Dependencies**: Built entirely with Python's Standard Library (`sys`, `os`, `subprocess`, `json`, `random`, `shutil`). No `pip install` required!
+* **🔒 Encapsulated Engine (`engine/`)**: Core application code, data catalogs, and UI renderers are protected inside `engine/` to prevent accidental deletion.
+* **🎲 Randomized Question Draw**: Dynamically draws random exercises from your current level's pool for an exciting practice experience.
+* **🐾 Cute Passphrase Session Naming**: Every session receives a unique passphrase name (e.g. `sunny-fox-pancake`, `velvet-bear-muffin`).
+* **💾 Automatic Session Archiving (`exit` / `quit`)**: When exiting, your C submissions, active subjects, and progress are automatically saved into `history/<session_name>/`. `rendu/` is cleaned for your next session.
 * **📜 Session History Viewer (`history`)**: View all past archived sessions, completion counts, dates, and submitted `.c` files.
 * **Instant Workspace Self-Healing**: Automatically repairs `subjects/` and `rendu/` if files or directories are accidentally deleted.
 * **118 Exercises Across 10 Levels**: Features 18 official 42 exam exercises + 100 extended custom practice exercises.
@@ -16,11 +18,10 @@
 
 ---
 
-## 🛠️ Installation & Requirements
+## 🛠️ System Requirements
 
-* **Python**: `3.8+`
+* **Python**: `3.8+` (Built-in standard library only)
 * **C Compiler**: `gcc`
-* **Dependencies**: `rich` (`pip install rich`)
 
 ---
 
@@ -39,12 +40,13 @@ Or execute direct commands:
 ./examshelp hint      # View targeted advice on what to look out for in the current question
 ./examshelp skip      # Skip the current question and advance to the next exercise
 ./examshelp history   # View all past archived sessions in history/
+./examshelp reset     # Reset all progress back to Level 0
 ./examshelp list      # View all 10 levels and unlocked exercises
 ```
 
 ---
 
-## 📂 Reorganized Project Layout
+## 📂 Project Layout
 
 ```
 examshelp/
@@ -52,8 +54,7 @@ examshelp/
 │   ├── config/
 │   │   └── exercises_db.json # 118-exercise database catalog
 │   ├── ui/
-│   │   ├── terminal.py       # Rich visual UI renderer
-│   │   └── themes.py         # Color themes
+│   │   └── terminal.py       # Pure Python terminal renderer & UI
 │   ├── compiler.py           # GCC runner
 │   ├── evaluator.py          # Non-punitive test runner
 │   ├── hints.py              # Hint engine
