@@ -47,6 +47,7 @@ def run_interactive_loop(state_mgr, evaluator, ui):
                 continue
                 
             ui.console.print(f"[bold cyan]Compiling and grading `rendu/{ex['name']}/{ex['expected_files']}`...[/bold cyan]")
+            ui.console.print(f"[dim](Hint: No `git push` needed. Just save your file and run grademe!)[/dim]")
             result = evaluator.evaluate(ex)
             ui.display_eval_result(result)
             
@@ -99,6 +100,7 @@ def main():
             ex = state_mgr.get_current_exercise()
             if ex:
                 ui.console.print(f"[bold cyan]Compiling and grading `rendu/{ex['name']}/{ex['expected_files']}`...[/bold cyan]")
+                ui.console.print(f"[dim](Hint: No `git push` needed. Just save your file and run grademe!)[/dim]")
                 result = evaluator.evaluate(ex)
                 ui.display_eval_result(result)
                 if result["success"]:

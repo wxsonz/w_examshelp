@@ -11,6 +11,8 @@ no dependencies. no me coding. 100% vibed.
 
 put your `.c` files inside `rendu/<exercise_name>/`. if you put them somewhere else it won't work and I won't help you.
 
+*Note: there is no git repo here. you don't need to `git add` or `git push` before grading. just save your file and run `grademe`.*
+
 ### Commands
 
 | cmd | whatever it does |
