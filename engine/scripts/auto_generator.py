@@ -60,6 +60,27 @@ def generate_function_wrapper(proto, name):
     main_body += "    return 0;\n}\n"
     return headers + main_body
 
+OFFICIAL_THAI_SUBJECTS = {
+    "aff_a": "เขียนโปรแกรมที่รับข้อความ และแสดงตัวอักษร 'a' ตัวแรกที่พบ ตามด้วยการขึ้นบรรทัดใหม่\nหากไม่พบตัว 'a' ให้แสดงแค่บรรทัดใหม่\nหากจำนวนอาร์กิวเมนต์ไม่ใช่ 1 ให้แสดง 'a' ตามด้วยบรรทัดใหม่",
+    "ft_countdown": "เขียนโปรแกรมที่แสดงตัวเลขทั้งหมดเรียงจาก 9 ถึง 0 ตามด้วยการขึ้นบรรทัดใหม่",
+    "ft_print_numbers": "เขียนฟังก์ชันที่แสดงตัวเลขทั้งหมด (0-9) เรียงจากน้อยไปมาก",
+    "hello": "เขียนโปรแกรมที่แสดงคำว่า \"Hello World!\" ตามด้วยการขึ้นบรรทัดใหม่",
+    "maff_alpha": "เขียนโปรแกรมที่แสดงตัวอักษรภาษาอังกฤษสลับพิมพ์เล็กพิมพ์ใหญ่ (aBcDeFg...z) ตามด้วยบรรทัดใหม่",
+    "ft_strcpy": "เขียนฟังก์ชันที่เลียนแบบการทำงานของ strcpy (คัดลอกสตริง s2 ไปยัง s1 รวม \\0)",
+    "ft_strlen": "เขียนฟังก์ชันคืนค่าความยาวของข้อความ (ไม่รวม \\0)",
+    "first_word": "เขียนโปรแกรมเพื่อแสดงคำแรกของข้อความ โดยข้ามช่องว่าง (spaces/tabs) ที่อยู่ข้างหน้า",
+    "ft_atoi": "เขียนฟังก์ชันที่แปลงข้อความเป็นตัวเลขจำนวนเต็ม (int) โดยเลียนแบบ atoi",
+    "inter": "เขียนโปรแกรมที่แสดงตัวอักษรที่ปรากฏในทั้งสองข้อความ (s1 และ s2) โดยไม่แสดงซ้ำกัน",
+    "ft_range": "เขียนฟังก์ชันคืนค่าอาร์เรย์ของตัวเลข (int) ตั้งแต่ start ไปจนถึง end (ไม่ว่าจะเพิ่มขึ้นหรือลดลง)",
+    "ft_split": "เขียนฟังก์ชันที่แยกข้อความออกเป็นอาร์เรย์ของคำ (ตัดด้วย spaces/tabs/newlines)",
+    "print_memory": "เขียนฟังก์ชันที่แสดงข้อมูลในหน่วยความจำในรูปแบบเลขฐานสิบหก (Hex dump)",
+    "count_of_2": "เขียนฟังก์ชันที่นับจำนวนเลข '2' ทั้งหมดที่ปรากฏตั้งแต่ 0 ถึง n",
+    "equation": "หาตัวเลข A, B, C (0-9) ที่ทำให้สมการ AB + CA = n เป็นจริง",
+    "height_tree": "เขียนฟังก์ชันหาความสูงมากที่สุดของ binary tree",
+    "perimeter": "เขียนฟังก์ชันเพื่อพิมพ์ขอบเขตด้านนอก (perimeter) ของ binary tree",
+    "g_diam": "เขียนโปรแกรมหาเส้นผ่านศูนย์กลาง (ระยะทางยาวสุด) ของกราฟที่กำหนด"
+}
+
 def inject_official_testcases(ex):
     name = ex["name"]
     
@@ -170,6 +191,10 @@ def process_exercises():
         # Generate Official Testcases
         if ex.get("source_type") == "42_official":
             inject_official_testcases(ex)
+            
+            # Inject Thai translation for Official 42 Subjects
+            thai_desc = OFFICIAL_THAI_SUBJECTS.get(ex["name"], "ไม่มีคำแปลภาษาไทยสำหรับข้อนี้")
+            ex["subject_th"] = f"ชื่อโจทย์  : {ex['name']}\nไฟล์ที่ต้องการ   : {ex['expected_files']}\nฟังก์ชันที่ใช้ได้: {ex['allowed_functions']}\n--------------------------------------------------------------------------------\n\n{thai_desc}\n"
             
             # If no custom testcases were injected above, provide fallback edgecases
             if not ex.get("test_cases"):
