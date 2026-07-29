@@ -1,7 +1,11 @@
+idk bruh i was going to do C10 but then i realize i have skill issue.
+so i waste tokens making things for people in my pool instead.
+
 # ExamsHelp ⚡
 
-A lightweight, zero-dependency CLI environment for practicing 42 exams. 
+A lightweight, zero-dependency CLI environment for practicing 42 exams.
 Built with Python 3 to help you focus entirely on your C code.
+
 
 ## Getting Started
 
