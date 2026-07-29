@@ -123,6 +123,7 @@ class TerminalUI:
 {C_CYAN} ███████╗██╔╝ ██╗██║     ██║ ╚═╝ ██║███████╗██║  ██║███████╗███████╗██║     {C_RESET}
 {C_MAGENTA} ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     {C_RESET}
                  {C_YELLOW}*** Antigravity Edition - Educational Examshell ***{C_RESET}
+             {C_GREEN}(Note: No git commands required! Just run `./examshelp grademe`){C_RESET}
 """
         print(banner)
         if session_name:
