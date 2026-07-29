@@ -196,17 +196,32 @@ def process_exercises():
             # Enhance subject for Level 0-2 beginners
             subject = ex["subject"]
             subject += "\n=== EXAMPLES & INSTRUCTIONS ===\n"
+            
+            subject_th = f"ชื่อโจทย์  : {ex['name']}\nไฟล์ที่ต้องการ   : {ex['expected_files']}\nฟังก์ชันที่ใช้ได้: {ex['allowed_functions']}\n--------------------------------------------------------------------------------\n\n{ex['hints'][0]}\n\n=== ตัวอย่างและคำแนะนำ ===\n"
+
             if ex["is_function"]:
                 subject += "You must write a C function (not a standalone program).\n"
                 subject += f"Your function must be prototyped exactly as: {ex.get('prototype', 'void func();')}\n"
                 subject += "Make sure you include the necessary headers if you use allowed functions.\n"
                 subject += "Do NOT submit a main() function in your final file, or compilation will fail!\n"
+                
+                subject_th += "คุณต้องเขียนฟังก์ชันภาษา C (ไม่ใช่โปรแกรมที่รันได้ด้วยตัวเอง)\n"
+                subject_th += f"ฟังก์ชันของคุณต้องมีต้นแบบ (prototype) ดังนี้: {ex.get('prototype', 'void func();')}\n"
+                subject_th += "อย่าลืม include header ที่จำเป็นหากคุณใช้ฟังก์ชันที่อนุญาต\n"
+                subject_th += "ห้ามเขียนฟังก์ชัน main() ส่งมาในไฟล์สุดท้ายของคุณเด็ดขาด มิฉะนั้นการคอมไพล์จะล้มเหลว!\n"
             else:
                 subject += "You must write a full C program with a standard `main()` function.\n"
                 subject += "Your program must compile and handle command-line arguments (argc, argv).\n"
                 subject += "If the number of arguments is unexpected, or if you encounter an error, failing gracefully (e.g. returning 0 or printing a newline) is standard practice.\n"
                 subject += f"\nExample compilation and execution:\n$> gcc -Wall -Wextra -Werror {ex['expected_files']} -o {ex['name']}\n$> ./{ex['name']} \"example input\" | cat -e\n...output...$\n$> ./{ex['name']} | cat -e\n$\n$>\n"
+                
+                subject_th += "คุณต้องเขียนโปรแกรมภาษา C แบบเต็มรูปแบบที่มีฟังก์ชัน `main()`\n"
+                subject_th += "โปรแกรมของคุณต้องสามารถคอมไพล์และรองรับอาร์กิวเมนต์จาก command-line (argc, argv) ได้\n"
+                subject_th += "หากจำนวนอาร์กิวเมนต์ไม่ถูกต้อง หรือเกิดข้อผิดพลาด การจัดการอย่างปลอดภัย (เช่น การ return 0 หรือพิมพ์บรรทัดใหม่) เป็นสิ่งที่ควรทำ\n"
+                subject_th += f"\nตัวอย่างการคอมไพล์และรัน:\n$> gcc -Wall -Wextra -Werror {ex['expected_files']} -o {ex['name']}\n$> ./{ex['name']} \"ตัวอย่าง input\" | cat -e\n...ผลลัพธ์...$\n$> ./{ex['name']} | cat -e\n$\n$>\n"
+                
             ex["subject"] = subject
+            ex["subject_th"] = subject_th
             
             if not ex.get("test_cases"):
                 ret_type = ""

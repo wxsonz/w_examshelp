@@ -44,8 +44,10 @@ class ConsoleWrapper:
         print(clean_text)
 
 class TerminalUI:
-    def __init__(self):
+    def __init__(self, lang="en"):
+        self.lang = lang
         self.console = ConsoleWrapper()
+        self.hint_engine = HintEngine()
 
     def _strip_ansi(self, text):
         clean = str(text)
@@ -133,6 +135,7 @@ class TerminalUI:
         session_completed = progress_data.get("session_completed_count", 0)
         total_completions = progress_data.get("total_completions", 0)
         ex = progress_data["current_exercise"]
+        lang = progress_data.get("language", "en")
 
         level_blocks = ""
         for i in range(10):
@@ -143,42 +146,68 @@ class TerminalUI:
             else:
                 level_blocks += f"{C_DIM}.{C_RESET}"
 
-        lines = [
-            f"{C_MAGENTA}{'Active Session:':<20}{C_RESET}{C_YELLOW}{session_name}{C_RESET}",
-            f"{C_MAGENTA}{'Current Level:':<20}{C_RESET}{C_YELLOW}Level {curr_lvl}/9{C_RESET}  [{level_blocks}]",
-            f"{C_MAGENTA}{'Session Progress:':<20}{C_RESET}{C_GREEN}{session_completed}{C_RESET} exercises completed in this session",
-            f"{C_MAGENTA}{'Cumulative Total:':<20}{C_RESET}{C_CYAN}{total_completions}{C_RESET} total questions completed across sessions"
-        ]
+        if lang == "th":
+            lines = [
+                f"{C_MAGENTA}{'เซสชันปัจจุบัน:':<20}{C_RESET}{C_YELLOW}{session_name}{C_RESET}",
+                f"{C_MAGENTA}{'ระดับปัจจุบัน:':<20}{C_RESET}{C_YELLOW}เลเวล {curr_lvl}/9{C_RESET}  [{level_blocks}]",
+                f"{C_MAGENTA}{'ความคืบหน้า:':<20}{C_RESET}{C_GREEN}{session_completed}{C_RESET} ข้อที่ผ่านในเซสชันนี้",
+                f"{C_MAGENTA}{'รวมทั้งหมด:':<20}{C_RESET}{C_CYAN}{total_completions}{C_RESET} ข้อที่ผ่านจากทุกเซสชัน"
+            ]
+        else:
+            lines = [
+                f"{C_MAGENTA}{'Active Session:':<20}{C_RESET}{C_YELLOW}{session_name}{C_RESET}",
+                f"{C_MAGENTA}{'Current Level:':<20}{C_RESET}{C_YELLOW}Level {curr_lvl}/9{C_RESET}  [{level_blocks}]",
+                f"{C_MAGENTA}{'Session Progress:':<20}{C_RESET}{C_GREEN}{session_completed}{C_RESET} exercises completed in this session",
+                f"{C_MAGENTA}{'Cumulative Total:':<20}{C_RESET}{C_CYAN}{total_completions}{C_RESET} total questions completed across sessions"
+            ]
 
         if ex:
             source_type = ex.get("source_type", "42_official")
-            track_label = f"{C_YELLOW}[Official 42 Exam]{C_RESET}" if source_type == "42_official" else f"{C_CYAN}[ExamsHelp Extended Custom]{C_RESET}"
-            lines.append(f"{C_MAGENTA}{'Exercise Track:':<20}{C_RESET}{track_label}")
-            lines.append(f"{C_MAGENTA}{'Assignment Name:':<20}{C_RESET}{C_WHITE}{ex['name']}{C_RESET}")
             import os
             base_path = os.path.abspath(os.getcwd())
-            lines.append(f"{C_MAGENTA}{'Expected File:':<20}{C_RESET}{C_YELLOW}rendu/{ex['name']}/{ex['expected_files']}{C_RESET}")
-            lines.append(f"{C_MAGENTA}{'Workspace Path:':<20}{C_RESET}{C_DIM}{base_path}/rendu/{ex['name']}/{C_RESET}")
-            lines.append(f"{C_MAGENTA}{'Allowed Functions:':<20}{C_RESET}{C_CYAN}{ex['allowed_functions']}{C_RESET}")
-            if ex.get("prototype"):
-                lines.append(f"{C_MAGENTA}{'Function Prototype:':<20}{C_RESET}{C_YELLOW}{ex['prototype']}{C_RESET}")
+            if lang == "th":
+                track_label = f"{C_YELLOW}[ข้อสอบ 42 Official]{C_RESET}" if source_type == "42_official" else f"{C_CYAN}[แบบฝึกหัดเสริม ExamsHelp]{C_RESET}"
+                lines.append(f"{C_MAGENTA}{'รูปแบบโจทย์:':<20}{C_RESET}{track_label}")
+                lines.append(f"{C_MAGENTA}{'ชื่อโจทย์:':<20}{C_RESET}{C_WHITE}{ex['name']}{C_RESET}")
+                lines.append(f"{C_MAGENTA}{'ไฟล์ที่ต้องการ:':<20}{C_RESET}{C_YELLOW}rendu/{ex['name']}/{ex['expected_files']}{C_RESET}")
+                lines.append(f"{C_MAGENTA}{'โฟลเดอร์ทำงาน:':<20}{C_RESET}{C_DIM}{base_path}/rendu/{ex['name']}/{C_RESET}")
+                lines.append(f"{C_MAGENTA}{'ฟังก์ชันที่ใช้ได้:':<20}{C_RESET}{C_CYAN}{ex['allowed_functions']}{C_RESET}")
+                if ex.get("prototype"):
+                    lines.append(f"{C_MAGENTA}{'ฟังก์ชันต้นแบบ:':<20}{C_RESET}{C_YELLOW}{ex['prototype']}{C_RESET}")
+            else:
+                track_label = f"{C_YELLOW}[Official 42 Exam]{C_RESET}" if source_type == "42_official" else f"{C_CYAN}[ExamsHelp Extended Custom]{C_RESET}"
+                lines.append(f"{C_MAGENTA}{'Exercise Track:':<20}{C_RESET}{track_label}")
+                lines.append(f"{C_MAGENTA}{'Assignment Name:':<20}{C_RESET}{C_WHITE}{ex['name']}{C_RESET}")
+                lines.append(f"{C_MAGENTA}{'Expected File:':<20}{C_RESET}{C_YELLOW}rendu/{ex['name']}/{ex['expected_files']}{C_RESET}")
+                lines.append(f"{C_MAGENTA}{'Workspace Path:':<20}{C_RESET}{C_DIM}{base_path}/rendu/{ex['name']}/{C_RESET}")
+                lines.append(f"{C_MAGENTA}{'Allowed Functions:':<20}{C_RESET}{C_CYAN}{ex['allowed_functions']}{C_RESET}")
+                if ex.get("prototype"):
+                    lines.append(f"{C_MAGENTA}{'Function Prototype:':<20}{C_RESET}{C_YELLOW}{ex['prototype']}{C_RESET}")
 
-        self._draw_box(f"{C_CYAN}*** EXAMSHELP DASHBOARD ***{C_RESET}", lines, border_color=C_CYAN, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
+        title = f"{C_CYAN}*** แดชบอร์ด EXAMSHELP ***{C_RESET}" if lang == "th" else f"{C_CYAN}*** EXAMSHELP DASHBOARD ***{C_RESET}"
+        self._draw_box(title, lines, border_color=C_CYAN, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
 
     def display_subject(self, exercise_info):
+        lang = self.lang
         if not exercise_info:
-            print("No active exercise selected.")
+            print("ไม่มีโจทย์ที่กำลังทำงานอยู่" if lang == "th" else "No active exercise selected.")
             return
 
         source_type = exercise_info.get("source_type", "42_official")
-        track_title = "42 Official Exam" if source_type == "42_official" else "ExamsHelp Extended Custom"
-        subj_text = exercise_info.get("subject", "No subject text available.")
+        if lang == "th":
+            track_title = "ข้อสอบ 42 Official" if source_type == "42_official" else "แบบฝึกหัดเสริม ExamsHelp"
+            subj_text = exercise_info.get("subject_th", exercise_info.get("subject", "ไม่มีข้อความโจทย์"))
+            box_title = f"{C_CYAN}โจทย์: {exercise_info['name']} [{track_title}]{C_RESET}"
+        else:
+            track_title = "42 Official Exam" if source_type == "42_official" else "ExamsHelp Extended Custom"
+            subj_text = exercise_info.get("subject", "No subject text available.")
+            box_title = f"{C_CYAN}SUBJECT: {exercise_info['name']} [{track_title}]{C_RESET}"
 
         subj_lines = subj_text.strip().split("\n")
         lines = [f"{C_WHITE}{line}{C_RESET}" for line in subj_lines]
 
         self._draw_box(
-            f"{C_CYAN}SUBJECT: {exercise_info['name']} [{track_title}]{C_RESET}",
+            box_title,
             lines,
             border_color=C_MAGENTA,
             subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}"
@@ -188,30 +217,33 @@ class TerminalUI:
         if result["success"]:
             lines = [
                 f"{C_GREEN}[+] {result['message']}{C_RESET}",
-                f"{C_GREEN}Level requirements met! New subject unlocked in `subjects/`!{C_RESET}"
+                f"{C_GREEN}Level requirements met! New subject unlocked in `subjects/`!{C_RESET}" if self.lang != "th" else f"{C_GREEN}ผ่านเงื่อนไขของเลเวลนี้! ปลดล็อคโจทย์ใหม่ในโฟลเดอร์ `subjects/` แล้ว!{C_RESET}"
             ]
-            self._draw_box(f"{C_GREEN}PASSED - GRADEME SUCCESS{C_RESET}", lines, border_color=C_GREEN, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
+            title = f"{C_GREEN}ผ่านการทดสอบ - GRADEME SUCCESS{C_RESET}" if self.lang == "th" else f"{C_GREEN}PASSED - GRADEME SUCCESS{C_RESET}"
+            self._draw_box(title, lines, border_color=C_GREEN, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
         else:
             stage = result.get("stage", "eval")
             lines = [f"{C_RED}[-] {result['message']}{C_RESET}"]
             
             if "log" in result:
                 lines.append("")
-                lines.append(f"{C_YELLOW}Compiler Output:{C_RESET}")
+                lines.append(f"{C_YELLOW}Compiler Output:{C_RESET}" if self.lang != "th" else f"{C_YELLOW}ผลลัพธ์จากการคอมไพล์:{C_RESET}")
                 for log_l in result["log"].split("\n"):
                     lines.append(f"  {C_YELLOW}{log_l}{C_RESET}")
 
             if "got" in result:
                 lines.append("")
-                lines.append(f"{C_GREEN}Expected Output: {repr(result['expected'])}{C_RESET}")
-                lines.append(f"{C_RED}Your Output:     {repr(result['got'])}{C_RESET}")
+                lines.append(f"{C_GREEN}Expected Output: {repr(result['expected'])}{C_RESET}" if self.lang != "th" else f"{C_GREEN}ผลลัพธ์ที่คาดหวัง: {repr(result['expected'])}{C_RESET}")
+                lines.append(f"{C_RED}Your Output:     {repr(result['got'])}{C_RESET}" if self.lang != "th" else f"{C_RED}ผลลัพธ์ของคุณ:     {repr(result['got'])}{C_RESET}")
 
-            self._draw_box(f"{C_RED}GRADEME FEEDBACK ({stage.upper()}){C_RESET}", lines, border_color=C_RED, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
+            title = f"{C_RED}ผลการตรวจ ({stage.upper()}){C_RESET}" if self.lang == "th" else f"{C_RED}GRADEME FEEDBACK ({stage.upper()}){C_RESET}"
+            self._draw_box(title, lines, border_color=C_RED, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
 
             hints = result.get("hints", [])
             if hints:
                 hint_lines = [f"* {C_CYAN}{h}{C_RESET}" for h in hints]
-                self._draw_box(f"{C_YELLOW}[?] FRIENDLY HINT (0 PENALTY){C_RESET}", hint_lines, border_color=C_YELLOW)
+                hint_title = f"{C_YELLOW}[?] คำแนะนำเพิ่มเติม (ไม่หักคะแนน){C_RESET}" if self.lang == "th" else f"{C_YELLOW}[?] FRIENDLY HINT (0 PENALTY){C_RESET}"
+                self._draw_box(hint_title, hint_lines, border_color=C_YELLOW)
 
     def display_hints(self, exercise_info):
         if not exercise_info:

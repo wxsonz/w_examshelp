@@ -43,6 +43,7 @@ class StateManager:
             "completed_exercises": [],
             "session_completed": [],
             "total_completions": 0,
+            "language": "en",
             "history": []
         }
         
@@ -225,5 +226,10 @@ class StateManager:
             "session_completed_count": session_completed,
             "total_completions": total_completions,
             "total_count": total,
+            "language": self.state.get("language", "en"),
             "current_exercise": self.get_current_exercise()
         }
+
+    def set_language(self, lang):
+        self.state["language"] = lang
+        self.save_state()

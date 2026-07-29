@@ -78,18 +78,20 @@ def run_interactive_loop(state_mgr, evaluator, ui):
             ui.console.print("  [bold green]history[/bold green]  - View all past saved sessions in `history/`")
             ui.console.print("  [bold green]reset[/bold green]    - Reset all progress back to Level 0 and 0 completed")
             ui.console.print("  [bold green]list[/bold green]     - List all 10 levels and unlocked exercises")
+            ui.console.print("  [bold green]thai[/bold green]     - Switch language to Thai (ภาษาไทย)")
+            ui.console.print("  [bold green]english[/bold green]  - Switch language to English")
             ui.console.print("  [bold green]exit[/bold green]     - Save and archive session to `history/<session_name>` and quit")
         else:
             ui.console.print(f"[red]Unknown command: `{cmd}`. Type `help` for available commands.[/red]")
 
 def main():
     parser = argparse.ArgumentParser(description="ExamsHelp CLI (Antigravity Edition)")
-    parser.add_argument("command", nargs="?", choices=["status", "grademe", "subject", "hint", "skip", "history", "sessions", "reset", "list"], help="CLI command to execute")
+    parser.add_argument("command", nargs="?", choices=["status", "grademe", "subject", "hint", "skip", "history", "sessions", "reset", "list", "thai", "english"], help="CLI command to execute")
     args = parser.parse_args()
 
     state_mgr = StateManager()
-    evaluator = Evaluator()
-    ui = TerminalUI()
+    ui = TerminalUI(lang=state_mgr.state.get("language", "en"))
+    evaluator = Evaluator(state_mgr.workspace_rendu)
 
     if args.command:
         if args.command == "status":
@@ -119,6 +121,12 @@ def main():
             ui.display_sessions_history(sessions)
         elif args.command == "list":
             ui.display_exercise_list(state_mgr.db, state_mgr.state)
+        elif args.command == "thai":
+            state_mgr.set_language("th")
+            ui.console.print("[bold green]เปลี่ยนภาษาเป็นภาษาไทยสำเร็จแล้ว! (Language switched to Thai)[/bold green]")
+        elif args.command == "english":
+            state_mgr.set_language("en")
+            ui.console.print("[bold green]Language switched to English![/bold green]")
     else:
         run_interactive_loop(state_mgr, evaluator, ui)
 
