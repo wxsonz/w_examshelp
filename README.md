@@ -1,30 +1,31 @@
 # ExamsHelp ⚡
 
-idk just a python script to practice 42 exams + ai generated in similar category.
-no dependencies. no me coding. 100% vibed.
+A lightweight, zero-dependency CLI environment for practicing 42 exams. 
+Built with Python 3 to help you focus entirely on your C code.
 
-## Usage
+## Getting Started
 
+Start the interactive shell:
 ```bash
 ./examshelp
 ```
 
-put your `.c` files inside `rendu/<exercise_name>/`. if you put them somewhere else it won't work and I won't help you.
+Place your `.c` files inside their respective exercise folders in the `rendu/` directory (e.g., `rendu/aff_a/aff_a.c`).
 
-*Note: there is no git repo here. you don't need to `git add` or `git push` before grading. just save your file and run `grademe`.*
+*Note: ExamsHelp grades your local files directly! You do not need to `git add` or `git push` before grading. Just save your file and run `grademe`.*
 
-### Commands
+### Available Commands
 
-| cmd | whatever it does |
+| Command | Description |
 |---|---|
-| `status` | see how bad you're doing |
-| `subject` | what you're supposed to code |
-| `hint` | some useless advice |
-| `grademe` | compiles your code and probably segfaults |
-| `skip` | give up |
-| `history` | wall of shame |
-| `list` | 118 exercises you'll never finish |
-| `reset` | wipe everything |
-| `exit` | close the thing |
+| `status` | View your current level and session progress |
+| `subject` | View the assignment instructions and examples |
+| `hint` | Get helpful tips and edge-case reminders |
+| `grademe` | Compile and test your solution |
+| `skip` | Move on to the next exercise |
+| `history` | View your past archived sessions |
+| `list` | See the full list of 118 exercises available |
+| `reset` | Reset all progress back to Level 0 |
+| `exit` | Safely archive your session and quit |
 
-glhf.
+Good luck with your studies!
