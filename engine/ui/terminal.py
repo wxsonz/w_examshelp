@@ -44,8 +44,7 @@ class ConsoleWrapper:
         print(clean_text)
 
 class TerminalUI:
-    def __init__(self, lang="en"):
-        self.lang = lang
+    def __init__(self):
         self.console = ConsoleWrapper()
         self.hint_engine = HintEngine()
 
@@ -169,7 +168,6 @@ class TerminalUI:
         self._draw_box(f"{C_CYAN}*** EXAMSHELP DASHBOARD ***{C_RESET}", lines, border_color=C_CYAN, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
 
     def display_subject(self, exercise_info):
-        lang = self.lang
         if not exercise_info:
             print("No active exercise selected.")
             return
@@ -177,10 +175,7 @@ class TerminalUI:
         source_type = exercise_info.get("source_type", "42_official")
         track_title = "42 Official Exam" if source_type == "42_official" else "ExamsHelp Extended Custom"
         
-        if lang == "th":
-            subj_text = exercise_info.get("subject_th", exercise_info.get("subject", "No subject text available."))
-        else:
-            subj_text = exercise_info.get("subject", "No subject text available.")
+        subj_text = exercise_info.get("subject", "No subject text available.")
 
         box_title = f"{C_CYAN}SUBJECT: {exercise_info['name']} [{track_title}]{C_RESET}"
 
@@ -229,9 +224,6 @@ class TerminalUI:
             return
 
         hints = exercise_info.get("hints", [])
-        if self.lang == "th" and "hints_th" in exercise_info:
-            hints = exercise_info["hints_th"]
-            
         if not hints:
             print("No hints available for this exercise.")
             return
@@ -254,7 +246,7 @@ class TerminalUI:
             lines = [
                 f"{C_YELLOW}Skipped exercise '{old_name}'.{C_RESET}",
                 f"{C_GREEN}Now on exercise: {new_ex['name']} [{track_name} - Level {new_ex.get('orig_level', 0)}]{C_RESET}",
-                f"{C_DIM}Updated `subjects/subject.txt` with new assignment specifications.{C_RESET}"
+                f"{C_DIM}Updated `subjects/subject.en.txt` and `subjects/subject.th.txt` with new assignment specifications.{C_RESET}"
             ]
         else:
             lines = [f"{C_YELLOW}Skipped exercise. All exercises in curriculum completed!{C_RESET}"]

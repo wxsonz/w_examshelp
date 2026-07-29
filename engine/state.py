@@ -205,15 +205,24 @@ class StateManager:
         os.makedirs(self.workspace_subjects, exist_ok=True)
         ex = self.get_current_exercise()
         if ex:
-            subj_content = ex.get("subject", f"Assignment name: {ex['name']}\nExpected files: {ex['expected_files']}\n")
+            subj_en = ex.get("subject", f"Assignment name: {ex['name']}\nExpected files: {ex['expected_files']}\n")
+            subj_th = ex.get("subject_th", subj_en)
             
-            subj_path = os.path.join(self.workspace_subjects, f"subject_{ex['name']}.txt")
-            with open(subj_path, "w", encoding="utf-8") as f:
-                f.write(subj_content)
+            # English outputs
+            subj_path_en = os.path.join(self.workspace_subjects, f"subject_{ex['name']}.en.txt")
+            with open(subj_path_en, "w", encoding="utf-8") as f:
+                f.write(subj_en)
+            active_subj_en = os.path.join(self.workspace_subjects, "subject.en.txt")
+            with open(active_subj_en, "w", encoding="utf-8") as f:
+                f.write(subj_en)
                 
-            active_subj_path = os.path.join(self.workspace_subjects, "subject.txt")
-            with open(active_subj_path, "w", encoding="utf-8") as f:
-                f.write(subj_content)
+            # Thai outputs
+            subj_path_th = os.path.join(self.workspace_subjects, f"subject_{ex['name']}.th.txt")
+            with open(subj_path_th, "w", encoding="utf-8") as f:
+                f.write(subj_th)
+            active_subj_th = os.path.join(self.workspace_subjects, "subject.th.txt")
+            with open(active_subj_th, "w", encoding="utf-8") as f:
+                f.write(subj_th)
 
     def get_progress_data(self):
         total_completions = self.state.get("total_completions", 0)
@@ -226,10 +235,5 @@ class StateManager:
             "session_completed_count": session_completed,
             "total_completions": total_completions,
             "total_count": total,
-            "language": self.state.get("language", "en"),
             "current_exercise": self.get_current_exercise()
         }
-
-    def set_language(self, lang):
-        self.state["language"] = lang
-        self.save_state()
