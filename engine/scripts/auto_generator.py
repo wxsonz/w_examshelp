@@ -218,11 +218,21 @@ def process_exercises():
             new_hints.append("Ensure you only use the allowed functions. Mallocs must be freed appropriately (if applicable).")
             ex["hints"] = new_hints
             
-            # Enhance subject for Level 0-2 beginners
+            # Try to get detailed extended subjects if available
+            try:
+                from translations import EXTENDED_SUBJECTS
+                if ex["name"] in EXTENDED_SUBJECTS:
+                    ex["subject"] = EXTENDED_SUBJECTS[ex["name"]]["en"]
+                    desc_th = EXTENDED_SUBJECTS[ex["name"]]["th"]
+                else:
+                    desc_th = ex["subject"]  # fallback
+            except ImportError:
+                desc_th = ex["subject"]
+
             subject = ex["subject"]
-            subject += "\n=== EXAMPLES & INSTRUCTIONS ===\n"
+            subject += "\n\n=== EXAMPLES & INSTRUCTIONS ===\n"
             
-            subject_th = f"ชื่อโจทย์  : {ex['name']}\nไฟล์ที่ต้องการ   : {ex['expected_files']}\nฟังก์ชันที่ใช้ได้: {ex['allowed_functions']}\n--------------------------------------------------------------------------------\n\n{ex['hints'][0]}\n\n=== ตัวอย่างและคำแนะนำ ===\n"
+            subject_th = f"ชื่อโจทย์  : {ex['name']}\nไฟล์ที่ต้องการ   : {ex['expected_files']}\nฟังก์ชันที่ใช้ได้: {ex['allowed_functions']}\n--------------------------------------------------------------------------------\n\n{desc_th}\n\n=== ตัวอย่างและคำแนะนำ ===\n"
 
             if ex["is_function"]:
                 subject += "You must write a C function (not a standalone program).\n"
