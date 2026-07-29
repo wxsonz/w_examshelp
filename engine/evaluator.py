@@ -149,7 +149,13 @@ class Evaluator:
         
         wrapper_path = os.path.join(temp_dir, "wrapper_main.c")
         
-        # Build headers
+        main_code = exercise_info.get("main_code")
+        if main_code:
+            with open(wrapper_path, "w") as f:
+                f.write(main_code)
+            return wrapper_path
+            
+        # Build headers for fallback
         code = "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include <unistd.h>\n\n"
         
         # Add prototype
