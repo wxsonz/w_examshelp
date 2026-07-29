@@ -24,7 +24,7 @@ class Evaluator:
         missing_files = []
         c_files_found = []
         for ef in expected_files:
-            file_path = os.path.join(self.workspace_rendu, ef)
+            file_path = os.path.join(self.workspace_rendu, ex_name, ef)
             if not os.path.exists(file_path):
                 missing_files.append(ef)
             elif ef.endswith('.c'):
@@ -34,10 +34,10 @@ class Evaluator:
             return {
                 "success": False,
                 "stage": "file_check",
-                "message": f"Missing expected file(s) in `{self.workspace_rendu}/`: {', '.join(missing_files)}",
+                "message": f"Missing expected file(s) in `rendu/{ex_name}/`: {', '.join(missing_files)}",
                 "hints": [
-                    f"Please place your C source code file `{expected_files[0]}` inside the `{self.workspace_rendu}/` directory.",
-                    f"Current directory path: `{os.path.abspath(self.workspace_rendu)}`"
+                    f"Please place your C source code file `{expected_files[0]}` inside the `{self.workspace_rendu}/{ex_name}/` directory.",
+                    f"Current expected path: `{os.path.abspath(os.path.join(self.workspace_rendu, ex_name))}`"
                 ]
             }
 

@@ -155,7 +155,7 @@ class TerminalUI:
             track_label = f"{C_YELLOW}[Official 42 Exam]{C_RESET}" if source_type == "42_official" else f"{C_CYAN}[ExamsHelp Extended Custom]{C_RESET}"
             lines.append(f"{C_MAGENTA}{'Exercise Track:':<20}{C_RESET}{track_label}")
             lines.append(f"{C_MAGENTA}{'Assignment Name:':<20}{C_RESET}{C_WHITE}{ex['name']}{C_RESET}")
-            lines.append(f"{C_MAGENTA}{'Expected File:':<20}{C_RESET}{C_YELLOW}rendu/{ex['expected_files']}{C_RESET}")
+            lines.append(f"{C_MAGENTA}{'Expected File:':<20}{C_RESET}{C_YELLOW}rendu/{ex['name']}/{ex['expected_files']}{C_RESET}")
             lines.append(f"{C_MAGENTA}{'Allowed Functions:':<20}{C_RESET}{C_CYAN}{ex['allowed_functions']}{C_RESET}")
             if ex.get("prototype"):
                 lines.append(f"{C_MAGENTA}{'Function Prototype:':<20}{C_RESET}{C_YELLOW}{ex['prototype']}{C_RESET}")

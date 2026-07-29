@@ -9,7 +9,7 @@ no dependencies. no me coding. 100% vibed.
 ./examshelp
 ```
 
-put your `.c` files in `rendu/`. if you put them somewhere else it won't work and i won't help you.
+put your `.c` files inside `rendu/<exercise_name>/`. if you put them somewhere else it won't work and I won't help you.
 
 ### Commands
 
