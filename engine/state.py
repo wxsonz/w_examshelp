@@ -1,5 +1,6 @@
 import os
 import json
+import difflib
 import random
 from engine.i18n import resolve_language
 from engine.session import SessionManager
@@ -297,6 +298,69 @@ class StateManager:
         chosen = random.choice(uncompleted or level_exs)
         entry["active"] = chosen["name"]
         return chosen
+
+    # ------------------------------------------------------- jumping straight
+
+    def exercise_names(self):
+        return sorted(self.db.get("exercises", {}))
+
+    def match_exercise(self, target):
+        """Resolve what was typed to one exercise name.
+
+        Returns (name, candidates, kind). A name means we know what was meant.
+        Otherwise `kind` says why we do not, and the two reasons want different
+        wording: "ambiguous" is a fragment that fits several exercises and the
+        fix is to type more, while "similar" is a typo and the fix is to pick
+        one of the guesses.
+
+        An unambiguous fragment counts as a match, so `fizz` finds fizzbuzz and
+        nobody has to type ft_list_push_front in full.
+        """
+        needle = (target or "").strip().lower()
+        if not needle:
+            return None, [], "empty"
+
+        names = self.exercise_names()
+        for name in names:
+            if name.lower() == needle:
+                return name, [], "exact"
+
+        contains = [name for name in names if needle in name.lower()]
+        if len(contains) == 1:
+            return contains[0], [], "fragment"
+        if contains:
+            return None, contains, "ambiguous"
+
+        # Nothing contains it, so this is a typo rather than an abbreviation.
+        # difflib ranks by whole-string similarity, which is the right question
+        # to ask once substring matching has already come up empty.
+        return None, difflib.get_close_matches(needle, names, n=3, cutoff=0.5), "similar"
+
+    def jump_to_exercise(self, name):
+        """Make `name` current, moving track and level as far as it takes.
+
+        Returns the exercise, or None if there is no such name. An exercise that
+        appears in several exams is reached through the current one where
+        possible, so jumping does not silently move you off the exam you are on.
+        """
+        exercise = self.db.get("exercises", {}).get(name)
+        if not exercise:
+            return None
+
+        exams = exercise.get("exams") or {}
+        track = self.get_current_track()
+        if track not in exams:
+            track = next((t for t in TRACKS if t in exams), None)
+        if track is None:
+            return None
+
+        self.state["current_track"] = track
+        entry = self._track_progress(track)
+        entry["level"] = exams[track]
+        entry["active"] = name
+        self.save_state()
+        self._sync_current_subject()
+        return exercise
 
     def complete_current_exercise(self):
         ex = self.get_current_exercise()

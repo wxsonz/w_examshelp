@@ -81,6 +81,7 @@ work properly.
 | `status` | Session, exam, level, and current exercise |
 | `list` | This exam's exercises; `list all` for every exam |
 | `exam` | List the exams; `exam 03` or `exam extra` switches |
+| `examselect` | List every exercise; `examselect fizzbuzz` jumps straight to one |
 | `skip` | Move to another exercise, and show its subject |
 | `lang en\|th` | Switch language (English / ไทย) |
 | `archive` | Snapshot `rendu/` into `history/` |
@@ -90,6 +91,11 @@ work properly.
 | `exit` | Archive and quit |
 
 Every command also works as a one-shot: `./examshelp grademe`.
+
+`examselect` takes a fragment, so `examselect fizz` reaches `fizzbuzz` and
+`examselect putstr` reaches `ft_putstr`. If the fragment fits several exercises
+it says which; if it fits none it offers the closest names instead of failing
+flat. Jumping moves the exam and level with you.
 
 Quitting archives your session to `history/<session-name>/` but **leaves
 `rendu/` alone**. Only `reset` clears your code, and it asks first.

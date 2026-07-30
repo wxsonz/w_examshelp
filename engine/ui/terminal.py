@@ -521,10 +521,10 @@ class TerminalUI:
 
     def display_help(self):
         names = [
-            "subject", "hint", "grademe", "status", "list", "exam",
+            "subject", "hint", "grademe", "status", "list", "exam", "examselect",
             "skip", "lang", "archive", "history", "reset", "version", "exit",
         ]
-        width = 12
+        width = 13
         lines = [
             f"{GREEN}{name:<{width}}{RESET}{DIM}{self.tr(f'cmd.{name}')}{RESET}"
             for name in names

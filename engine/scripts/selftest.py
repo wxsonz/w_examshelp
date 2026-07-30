@@ -148,6 +148,10 @@ def check_ui():
         ("exam", "extra"), ("exam", "EXTRA"), ("exam", "9"), ("exam", "nope"),
         ("exam", ""), ("exam", "  "),
         ("list", "all"), ("list", "extra"), ("list", "01"), ("list", "nope"),
+        ("examselect", None), ("examselect", ""), ("examselect", "   "),
+        ("examselect", "fizzbuzz"), ("examselect", "FizzBuzz"),
+        ("examselect", "fizz"), ("examselect", "ft_list"), ("examselect", "list"),
+        ("examselect", "ft_strlne"), ("examselect", "zzzzz"), ("examselect", "*"),
     ]
 
     saved_env = {k: os.environ.get(k) for k in

@@ -23,7 +23,7 @@ from engine.ui.terminal import TerminalUI
 from engine.version import VERSION
 
 COMMANDS = (
-    "status", "subject", "hint", "grademe", "skip", "list", "exam",
+    "status", "subject", "hint", "grademe", "skip", "list", "exam", "examselect",
     "lang", "archive", "history", "reset", "version", "help", "exit",
 )
 
@@ -118,6 +118,37 @@ class Shell:
             "  "
             + self.tr(
                 "exam.set",
+                track=track_name(self.ui.lang, track),
+                level=self.state.get_level(track),
+            )
+        )
+        self.cmd_subject()
+
+    def cmd_examselect(self, args=None):
+        target = (args or "").strip()
+        if not target:
+            self.ui.display_exercise_list(self.state, self.state.available_tracks())
+            self.ui.dim("  " + self.tr("select.hint"))
+            return
+
+        name, candidates, kind = self.state.match_exercise(target)
+        if not name:
+            if not candidates:
+                self.ui.err(self.tr("select.unknown", name=target))
+            else:
+                key = "select.ambiguous" if kind == "ambiguous" else "select.did_you_mean"
+                self.ui.err(
+                    self.tr(key, name=target, suggestions=", ".join(candidates))
+                )
+            return
+
+        exercise = self.state.jump_to_exercise(name)
+        track = self.state.get_current_track()
+        self.ui.ok(
+            "  "
+            + self.tr(
+                "select.jumped",
+                name=exercise["name"],
                 track=track_name(self.ui.lang, track),
                 level=self.state.get_level(track),
             )
