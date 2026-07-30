@@ -14,7 +14,7 @@ scored "All 3/3 tests passed".
 import re
 
 from engine.textwidth import display_width, pad
-from engine.tracks import EXTRA, PISCINE_2026, SOURCES, TRACKS
+from engine.tracks import ADDED, EXTRA, PISCINE_2026, SOURCES, TRACKS
 
 PROGRAM = "program"
 FUNCTION = "function"
@@ -255,14 +255,14 @@ def validate(exercises):
             raise SpecError(f"duplicate exercise name: {e['name']}")
         seen[e["name"]] = e
 
-        # An off-pool exercise must not masquerade as exam material, and an exam
-        # exercise must not hide in the drill track.
+        # The drill track and the drill source imply each other; anything with a
+        # place on an exam ladder must say which one it is.
         tracks = set(e["exams"])
         if e["source"] == EXTRA and tracks != {EXTRA}:
             raise SpecError(
                 f"{e['name']}: source is {EXTRA!r} but it claims "
-                f"{', '.join(sorted(tracks - {EXTRA}))} -- off-pool exercises live "
-                f"in the {EXTRA} track only"
+                f"{', '.join(sorted(tracks - {EXTRA}))} -- drill-only exercises live "
+                f"in the {EXTRA} track. Placing it on an exam makes it {ADDED!r}."
             )
         if e["source"] != EXTRA and EXTRA in tracks:
             raise SpecError(

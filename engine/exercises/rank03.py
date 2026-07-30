@@ -5,7 +5,7 @@ leave implicit (print_memory in particular) are pinned down exactly here, becaus
 the grader compares bytes and a learner cannot guess a format.
 """
 
-from engine.exercises.spec import ex, EXTRA, PROGRAM, FUNCTION
+from engine.exercises.spec import ex, ADDED, PROGRAM, FUNCTION
 
 EXERCISES = [
     # ------------------------------------------------------------------ level 3
@@ -616,8 +616,8 @@ int	main(int argc, char **argv)
     # ------------------------------------------------------------------ level 4
     ex(
         name="ft_strjoin",
-        exams={"extra": 2},
-        source=EXTRA,
+        exams={"exam_03": 3, "exam_04": 1},
+        source=ADDED,
         kind=FUNCTION,
         allowed=["malloc"],
         prototype="char *ft_strjoin(int size, char **strs, char *sep);",
@@ -1124,8 +1124,8 @@ int	main(int argc, char **argv)
     ),
     ex(
         name="ft_strspn",
-        exams={"extra": 2},
-        source=EXTRA,
+        exams={"exam_02": 7, "exam_03": 1},
+        source=ADDED,
         kind=FUNCTION,
         allowed=[],
         prototype="size_t ft_strspn(const char *s, const char *accept);",
@@ -1332,8 +1332,8 @@ int	main(int argc, char **argv)
     ),
     ex(
         name="ft_sort_string_tab",
-        exams={"extra": 3},
-        source=EXTRA,
+        exams={"exam_04": 2},
+        source=ADDED,
         kind=FUNCTION,
         allowed=[],
         prototype="void ft_sort_string_tab(char **tab);",

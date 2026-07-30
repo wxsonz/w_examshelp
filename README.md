@@ -47,9 +47,23 @@ and an exercise sits at a *different* level in each exam it appears in
 switches; progress is tracked per exam, and solving an exercise counts wherever
 it appears.
 
-A fifth track, `extra`, holds 16 exercises that are not in the 2026 pool. They
-stay as drill and are labelled as such everywhere, so they are never mistaken for
-exam material.
+Exercises the 2026 pool does not contain but which clearly belong on a ladder
+are placed there by judgement and marked `*` in `list`, with a note on the
+subject — `ft_putchar` is easier than anything at exam 01 level 0, and exam 04
+level 3 held a single exercise until `eval_expr` and `permutations` joined it.
+The 59 exercises the pool *does* contain sit exactly where the real exams put
+them; `audit_corpus.py` fails the build if that ever drifts.
+
+A fifth track, `extra`, is what is left: `ft_printf` and `n_queens`, which are
+not exam material by any reading and stay as pure drill.
+
+## Updates
+
+`version` reports the version and checks whether a newer one has been published.
+The shell also checks quietly in the background, at most once a day, on a
+thread, and tells you on the *next* start — nothing ever waits on the network,
+and a machine that is offline sees no error. `EXAMSHELP_NO_UPDATE_CHECK=1` turns
+it off entirely.
 
 Your submission is compiled with `-Wall -Wextra -Werror` and compared byte for
 byte, so a missing trailing newline fails — as it does in the real exam. Function
@@ -72,6 +86,7 @@ work properly.
 | `archive` | Snapshot `rendu/` into `history/` |
 | `history` | Past archived sessions |
 | `reset` | Wipe all progress and start over (asks first) |
+| `version` | Show the version and check for updates |
 | `exit` | Archive and quit |
 
 Every command also works as a one-shot: `./examshelp grademe`.

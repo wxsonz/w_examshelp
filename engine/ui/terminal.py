@@ -22,7 +22,8 @@ except ImportError:
 
 from engine.hints import HintEngine
 from engine.i18n import language_badge, other_language, t, track_name
-from engine.tracks import EXTRA
+from engine.tracks import ADDED, EXTRA
+from engine.version import VERSION
 from engine.ui.ansi import (
     CYAN,
     DIM,
@@ -37,8 +38,6 @@ from engine.ui.ansi import (
     draw_box,
     visible,
 )
-
-VERSION = "v0.5.0"
 
 MAX_SHOWN_FAILURES = 3
 MAX_SHOWN_LINES = 8
@@ -115,7 +114,7 @@ class TerminalUI:
 
     # ---------------------------------------------------------------- banner
 
-    def print_banner(self, exercise_count=None, test_count=None):
+    def print_banner(self, exercise_count=None, test_count=None, newer_version=None):
         art = [
             " ███████╗██╗  ██╗██████╗ ███╗   ███╗███████╗██╗  ██╗███████╗██╗     ██████╗ ",
             " ██╔════╝╚██╗██╔╝██╔══██╗████╗ ████║██╔════╝██║  ██║██╔════╝██║     ██╔══██╗",
@@ -134,6 +133,11 @@ class TerminalUI:
         if exercise_count:
             subtitle += f"  ·  {exercise_count} / {test_count}"
         self.dim(subtitle.center(box_width()))
+
+        if newer_version:
+            notice = self.tr("update.available", latest=newer_version, current=VERSION)
+            self.warn(notice.center(box_width()))
+            self.dim(self.tr("update.how").center(box_width()))
 
     # ---------------------------------------------------------------- status
 
@@ -218,9 +222,11 @@ class TerminalUI:
             f"{RESET}",
             indent="",
         )
-        # An off-pool exercise must never be mistaken for exam material.
+        # Nothing outside the 2026 pool may be read as real exam material.
         if exercise.get("source") == EXTRA:
             self.dim(f"  {self.tr('track.extra_note')}")
+        elif exercise.get("source") == ADDED:
+            self.dim(f"  {self.tr('track.added_note')}")
         self.dim(f"  {self.tr('subject.switch', other=other_language(self.lang))}")
 
     # ----------------------------------------------------------------- hints
@@ -468,15 +474,17 @@ class TerminalUI:
                     kind = "fn" if exercise.get("kind") == "function" else "prog"
                     count = len(exercise.get("tests", []))
                     key = "list.tests" if count == 1 else "list.tests_plural"
+                    label = name + ("*" if exercise.get("source") == ADDED else "")
                     lines.append(
-                        f"{color}{mark} {name:<22}{RESET}"
+                        f"{color}{mark} {label:<22}{RESET}"
                         f"{DIM}{kind:<5}{self.tr(key, count=count)}{RESET}"
                     )
 
         legend = (
             f"{GREEN}✓{RESET} {self.tr('list.legend_done')}   "
             f"{YELLOW}▸{RESET} {self.tr('list.legend_current')}   "
-            f"{DIM}·{RESET} {self.tr('list.legend_locked')}"
+            f"{DIM}·{RESET} {self.tr('list.legend_locked')}   "
+            f"{DIM}*{RESET} {self.tr('list.legend_added')}"
         )
         self.box(
             f"{CYAN}{self.tr('ui.curriculum')}{RESET}",
@@ -514,7 +522,7 @@ class TerminalUI:
     def display_help(self):
         names = [
             "subject", "hint", "grademe", "status", "list", "exam",
-            "skip", "lang", "archive", "history", "reset", "exit",
+            "skip", "lang", "archive", "history", "reset", "version", "exit",
         ]
         width = 12
         lines = [

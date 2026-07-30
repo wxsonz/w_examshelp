@@ -6,7 +6,7 @@ this pack picks one reading and states it unambiguously; the reference solution
 implements that reading, and the tests are generated from it.
 """
 
-from engine.exercises.spec import ex, EXTRA, PROGRAM, FUNCTION
+from engine.exercises.spec import ex, ADDED, PROGRAM, FUNCTION
 
 EXERCISES = [
     # ------------------------------------------------------------------ level 0
@@ -317,8 +317,8 @@ int	main(void)
     ),
     ex(
         name="ft_putchar",
-        exams={"extra": 0},
-        source=EXTRA,
+        exams={"exam_01": 0},
+        source=ADDED,
         kind=FUNCTION,
         allowed=["write"],
         prototype="void ft_putchar(char c);",
@@ -366,8 +366,8 @@ int	main(int argc, char **argv)
     ),
     ex(
         name="is_negative",
-        exams={"extra": 0},
-        source=EXTRA,
+        exams={"exam_01": 1},
+        source=ADDED,
         kind=FUNCTION,
         allowed=["write"],
         prototype="void is_negative(int n);",
@@ -1559,8 +1559,8 @@ int	main(int argc, char **argv)
     ),
     ex(
         name="fizzbuzz",
-        exams={"extra": 1},
-        source=EXTRA,
+        exams={"exam_01": 7, "exam_02": 3},
+        source=ADDED,
         kind=PROGRAM,
         allowed=["write"],
         subject="""

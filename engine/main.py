@@ -13,16 +13,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
+from engine import update
 from engine.evaluator import Evaluator
 from engine.i18n import LANGUAGES, accepted_languages, t, track_name
 from engine.state import StateManager
 from engine.tracks import accepted_tracks, resolve_track
 from engine.ui.ansi import DIM, RESET, YELLOW
 from engine.ui.terminal import TerminalUI
+from engine.version import VERSION
 
 COMMANDS = (
     "status", "subject", "hint", "grademe", "skip", "list", "exam",
-    "lang", "archive", "history", "reset", "help", "exit",
+    "lang", "archive", "history", "reset", "version", "help", "exit",
 )
 
 
@@ -32,6 +34,9 @@ class Shell:
         lang = self.state.get_language()
         self.ui = TerminalUI(lang=lang)
         self.evaluator = Evaluator(self.state.workspace_rendu, lang=lang)
+        # What we heard last time; this start refreshes it for the next one.
+        self.newer_version = update.pending(self.state.state_file)
+        update.refresh_later(self.state.state_file)
 
     def tr(self, key, **kwargs):
         return t(self.ui.lang, key, **kwargs)
@@ -166,6 +171,18 @@ class Shell:
             self.state.get_current_exercise(), self.state.get_current_track()
         )
 
+    def cmd_version(self, _args=None):
+        """Typed by hand, so this one is allowed to wait on the network."""
+        latest = update.check_now(self.state.state_file)
+        if latest is None:
+            self.ui.dim("  " + self.tr("update.unknown", current=VERSION))
+        elif update.is_newer(latest):
+            self.newer_version = latest
+            self.ui.warn("  " + self.tr("update.available", latest=latest, current=VERSION))
+            self.ui.dim("  " + self.tr("update.how"))
+        else:
+            self.ui.ok("  " + self.tr("update.current", current=VERSION))
+
     def cmd_help(self, _args=None):
         self.ui.display_help()
 
@@ -189,7 +206,9 @@ class Shell:
 
     def run_interactive(self):
         self.ui.print_banner(
-            self.state.db.get("total_exercises"), self.state.db.get("total_tests")
+            self.state.db.get("total_exercises"),
+            self.state.db.get("total_tests"),
+            newer_version=self.newer_version,
         )
         self.ui.emit()
         self.cmd_status()

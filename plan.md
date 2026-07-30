@@ -14,6 +14,18 @@ Two things were decided while implementing, and differ from the text below:
 
 Everything below is the plan as agreed, kept for the reasoning.
 
+### Follow-up pass (v0.6.0)
+
+Section 6 said the 16 off-pool exercises stay a separate `extra` track. Fourteen
+of them turned out to be good enough to earn a place on an exam ladder, so they
+were promoted and a third source, `added`, was introduced: not from the 2026
+pool, placed by judgement, and labelled as such on the subject and with a `*` in
+`list`. Only `ft_printf` and `n_queens` remain drill.
+
+The 59 exercises the corpus *does* place were left exactly where it places them.
+Moving those by judgement would defeat section 8 — that check exists precisely
+because hand-assigned levels were what got `sort_int_tab` wrong.
+
 ## Context
 
 The pack's low levels are outdated relative to the 2026 Piscine and its difficulty

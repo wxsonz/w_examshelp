@@ -10,7 +10,13 @@ level 5 and exam_02 level 0; the later exams start where the earlier ones ended.
 That is exactly why a single number could never describe it.
 
 `extra` is the fifth track. It holds exercises that are not in the 2026 pool at
-all. They stay in the pack as drill, and are never presented as exam material.
+all and are not close enough to any exam to be worth pretending otherwise.
+
+Between the two sits `added`: an exercise the pool does not contain but which
+earns its place on an exam's ladder anyway -- ft_putchar is easier than anything
+at exam_01 level 0, and exam_04 level 3 held a single exercise until eval_expr
+and permutations joined it. These are placed by judgement rather than by ground
+truth, so they say so wherever they are shown.
 """
 
 EXAM_IDS = ("exam_01", "exam_02", "exam_03", "exam_04")
@@ -21,7 +27,8 @@ DEFAULT_TRACK = EXAM_IDS[0]
 
 # Where an exercise comes from, which is a different question from where it sits.
 PISCINE_2026 = "piscine_2026"
-SOURCES = (PISCINE_2026, EXTRA)
+ADDED = "added"
+SOURCES = (PISCINE_2026, ADDED, EXTRA)
 
 
 def _build_aliases():

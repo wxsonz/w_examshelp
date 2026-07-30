@@ -53,6 +53,10 @@ MESSAGES = {
         "track.exam": "exam {number}",
         "track.extra": "extra",
         "track.extra_note": "not in the 2026 exam pool, drill only",
+        "track.added_note": (
+            "not from the 2026 pool -- placed on this exam by difficulty, as extra "
+            "practice"
+        ),
         # dashboard fields
         "field.session": "Session",
         "field.exam": "Exam",
@@ -131,6 +135,7 @@ MESSAGES = {
         "list.legend_done": "done",
         "list.legend_current": "current",
         "list.legend_locked": "locked",
+        "list.legend_added": "added, not from the 2026 pool",
         "list.col_session": "session",
         "list.col_archived": "archived",
         "list.col_level": "lvl",
@@ -154,6 +159,12 @@ MESSAGES = {
         "shell.goodbye": "See you.",
         "shell.no_db": "No exercises found in engine/config/exercises_db.json.",
         "shell.build_db": "Build it with: python3 engine/scripts/build_db.py",
+        # updates
+        "update.available": "update available: {latest} — you have {current}",
+        "update.how": "git pull, then: python3 engine/scripts/build_db.py",
+        "update.current": "up to date ({current})",
+        "update.checking": "checking for updates...",
+        "update.unknown": "could not reach the update source — {current} it is",
         # command descriptions
         "cmd.subject": "read the current assignment",
         "cmd.hint": "what to watch out for",
@@ -166,6 +177,7 @@ MESSAGES = {
         "cmd.archive": "snapshot rendu/ into history/",
         "cmd.history": "past archived sessions",
         "cmd.reset": "wipe all progress and start over",
+        "cmd.version": "show the version and check for updates",
         "cmd.exit": "archive and quit",
         # hint engine
         "hint.function_only": "Write the function only -- no main(). Prototype: {prototype}",
@@ -264,6 +276,9 @@ MESSAGES = {
         "track.exam": "ข้อสอบชุดที่ {number}",
         "track.extra": "แบบฝึกเสริม",
         "track.extra_note": "ไม่ได้อยู่ในชุดข้อสอบปี 2026 ใช้สำหรับฝึกซ้อมเท่านั้น",
+        "track.added_note": (
+            "ไม่ได้มาจากชุดข้อสอบปี 2026 แต่จัดไว้ในชุดนี้ตามระดับความยาก เพื่อเป็นแบบฝึกเพิ่มเติม"
+        ),
         "field.session": "เซสชัน",
         "field.exam": "ชุดข้อสอบ",
         "field.level": "ระดับ",
@@ -331,6 +346,7 @@ MESSAGES = {
         "list.legend_done": "ทำแล้ว",
         "list.legend_current": "ข้อปัจจุบัน",
         "list.legend_locked": "ยังไม่ปลดล็อก",
+        "list.legend_added": "เพิ่มเข้ามา ไม่ได้มาจากชุดข้อสอบปี 2026",
         "list.col_session": "เซสชัน",
         "list.col_archived": "บันทึกเมื่อ",
         "list.col_level": "ระดับ",
@@ -352,6 +368,11 @@ MESSAGES = {
         "shell.goodbye": "เจอกันใหม่",
         "shell.no_db": "ไม่พบโจทย์ในไฟล์ engine/config/exercises_db.json",
         "shell.build_db": "สร้างได้ด้วยคำสั่ง: python3 engine/scripts/build_db.py",
+        "update.available": "มีเวอร์ชันใหม่: {latest} — ของคุณคือ {current}",
+        "update.how": "รัน git pull แล้วตามด้วย: python3 engine/scripts/build_db.py",
+        "update.current": "เป็นเวอร์ชันล่าสุดแล้ว ({current})",
+        "update.checking": "กำลังตรวจหาเวอร์ชันใหม่...",
+        "update.unknown": "ติดต่อแหล่งอัปเดตไม่ได้ ใช้เวอร์ชัน {current} ต่อไป",
         "cmd.subject": "อ่านโจทย์ข้อปัจจุบัน",
         "cmd.hint": "ดูจุดที่ต้องระวังในข้อนี้",
         "cmd.grademe": "คอมไพล์และทดสอบโค้ดในโฟลเดอร์ rendu/",
@@ -363,6 +384,7 @@ MESSAGES = {
         "cmd.archive": "บันทึกโฟลเดอร์ rendu/ เก็บไว้ใน history/",
         "cmd.history": "ดูเซสชันที่บันทึกไว้ก่อนหน้า",
         "cmd.reset": "ลบความก้าวหน้าทั้งหมดและเริ่มใหม่",
+        "cmd.version": "ดูเวอร์ชันและตรวจหาเวอร์ชันใหม่",
         "cmd.exit": "บันทึกแล้วออกจากโปรแกรม",
         "hint.function_only": "เขียนเฉพาะฟังก์ชัน ไม่ต้องมี main() ต้นแบบ: {prototype}",
         "hint.signature_exact": (

@@ -4,6 +4,7 @@ __pycache__/
 
 # Local runtime workspace & user state
 .examshelp_state.json
+.examshelp_update.json
 rendu/
 subjects/
 history/

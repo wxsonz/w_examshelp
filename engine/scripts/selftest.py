@@ -16,6 +16,7 @@ Usage:
 """
 
 import argparse
+import json
 import os
 import shutil
 import sys
@@ -27,7 +28,7 @@ if BASE_DIR not in sys.path:
 
 from engine.evaluator import Evaluator
 from engine.exercises import load_all, spec
-from engine.state import StateManager
+from engine.state import DB_FILE
 
 
 def materialise(rendu, exercise, sources):
@@ -46,9 +47,11 @@ def main():
     args = parser.parse_args()
 
     # The graded exercise dicts come from the built database, so this also
-    # catches a database that has drifted from the pack.
-    state = StateManager()
-    graded = dict(state.db.get("exercises", {}))
+    # catches a database that has drifted from the pack. Read straight off disk
+    # rather than through StateManager, which would migrate the real progress
+    # file of whoever is running the tests.
+    with open(DB_FILE, encoding="utf-8") as f:
+        graded = dict(json.load(f).get("exercises", {}))
 
     pack = load_all()
     if args.only:
@@ -137,7 +140,7 @@ def check_ui():
     invocations = [
         ("status", None), ("subject", None), ("hint", None), ("list", None),
         ("help", None), ("history", None), ("archive", None), ("skip", None),
-        ("grademe", None), ("exam", None),
+        ("grademe", None), ("exam", None), ("version", None),
         # Failure and edge paths, which are the ones that go untested.
         ("lang", ""), ("lang", "th"), ("lang", "thai"), ("lang", "en"),
         ("lang", "english"), ("lang", "xyz"), ("lang", "  "), ("lang", "TH"),
@@ -149,8 +152,11 @@ def check_ui():
 
     saved_env = {k: os.environ.get(k) for k in
                  ("EXAMSHELP_STATE", "EXAMSHELP_RENDU", "EXAMSHELP_SUBJECTS",
-                  "EXAMSHELP_HISTORY")}
+                  "EXAMSHELP_HISTORY", "EXAMSHELP_NO_UPDATE_CHECK")}
     with tempfile.TemporaryDirectory() as tmp:
+        # A test run must not depend on the network, so `version` and the
+        # background check both take their no-op path here.
+        os.environ["EXAMSHELP_NO_UPDATE_CHECK"] = "1"
         # Redirect the whole workspace before Shell() builds any state, so the
         # real .examshelp_state.json and rendu/ are never touched.
         os.environ["EXAMSHELP_STATE"] = os.path.join(tmp, "state.json")

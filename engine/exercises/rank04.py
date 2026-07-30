@@ -14,7 +14,7 @@ The linked list used throughout is the standard one:
     } t_list;
 """
 
-from engine.exercises.spec import ex, EXTRA, PISCINE_2026, PROGRAM, FUNCTION
+from engine.exercises.spec import ex, ADDED, EXTRA, PISCINE_2026, PROGRAM, FUNCTION
 
 FT_LIST_H = """
 #ifndef FT_LIST_H
@@ -176,8 +176,8 @@ int	ft_list_size(t_list *begin_list)
     ),
     _list_exercise(
         name="ft_list_push_front",
-        exams={"extra": 4},
-        source=EXTRA,
+        exams={"exam_03": 2, "exam_04": 0},
+        source=ADDED,
         prototype="void ft_list_push_front(t_list **begin_list, void *data);",
         allowed=["malloc"],
         subject="""
@@ -242,8 +242,8 @@ void	ft_list_push_front(t_list **begin_list, void *data)
     ),
     _list_exercise(
         name="ft_list_push_back",
-        exams={"extra": 4},
-        source=EXTRA,
+        exams={"exam_03": 2, "exam_04": 0},
+        source=ADDED,
         prototype="void ft_list_push_back(t_list **begin_list, void *data);",
         allowed=["malloc"],
         subject="""
@@ -317,8 +317,8 @@ void	ft_list_push_back(t_list **begin_list, void *data)
     ),
     _list_exercise(
         name="ft_list_at",
-        exams={"extra": 4},
-        source=EXTRA,
+        exams={"exam_03": 2, "exam_04": 0},
+        source=ADDED,
         prototype="t_list *ft_list_at(t_list *begin_list, unsigned int nbr);",
         allowed=[],
         subject="""
@@ -393,8 +393,8 @@ t_list	*ft_list_at(t_list *begin_list, unsigned int nbr)
     ),
     _list_exercise(
         name="ft_list_reverse",
-        exams={"extra": 4},
-        source=EXTRA,
+        exams={"exam_03": 3, "exam_04": 1},
+        source=ADDED,
         prototype="void ft_list_reverse(t_list **begin_list);",
         allowed=[],
         subject="""
@@ -615,8 +615,8 @@ void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
     ),
     _list_exercise(
         name="sorted_list_insert",
-        exams={"extra": 5},
-        source=EXTRA,
+        exams={"exam_04": 2},
+        source=ADDED,
         prototype="void sorted_list_insert(t_list **begin_list, void *data, int (*cmp)(void *, void *));",
         allowed=["malloc"],
         subject="""
@@ -715,10 +715,13 @@ void	sorted_list_insert(t_list **begin_list, void *data,
             "Link the new node to cursor->next BEFORE overwriting cursor->next.",
         ],
     ),
+    # The 2026 pool's equivalent is `sort_list` at exam_04/2, with a different
+    # prototype; it is still to be written. When it lands the two sit side by
+    # side rather than replacing each other -- same level, different signature.
     _list_exercise(
         name="ft_list_sort",
-        exams={"extra": 5},
-        source=EXTRA,
+        exams={"exam_04": 2},
+        source=ADDED,
         prototype="void ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *));",
         allowed=[],
         subject="""
@@ -809,8 +812,8 @@ void	ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *))
     # ------------------------------------------------------------------ level 8
     ex(
         name="eval_expr",
-        exams={"extra": 6},
-        source=EXTRA,
+        exams={"exam_04": 3},
+        source=ADDED,
         kind=PROGRAM,
         allowed=["printf", "write"],
         subject="""
@@ -985,8 +988,8 @@ int	main(int argc, char **argv)
     ),
     ex(
         name="permutations",
-        exams={"extra": 6},
-        source=EXTRA,
+        exams={"exam_04": 3},
+        source=ADDED,
         kind=PROGRAM,
         allowed=["write"],
         subject="""
@@ -1265,7 +1268,7 @@ int	main(int argc, char **argv)
     # ------------------------------------------------------------------ level 9
     ex(
         name="n_queens",
-        exams={"extra": 7},
+        exams={"extra": 1},
         source=EXTRA,
         kind=PROGRAM,
         allowed=["atoi", "printf", "write"],
@@ -1385,7 +1388,7 @@ int	main(int argc, char **argv)
     ),
     ex(
         name="ft_printf",
-        exams={"extra": 7},
+        exams={"extra": 0},
         source=EXTRA,
         kind=FUNCTION,
         allowed=["write", "malloc", "free", "va_start", "va_arg", "va_copy", "va_end"],
