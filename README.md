@@ -102,18 +102,37 @@ Quitting archives your session to `history/<session-name>/` but **leaves
 
 ## Adding or changing exercises
 
-One exercise is one directory of ordinary files under `exercises/` — a real `.c`
-reference, plain-text subjects, a small config, one test per line. No Python and
-no escaping, and adding one touches nobody else's files.
+One exercise is one directory of ordinary files under `engine/exercises/` — a
+real `.c` reference, plain-text subjects, a small config, one test per line. No
+Python and no escaping, and adding one touches nobody else's files.
 
 ```bash
 python3 engine/scripts/new_exercise.py alen --exams exam_01/4
 python3 engine/scripts/build_db.py --only alen
 ```
 
-The skeleton already builds, so you can watch it pass and then change one thing
-at a time. **[CONTRIBUTING.md](CONTRIBUTING.md) is the full format** — it is
-short.
+The skeleton it writes already builds, so you can watch it pass and then change
+one thing at a time:
+
+```
+engine/exercises/alen/
+├── exercise.conf      exams : exam_01/4        where it sits
+│                      allowed : write          what may be called
+├── subject.en.txt     the subject, as the student reads it
+├── subject.th.txt
+├── alen.c             your reference — gcc compiles it directly
+├── tests              $ hello        one test per line, shell-quoted
+│                      $              a bare $ means no arguments
+└── hints.en.txt       optional, hints separated by blank lines
+```
+
+`harness.c` (required for function exercises), `stub.c` and any extra reference
+files such as `ft_list.h` are picked up just by being there. `engine/pack/loader.py`
+documents the format in full.
+
+**You never write the expected output.** The build runs your reference and
+records what it printed, which is why a subject and its tests cannot drift
+apart — and why the reference has to be right.
 
 `engine/config/` is generated; don't edit it.
 

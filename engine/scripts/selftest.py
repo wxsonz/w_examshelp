@@ -221,9 +221,9 @@ SCAFFOLD_MODES = (
 def check_scaffolding():
     """The skeleton new_exercise.py writes must still be a working exercise.
 
-    CONTRIBUTING.md promises a contributor that their first two commands pass
-    before they have changed anything, and that promise is the whole onboarding
-    story. But the skeleton lives in string constants: add a required file to
+    The README promises a contributor that their first two commands pass before
+    they have changed anything, and that promise is the whole onboarding story.
+    But the skeleton lives in string constants: add a required file to
     the pack format, rename a conf key, tighten parse_tests, and it rots
     silently. The person who finds out is the one least able to tell whether
     they broke it or the tool did.
@@ -239,7 +239,7 @@ def check_scaffolding():
     problems = []
 
     for name, extra in SCAFFOLD_MODES:
-        # --pack keeps this out of the real exercises/, and going through the
+        # --pack keeps this out of the real engine/exercises/, and going through
         # command line covers the argument parsing rather than the templates
         # alone.
         with tempfile.TemporaryDirectory() as pack:

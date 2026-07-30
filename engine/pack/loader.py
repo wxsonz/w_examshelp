@@ -7,7 +7,7 @@ exercise meant editing a 2,500-line file somebody else was editing too.
 
 An exercise is now a directory:
 
-    exercises/aff_a/
+    engine/exercises/aff_a/
         exercise.conf     placement and allowed functions
         subject.en.txt    the subject, exactly as the student reads it
         subject.th.txt
@@ -17,7 +17,7 @@ An exercise is now a directory:
 
 harness.c, stub.c and any extra reference files (ft_list.h) are optional and are
 picked up by being there. Nothing is escaped, quoted or indented into a Python
-literal, and `gcc exercises/aff_a/aff_a.c` works from a shell.
+literal, and `gcc engine/exercises/aff_a/aff_a.c` works from a shell.
 
 Everything still goes through spec.ex(), so a directory and a hand-written
 exercise are validated by exactly the same code.

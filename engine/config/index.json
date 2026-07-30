@@ -1,6 +1,6 @@
 {
  "generated_by": "engine/scripts/build_db.py",
- "warning": "Generated file. Edit exercises/, then run engine/scripts/build_db.py.",
+ "warning": "Generated file. Edit engine/exercises/, then run engine/scripts/build_db.py.",
  "total_exercises": 75,
  "total_tests": 437,
  "tracks": {

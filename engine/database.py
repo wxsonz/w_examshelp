@@ -23,7 +23,7 @@ CONFIG_DIR = os.path.join(BASE_DIR, "engine", "config")
 INDEX_NAME = "index.json"
 EXERCISES_NAME = "exercises"
 
-WARNING = "Generated file. Edit exercises/, then run engine/scripts/build_db.py."
+WARNING = "Generated file. Edit engine/exercises/, then run engine/scripts/build_db.py."
 
 
 def index_path(config_dir=None):

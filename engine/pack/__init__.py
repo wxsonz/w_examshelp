@@ -1,8 +1,10 @@
 """The exercise pack: the source of truth for every subject and every test.
 
-The pack itself lives in `exercises/` at the top of the repository, one
-directory per exercise, in ordinary files -- see engine/pack/loader.py for the
-layout and CONTRIBUTING.md for how to add one.
+The pack itself lives in `engine/exercises/`, one directory per exercise, in
+ordinary files -- see engine/pack/loader.py for the layout.
+
+`engine/exercises/` holds data, not code: it has no __init__.py and nothing
+imports it. The code that reads it is here in engine/pack/.
 
 engine/config/ is a *generated artefact* built from that directory. Never edit
 it by hand -- run `python3 engine/scripts/build_db.py`, which regenerates it and
@@ -14,7 +16,9 @@ import os
 from engine.pack import loader, spec
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PACK_DIR = os.environ.get("EXAMSHELP_PACK") or os.path.join(BASE_DIR, "exercises")
+PACK_DIR = os.environ.get("EXAMSHELP_PACK") or os.path.join(
+    BASE_DIR, "engine", "exercises"
+)
 
 
 def exercise_directories(root=None):

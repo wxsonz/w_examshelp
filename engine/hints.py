@@ -5,7 +5,7 @@ one-line filler stored in the database instead. It is now the source of the
 `hint` command's output, combined with the per-exercise hints from the pack.
 
 The generic advice below is translated. The per-exercise hints written in
-exercises/*/hints.en.txt are English only, so a Thai session shows Thai advice followed
+engine/exercises/*/hints.en.txt are English only, so a Thai session shows Thai advice followed
 by English exercise-specific notes.
 """
 
