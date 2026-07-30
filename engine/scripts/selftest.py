@@ -18,6 +18,7 @@ Usage:
 import argparse
 import os
 import shutil
+import subprocess
 import sys
 import tempfile
 
@@ -120,6 +121,13 @@ def main():
         for message in ui_failures:
             print(f"* {message}", file=sys.stderr)
         return 1
+
+    scaffold_failures = check_scaffolding()
+    if scaffold_failures:
+        print(f"\n{len(scaffold_failures)} scaffolding failure(s):\n", file=sys.stderr)
+        for message in scaffold_failures:
+            print(f"* {message}", file=sys.stderr)
+        return 1
     return 0
 
 
@@ -199,6 +207,74 @@ def check_ui():
 
     if not problems:
         print(f"UI: every command ran in {len(LANGUAGES)} languages, catalogs consistent.")
+    return problems
+
+
+# The two shapes new_exercise.py can produce. A function exercise also gets a
+# harness.c, which is the half most likely to rot unnoticed.
+SCAFFOLD_MODES = (
+    ("probe_program", []),
+    ("probe_function", ["--prototype", "void probe_function(char *str);"]),
+)
+
+
+def check_scaffolding():
+    """The skeleton new_exercise.py writes must still be a working exercise.
+
+    CONTRIBUTING.md promises a contributor that their first two commands pass
+    before they have changed anything, and that promise is the whole onboarding
+    story. But the skeleton lives in string constants: add a required file to
+    the pack format, rename a conf key, tighten parse_tests, and it rots
+    silently. The person who finds out is the one least able to tell whether
+    they broke it or the tool did.
+
+    Building it here asserts the whole claim at once -- the reference compiles
+    under -Wall -Wextra -Werror, its output is deterministic, the transcript in
+    the generated subject is real, and the do-nothing stub still fails.
+    """
+    from engine.pack import loader
+    from engine.scripts.build_db import BuildError, build_exercise
+
+    script = os.path.join(BASE_DIR, "engine", "scripts", "new_exercise.py")
+    problems = []
+
+    for name, extra in SCAFFOLD_MODES:
+        # --pack keeps this out of the real exercises/, and going through the
+        # command line covers the argument parsing rather than the templates
+        # alone.
+        with tempfile.TemporaryDirectory() as pack:
+            created = subprocess.run(
+                [sys.executable, script, name, "--exams", "exam_01/0",
+                 "--pack", pack] + extra,
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            if created.returncode != 0:
+                problems.append(
+                    f"new_exercise.py {name} exited {created.returncode}: "
+                    f"{created.stderr.strip() or created.stdout.strip()}"
+                )
+                continue
+
+            try:
+                exercise = loader.load_exercise(os.path.join(pack, name))
+            except spec.SpecError as err:
+                problems.append(f"the {name} skeleton does not load: {err}")
+                continue
+
+            try:
+                build_exercise(exercise)
+            except (BuildError, spec.SpecError) as err:
+                problems.append(f"the {name} skeleton does not build: {err}")
+            except subprocess.TimeoutExpired:
+                problems.append(f"the {name} skeleton timed out while building")
+
+    if not problems:
+        print(
+            f"Scaffolding: new_exercise.py still produces a working exercise "
+            f"in {len(SCAFFOLD_MODES)} modes."
+        )
     return problems
 
 

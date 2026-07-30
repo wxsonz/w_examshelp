@@ -5,4 +5,4 @@ repository -- a few hundred bytes -- instead of downloading the renderer to read
 one string out of it.
 """
 
-VERSION = "v0.8.0"
+VERSION = "v0.8.1"
