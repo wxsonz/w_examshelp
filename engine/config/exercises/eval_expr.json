@@ -1,0 +1,121 @@
+{
+ "id": "eval_expr",
+ "name": "eval_expr",
+ "exams": {
+  "exam_04": 3
+ },
+ "source": "added",
+ "kind": "program",
+ "expected_files": [
+  "eval_expr.c"
+ ],
+ "allowed_functions": [
+  "printf",
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : eval_expr\nExpected files    : eval_expr.c\nAllowed functions : printf, write\n--------------------------------------------------------------------------------\n\nWrite a program that evaluates the arithmetic expression given as its single\nargument and displays the result, followed by a newline.\n\nThe expression may contain non-negative integers, the binary operators +, -, *, /\nand %, parentheses, and spaces. Standard precedence applies: * / % bind tighter\nthan + -, parentheses override everything, and operators of equal precedence\nassociate to the left. A '-' directly in front of a value negates it.\n\nAll arithmetic is integer arithmetic. You may assume the expression is valid and\nthat no division or modulo by zero occurs.\n\nIf the number of arguments is not 1, the program writes only a newline.\n\nExamples:\n\n  $> ./eval_expr \"1 + 2 * 3\" | cat -e\n  7$\n  $> ./eval_expr \"(1 + 2) * 3\" | cat -e\n  9$\n  $> ./eval_expr \"10 - 2 - 3\" | cat -e\n  5$\n",
+ "subject_th": "ชื่อโจทย์     : eval_expr\nไฟล์ที่ต้องส่ง  : eval_expr.c\nฟังก์ชันที่ใช้ได้ : printf, write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่คำนวณค่าของนิพจน์คณิตศาสตร์ที่รับมาเป็นอาร์กิวเมนต์เดียว\nแล้วแสดงผลลัพธ์ ตามด้วยการขึ้นบรรทัดใหม่\n\nนิพจน์อาจประกอบด้วยจำนวนเต็มที่ไม่เป็นลบ ตัวดำเนินการสองตัวแปร +, -, *, / และ %\nวงเล็บ และช่องว่าง โดยใช้ลำดับความสำคัญตามปกติ คือ * / % มาก่อน + -\nวงเล็บมีความสำคัญสูงสุด และตัวดำเนินการที่มีความสำคัญเท่ากันให้คำนวณจากซ้ายไปขวา\nเครื่องหมาย '-' ที่อยู่หน้าค่าโดยตรงหมายถึงการเปลี่ยนเครื่องหมายของค่านั้น\n\nการคำนวณทั้งหมดเป็นการคำนวณแบบจำนวนเต็ม\nสามารถสมมติได้ว่านิพจน์ถูกต้อง และไม่มีการหารหรือมอดุโลด้วยศูนย์\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./eval_expr \"1 + 2 * 3\" | cat -e\n  7$\n  $> ./eval_expr \"(1 + 2) * 3\" | cat -e\n  9$\n  $> ./eval_expr \"10 - 2 - 3\" | cat -e\n  5$\n",
+ "hints": [
+  "Three mutually recursive levels: sums call products, products call values, values can call sums inside parentheses.",
+  "Left associativity comes from looping at each level, not from recursing on the right.",
+  "Keep the read position in one place (a global or a char ** you pass around)."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "1 + 2 * 3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "7\n"
+  },
+  {
+   "argv": [
+    "(1 + 2) * 3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "9\n"
+  },
+  {
+   "argv": [
+    "10 - 2 - 3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  },
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "42\n"
+  },
+  {
+   "argv": [
+    "2 * 3 * 4"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "24\n"
+  },
+  {
+   "argv": [
+    "100 / 5 / 2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "10\n"
+  },
+  {
+   "argv": [
+    "17 % 5"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "2\n"
+  },
+  {
+   "argv": [
+    "-3 + 10"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "7\n"
+  },
+  {
+   "argv": [
+    "((2))"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "2\n"
+  },
+  {
+   "argv": [
+    "1+2*(3-1)"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  },
+  {
+   "argv": [
+    "8 / 3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "2\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

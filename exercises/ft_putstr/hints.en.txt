@@ -1,0 +1,5 @@
+Stop at the '\0'; it is not part of the string and must not be written.
+
+write() takes an address, so pass &str[i] -- not str[i], which is a single char value.
+
+The grader supplies main(), so your file must not define one.

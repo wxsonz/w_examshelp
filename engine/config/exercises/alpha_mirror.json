@@ -1,0 +1,63 @@
+{
+ "id": "alpha_mirror",
+ "name": "alpha_mirror",
+ "exams": {
+  "exam_02": 6,
+  "exam_03": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "alpha_mirror.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : alpha_mirror\nExpected files    : alpha_mirror.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays it with every alphabetical\ncharacter replaced by its mirror image in the alphabet, followed by a newline.\n\n'a' becomes 'z', 'b' becomes 'y', 'A' becomes 'Z', and so on. Case is preserved\nand non-alphabetical characters are left unchanged.\n\nIf the number of arguments is not 1, the program writes only a newline.\n\nExample:\n\n  $> ./alpha_mirror \"abc xyz.\" | cat -e\n  zyx cba.$\n",
+ "subject_th": "ชื่อโจทย์     : alpha_mirror\nไฟล์ที่ต้องส่ง  : alpha_mirror.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงข้อความนั้นโดยแทนตัวอักษรภาษาอังกฤษ\nทุกตัวด้วยตัวอักษรที่อยู่ตรงข้ามกันในผังตัวอักษร ตามด้วยการขึ้นบรรทัดใหม่\n\n'a' กลายเป็น 'z', 'b' กลายเป็น 'y', 'A' กลายเป็น 'Z' และเป็นเช่นนี้ต่อไป\nโดยคงตัวพิมพ์เล็กพิมพ์ใหญ่ไว้ และตัวอักษรอื่นคงไว้ตามเดิม\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./alpha_mirror \"abc xyz.\" | cat -e\n  zyx cba.$\n",
+ "hints": [
+  "'z' - (c - 'a') mirrors a lowercase letter."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "abc xyz."
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "zyx cba.\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "aAzZ"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "zZaA\n"
+  },
+  {
+   "argv": [
+    "Hello"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Svool\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

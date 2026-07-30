@@ -1,0 +1,3 @@
+Start from tab[0], not from 0 -- otherwise an all-negative array returns 0.
+
+Handle len == 0 before you read tab[0].

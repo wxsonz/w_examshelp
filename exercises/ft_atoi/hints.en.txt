@@ -1,0 +1,5 @@
+Three phases in order: whitespace, signs, digits.
+
+Multiple signs multiply together: "+-3" is -3 and "--5" is 5.
+
+str[i] - '0' converts a digit character to its value.

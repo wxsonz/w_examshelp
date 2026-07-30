@@ -1,0 +1,5 @@
+argv is already NULL-terminated, which is why it makes a convenient test subject.
+
+Guard against an empty array before you read tab[0].
+
+Swap the pointers, not the string contents.

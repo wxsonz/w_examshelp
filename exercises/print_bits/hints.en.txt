@@ -1,0 +1,5 @@
+Shift right by i and mask with & 1 to isolate one bit.
+
+Count i down from 7 to 0 so the most significant bit comes first.
+
+Add '0' to turn the bit into a printable character.

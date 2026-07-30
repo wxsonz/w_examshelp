@@ -1,0 +1,9 @@
+Write a program that displays the number of arguments it received, followed by a
+newline. The program name itself does not count.
+
+Examples:
+
+  $> ./paramsum 1 2 3 | cat -e
+  3$
+  $> ./paramsum | cat -e
+  0$

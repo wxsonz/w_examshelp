@@ -1,0 +1,5 @@
+Inserting at the head is its own case: empty list, or new data <= head.
+
+Otherwise stop at the node whose next should come after the new data.
+
+Link the new node to cursor->next BEFORE overwriting cursor->next.

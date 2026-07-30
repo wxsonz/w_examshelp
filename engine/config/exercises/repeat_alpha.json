@@ -1,0 +1,80 @@
+{
+ "id": "repeat_alpha",
+ "name": "repeat_alpha",
+ "exams": {
+  "exam_01": 5,
+  "exam_02": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "repeat_alpha.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : repeat_alpha\nExpected files    : repeat_alpha.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and repeats each alphabetical character as\nmany times as its position in the alphabet. Other characters are printed once,\nunchanged. The result is followed by a newline.\n\nCase is preserved: 'b' becomes \"bb\", 'C' becomes \"CCC\".\n\nIf the number of arguments is not 1, the program writes only a newline.\n\nExamples:\n\n  $> ./repeat_alpha \"abc\" | cat -e\n  abbccc$\n  $> ./repeat_alpha \"Alex.\" | cat -e\n  Alllllllllllleeeeexxxxxxxxxxxxxxxxxxxxxxxx.$\n",
+ "subject_th": "ชื่อโจทย์     : repeat_alpha\nไฟล์ที่ต้องส่ง  : repeat_alpha.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงตัวอักษรภาษาอังกฤษแต่ละตัวซ้ำ\nเท่ากับลำดับของตัวอักษรนั้นในผังตัวอักษร ตัวอักษรอื่นให้แสดงหนึ่งครั้งตามเดิม\nจากนั้นขึ้นบรรทัดใหม่\n\nตัวพิมพ์เล็กพิมพ์ใหญ่คงเดิม: 'b' กลายเป็น \"bb\" และ 'C' กลายเป็น \"CCC\"\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./repeat_alpha \"abc\" | cat -e\n  abbccc$\n  $> ./repeat_alpha \"Alex.\" | cat -e\n  Alllllllllllleeeeexxxxxxxxxxxxxxxxxxxxxxxx.$\n",
+ "hints": [
+  "c - 'a' + 1 gives the position of a lowercase letter in the alphabet.",
+  "Non-alphabetical characters are printed exactly once, not zero times."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "abbccc\n"
+  },
+  {
+   "argv": [
+    "Alex."
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Alllllllllllleeeeexxxxxxxxxxxxxxxxxxxxxxxx.\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  },
+  {
+   "argv": [
+    "Zz"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "ZZZZZZZZZZZZZZZZZZZZZZZZZZzzzzzzzzzzzzzzzzzzzzzzzzzz\n"
+  },
+  {
+   "argv": [
+    "42!"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "42!\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "id": "ft_printf",
+ "name": "ft_printf",
+ "exams": {
+  "extra": 0
+ },
+ "source": "extra",
+ "kind": "function",
+ "expected_files": [
+  "ft_printf.c"
+ ],
+ "allowed_functions": [
+  "write",
+  "malloc",
+  "free",
+  "va_start",
+  "va_arg",
+  "va_copy",
+  "va_end"
+ ],
+ "prototype": "int ft_printf(const char *format, ...);",
+ "subject": "Assignment name   : ft_printf\nExpected files    : ft_printf.c\nAllowed functions : write, malloc, free, va_start, va_arg, va_copy, va_end\nPrototype         : int ft_printf(const char *format, ...);\n--------------------------------------------------------------------------------\n\nWrite a variadic function that mimics printf for a small set of conversions, and\nreturns the number of characters it printed.\n\nThe conversions to handle are:\n\n  %s   a string of characters\n  %d   a signed decimal integer\n  %x   an unsigned integer in lowercase hexadecimal\n  %%   a literal percent sign\n\nAny other character following a '%' is printed as-is, preceded by the '%'.\nFlags, field widths and precisions are not required. The function must handle\nINT_MIN for %d.\n\nOutput goes to standard output.\n",
+ "subject_th": "ชื่อโจทย์     : ft_printf\nไฟล์ที่ต้องส่ง  : ft_printf.c\nฟังก์ชันที่ใช้ได้ : write, malloc, free, va_start, va_arg, va_copy, va_end\nต้นแบบฟังก์ชัน : int ft_printf(const char *format, ...);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันแบบรับอาร์กิวเมนต์ไม่จำกัดจำนวน ที่ทำงานเลียนแบบ printf\nสำหรับรูปแบบการแปลงชุดเล็ก ๆ แล้วคืนค่าจำนวนตัวอักษรที่แสดงออกไป\n\nรูปแบบการแปลงที่ต้องรองรับคือ:\n\n  %s   ข้อความ\n  %d   จำนวนเต็มฐานสิบแบบมีเครื่องหมาย\n  %x   จำนวนเต็มไม่มีเครื่องหมายในระบบฐานสิบหกตัวพิมพ์เล็ก\n  %%   เครื่องหมายเปอร์เซ็นต์\n\nอักขระอื่นที่ตามหลัง '%' ให้แสดงตามเดิมโดยมี '%' นำหน้า\nไม่ต้องรองรับแฟล็ก ความกว้างของช่อง หรือความละเอียดทศนิยม\nและฟังก์ชันต้องรองรับค่า INT_MIN สำหรับ %d\n\nให้แสดงผลออกทางเอาต์พุตมาตรฐาน\n",
+ "hints": [
+  "va_start, then va_arg once per conversion, then va_end.",
+  "To pass the va_list to a helper, take a va_list * -- copying it is not portable.",
+  "Count every character you write, including the '-' and the padding-free digits.",
+  "Negating INT_MIN overflows an int, so widen to long before you negate."
+ ],
+ "harness": "#include <stdio.h>\n\nint\tft_printf(const char *format, ...);\n\nstatic void\treport(int count)\n{\n\t/* ft_printf writes unbuffered, so flush to keep the order honest. */\n\tprintf(\" -> %d\\n\", count);\n\tfflush(stdout);\n}\n\nint\tmain(void)\n{\n\treport(ft_printf(\"plain text\"));\n\treport(ft_printf(\"str=[%s]\", \"hello\"));\n\treport(ft_printf(\"empty=[%s]\", \"\"));\n\treport(ft_printf(\"dec=%d %d %d\", 42, 0, -42));\n\treport(ft_printf(\"min=%d\", -2147483648));\n\treport(ft_printf(\"hex=%x %x %x\", 255, 0, 4294967295u));\n\treport(ft_printf(\"100%% sure\"));\n\treport(ft_printf(\"mixed %s=%d (%x)\", \"id\", 7, 7));\n\treport(ft_printf(\"unknown %q here\"));\n\treport(ft_printf(\"\"));\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "plain text -> 10\nstr=[hello] -> 11\nempty=[] -> 8\ndec=42 0 -42 -> 12\nmin=-2147483648 -> 15\nhex=ff 0 ffffffff -> 17\n100% sure -> 9\nmixed id=7 (7) -> 14\nunknown %q here -> 15\n -> 0\n"
+  }
+ ]
+}

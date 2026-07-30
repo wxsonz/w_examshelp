@@ -1,0 +1,3 @@
+A 256-entry flag array is the easy way to suppress duplicates.
+
+Index that array with (unsigned char) so negative bytes cannot escape it.

@@ -1,0 +1,3 @@
+This is epur_str with a 3-byte separator instead of a 1-byte one.
+
+Still no separator before the first word or after the last.

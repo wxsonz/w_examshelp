@@ -1,0 +1,7 @@
+Reproduce the behaviour of strspn: return the length of the initial segment of s
+that consists entirely of characters from accept.
+
+Examples:
+
+  ft_strspn("42abc", "0123456789")   ->  2
+  ft_strspn("abc", "xyz")            ->  0

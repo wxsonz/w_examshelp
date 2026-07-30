@@ -1,0 +1,14 @@
+Write a program that takes a string and repeats each alphabetical character as
+many times as its position in the alphabet. Other characters are printed once,
+unchanged. The result is followed by a newline.
+
+Case is preserved: 'b' becomes "bb", 'C' becomes "CCC".
+
+If the number of arguments is not 1, the program writes only a newline.
+
+Examples:
+
+  $> ./repeat_alpha "abc" | cat -e
+  abbccc$
+  $> ./repeat_alpha "Alex." | cat -e
+  Alllllllllllleeeeexxxxxxxxxxxxxxxxxxxxxxxx.$

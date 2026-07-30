@@ -2,12 +2,12 @@ import os
 import json
 import difflib
 import random
+from engine import database
 from engine.i18n import resolve_language
 from engine.session import SessionManager
 from engine.tracks import DEFAULT_TRACK, TRACKS, resolve_track
 
 ENGINE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_FILE = os.path.join(ENGINE_DIR, "config", "exercises_db.json")
 ROOT_DIR = os.path.dirname(ENGINE_DIR)
 STATE_FILE = os.path.join(ROOT_DIR, ".examshelp_state.json")
 
@@ -46,10 +46,7 @@ class StateManager:
         self.health_check()
 
     def _load_db(self):
-        if os.path.exists(DB_FILE):
-            with open(DB_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
-        return {"total_exercises": 0, "tracks": {}, "exercises": {}}
+        return database.load()
 
     def has_exercises(self):
         return bool(self.db.get("exercises"))

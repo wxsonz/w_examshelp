@@ -1,0 +1,30 @@
+{
+ "id": "ft_print_numbers",
+ "name": "ft_print_numbers",
+ "exams": {
+  "exam_01": 0
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_print_numbers.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": "void ft_print_numbers(void);",
+ "subject": "Assignment name   : ft_print_numbers\nExpected files    : ft_print_numbers.c\nAllowed functions : write\nPrototype         : void ft_print_numbers(void);\n--------------------------------------------------------------------------------\n\nWrite a function that displays all digits from 0 to 9 in ascending order, with no\nseparator between them, followed by a newline.\n\nExpected output:\n\n  $> ./a.out | cat -e\n  0123456789$\n",
+ "subject_th": "ชื่อโจทย์     : ft_print_numbers\nไฟล์ที่ต้องส่ง  : ft_print_numbers.c\nฟังก์ชันที่ใช้ได้ : write\nต้นแบบฟังก์ชัน : void ft_print_numbers(void);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่แสดงตัวเลขทั้งหมดจาก 0 ถึง 9 เรียงจากน้อยไปมาก\nโดยไม่มีตัวคั่นระหว่างตัวเลข แล้วขึ้นบรรทัดใหม่\n\nผลลัพธ์ที่ต้องได้:\n\n  $> ./a.out | cat -e\n  0123456789$\n",
+ "hints": [
+  "The mirror image of ft_countdown."
+ ],
+ "harness": "void\tft_print_numbers(void);\n\nint\tmain(void)\n{\n\tft_print_numbers();\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0123456789\n"
+  }
+ ]
+}

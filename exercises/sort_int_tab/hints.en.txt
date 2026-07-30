@@ -1,0 +1,3 @@
+size is unsigned: `i - 1` underflows to a huge number. Compare i + 1 < size instead.
+
+Any correct sort is fine -- bubble sort is plenty for the exam.

@@ -1,0 +1,3 @@
+argc is 4 when you receive 3 arguments -- argv[0] is the program name.
+
+The operator is a single character: use argv[2][0].

@@ -1,0 +1,17 @@
+Write a program that takes a string and displays its first word, followed by a
+newline.
+
+A word is a sequence of characters that are neither spaces nor tabs. Leading
+whitespace is skipped.
+
+If the number of arguments is not 1, or if the string contains no word, the
+program writes only a newline.
+
+Examples:
+
+  $> ./first_word "hello world" | cat -e
+  hello$
+  $> ./first_word "   lorem,ipsum  " | cat -e
+  lorem,ipsum$
+  $> ./first_word "   " | cat -e
+  $

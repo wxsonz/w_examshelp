@@ -1,0 +1,103 @@
+{
+ "id": "do_op",
+ "name": "do_op",
+ "exams": {
+  "exam_02": 6,
+  "exam_03": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "do_op.c"
+ ],
+ "allowed_functions": [
+  "atoi",
+  "printf",
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : do_op\nExpected files    : do_op.c\nAllowed functions : atoi, printf, write\n--------------------------------------------------------------------------------\n\nWrite a program that takes three arguments -- a number, an operator, and another\nnumber -- and displays the result of the operation, followed by a newline.\n\nThe operators to handle are +, -, *, / and %.\n\nIf the number of arguments is not 3, the program writes only a newline.\nYou may assume the operator is always one of the five listed, and that division\nand modulo by zero will not be tested.\n\nExamples:\n\n  $> ./do_op 42 \"+\" 21 | cat -e\n  63$\n  $> ./do_op 42 \"/\" 21 | cat -e\n  2$\n",
+ "subject_th": "ชื่อโจทย์     : do_op\nไฟล์ที่ต้องส่ง  : do_op.c\nฟังก์ชันที่ใช้ได้ : atoi, printf, write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับอาร์กิวเมนต์สามตัว คือ ตัวเลข ตัวดำเนินการ และตัวเลขอีกตัว\nแล้วแสดงผลลัพธ์ของการดำเนินการนั้น ตามด้วยการขึ้นบรรทัดใหม่\n\nตัวดำเนินการที่ต้องรองรับคือ +, -, *, / และ %\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 3 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\nสามารถสมมติได้ว่าตัวดำเนินการจะเป็นหนึ่งในห้าตัวนี้เสมอ\nและจะไม่มีการทดสอบการหารหรือมอดุโลด้วยศูนย์\n\nตัวอย่าง:\n\n  $> ./do_op 42 \"+\" 21 | cat -e\n  63$\n  $> ./do_op 42 \"/\" 21 | cat -e\n  2$\n",
+ "hints": [
+  "argc is 4 when you receive 3 arguments -- argv[0] is the program name.",
+  "The operator is a single character: use argv[2][0]."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "42",
+    "+",
+    "21"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "63\n"
+  },
+  {
+   "argv": [
+    "42",
+    "-",
+    "21"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "21\n"
+  },
+  {
+   "argv": [
+    "42",
+    "*",
+    "21"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "882\n"
+  },
+  {
+   "argv": [
+    "42",
+    "/",
+    "21"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "2\n"
+  },
+  {
+   "argv": [
+    "42",
+    "%",
+    "21"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "-3",
+    "+",
+    "8"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "1",
+    "+"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

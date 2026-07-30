@@ -1,0 +1,5 @@
+A t_list ** cursor lets you rewrite the head and any next pointer with the same code.
+
+Bubble sort on nodes: swap a pair, mark that something changed, repeat until a clean pass.
+
+Relinking three pointers per swap is fiddly -- draw it before you code it.

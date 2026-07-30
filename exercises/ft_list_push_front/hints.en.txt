@@ -1,0 +1,3 @@
+The new node's next is the OLD head, then the head becomes the new node.
+
+You need t_list ** so that the caller's own pointer is updated.

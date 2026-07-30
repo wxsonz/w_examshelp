@@ -1,0 +1,11 @@
+Write a function that allocates and returns the decimal representation of nbr as
+a null-terminated string.
+
+Negative numbers are prefixed with '-'. The function must handle INT_MIN
+(-2147483648) correctly. Return NULL if the allocation fails.
+
+Examples:
+
+  ft_itoa(42)     ->  "42"
+  ft_itoa(0)      ->  "0"
+  ft_itoa(-42)    ->  "-42"

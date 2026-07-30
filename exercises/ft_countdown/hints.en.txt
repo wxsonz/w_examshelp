@@ -1,0 +1,3 @@
+write() sends characters, not integers: '9' is the character, 9 is the number.
+
+You can add '0' to a digit to get its character, or just loop over char values.

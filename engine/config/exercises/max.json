@@ -1,0 +1,77 @@
+{
+ "id": "max",
+ "name": "max",
+ "exams": {
+  "exam_02": 7,
+  "exam_03": 1
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "max.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "int max(int *tab, unsigned int len);",
+ "subject": "Assignment name   : max\nExpected files    : max.c\nAllowed functions : None\nPrototype         : int max(int *tab, unsigned int len);\n--------------------------------------------------------------------------------\n\nWrite a function that returns the largest value in the array tab of len integers.\n\nIf len is 0, the function returns 0.\n",
+ "subject_th": "ชื่อโจทย์     : max\nไฟล์ที่ต้องส่ง  : max.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : int max(int *tab, unsigned int len);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่คืนค่าจำนวนเต็มที่มีค่ามากที่สุดในอาเรย์ tab ซึ่งมีสมาชิก len ตัว\n\nถ้า len เท่ากับ 0 ให้คืนค่า 0\n",
+ "hints": [
+  "Start from tab[0], not from 0 -- otherwise an all-negative array returns 0.",
+  "Handle len == 0 before you read tab[0]."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nint\tmax(int *tab, unsigned int len);\n\nint\tmain(int argc, char **argv)\n{\n\tint\t\t\t\ttab[256];\n\tunsigned int\ti;\n\n\ti = 0;\n\twhile (i + 1 < (unsigned int)argc && i < 256)\n\t{\n\t\ttab[i] = atoi(argv[i + 1]);\n\t\ti++;\n\t}\n\tprintf(\"%d\\n\", max(tab, i));\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "1",
+    "5",
+    "3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  },
+  {
+   "argv": [
+    "-10",
+    "-2",
+    "-7"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-2\n"
+  },
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "42\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "0",
+    "0",
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "2147483647",
+    "-2147483648"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "2147483647\n"
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "id": "ft_split",
+ "name": "ft_split",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_split.c"
+ ],
+ "allowed_functions": [
+  "malloc"
+ ],
+ "prototype": "char **ft_split(char *str);",
+ "subject": "Assignment name   : ft_split\nExpected files    : ft_split.c\nAllowed functions : malloc\nPrototype         : char **ft_split(char *str);\n--------------------------------------------------------------------------------\n\nWrite a function that splits str into words and returns them as a\nNULL-terminated array of freshly allocated strings.\n\nA word is a sequence of characters that are neither spaces, tabs, nor newlines.\nAn input with no words yields an array whose first element is NULL.\n\nReturn NULL if an allocation fails.\n",
+ "subject_th": "ชื่อโจทย์     : ft_split\nไฟล์ที่ต้องส่ง  : ft_split.c\nฟังก์ชันที่ใช้ได้ : malloc\nต้นแบบฟังก์ชัน : char **ft_split(char *str);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่แยกข้อความ str ออกเป็นคำ แล้วคืนค่าเป็นอาเรย์ของข้อความ\nที่จองหน่วยความจำใหม่ และปิดท้ายอาเรย์ด้วย NULL\n\nคำ หมายถึงลำดับของตัวอักษรที่ไม่ใช่ช่องว่าง ไม่ใช่แท็บ และไม่ใช่การขึ้นบรรทัดใหม่\nถ้าข้อความไม่มีคำใดเลย ให้คืนค่าอาเรย์ที่สมาชิกตัวแรกเป็น NULL\n\nถ้าจองหน่วยความจำไม่สำเร็จให้คืนค่า NULL\n",
+ "hints": [
+  "Count the words in a first pass so you know how big the char** must be.",
+  "Allocate count + 1 pointers -- the last one holds the NULL terminator.",
+  "Newlines and tabs are separators here, not just spaces."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nchar\t**ft_split(char *str);\n\nint\tmain(int argc, char **argv)\n{\n\tchar\t**words;\n\tint\t\ti;\n\n\tif (argc != 2)\n\t\treturn (0);\n\twords = ft_split(argv[1]);\n\tif (!words)\n\t\treturn (1);\n\ti = 0;\n\twhile (words[i])\n\t{\n\t\tprintf(\"[%s]\\n\", words[i]);\n\t\tfree(words[i]);\n\t\ti++;\n\t}\n\tprintf(\"count=%d\\n\", i);\n\tfree(words);\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "hello world"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[hello]\n[world]\ncount=2\n"
+  },
+  {
+   "argv": [
+    "  leading and trailing  "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[leading]\n[and]\n[trailing]\ncount=3\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "count=0\n"
+  },
+  {
+   "argv": [
+    "   "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "count=0\n"
+  },
+  {
+   "argv": [
+    "one"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[one]\ncount=1\n"
+  },
+  {
+   "argv": [
+    "a\tb\nc d"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a]\n[b]\n[c]\n[d]\ncount=4\n"
+  },
+  {
+   "argv": [
+    "multiple   spaces   between"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[multiple]\n[spaces]\n[between]\ncount=3\n"
+  }
+ ]
+}

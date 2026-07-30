@@ -1,0 +1,86 @@
+{
+ "id": "wdmatch",
+ "name": "wdmatch",
+ "exams": {
+  "exam_02": 7,
+  "exam_03": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "wdmatch.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : wdmatch\nExpected files    : wdmatch.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes two strings and checks whether it is possible to\nwrite the first string using the characters of the second, taking them in order\nand using each at most once.\n\nIf it is possible, display the first string followed by a newline. Otherwise\ndisplay only a newline.\n\nIf the number of arguments is not 2, the program writes only a newline.\n\nExamples:\n\n  $> ./wdmatch \"faya\" \"fgvvfdxcacpolhyaghbn\" | cat -e\n  faya$\n  $> ./wdmatch \"faya\" \"fgvvfdxcacpolhy\" | cat -e\n  $\n",
+ "subject_th": "ชื่อโจทย์     : wdmatch\nไฟล์ที่ต้องส่ง  : wdmatch.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความสองชุด แล้วตรวจสอบว่าสามารถสร้างข้อความชุดแรก\nจากตัวอักษรในข้อความชุดที่สองได้หรือไม่ โดยต้องเลือกตัวอักษรตามลำดับที่ปรากฏ\nและใช้แต่ละตัวได้ไม่เกินหนึ่งครั้ง\n\nถ้าทำได้ ให้แสดงข้อความชุดแรก ตามด้วยการขึ้นบรรทัดใหม่\nถ้าทำไม่ได้ ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 2 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./wdmatch \"faya\" \"fgvvfdxcacpolhyaghbn\" | cat -e\n  faya$\n  $> ./wdmatch \"faya\" \"fgvvfdxcacpolhy\" | cat -e\n  $\n",
+ "hints": [
+  "One index per string: advance the second always, the first only on a match.",
+  "You succeeded if you reached the end of the FIRST string."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "faya",
+    "fgvvfdxcacpolhyaghbn"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "faya\n"
+  },
+  {
+   "argv": [
+    "faya",
+    "fgvvfdxcacpolhy"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "",
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "abc",
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "abc",
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "abc\n"
+  },
+  {
+   "argv": [
+    "aaa",
+    "aa"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

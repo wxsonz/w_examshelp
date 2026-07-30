@@ -1,0 +1,5 @@
+Compute the exact total length first: all the strings plus (size - 1) separators.
+
+With size == 0 you still malloc one byte for the '\0'.
+
+There is no separator after the last string.

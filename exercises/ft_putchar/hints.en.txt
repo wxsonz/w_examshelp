@@ -1,0 +1,3 @@
+write() needs an ADDRESS, so pass &c, not c.
+
+One byte only -- no newline of your own.

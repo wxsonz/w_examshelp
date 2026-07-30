@@ -1,0 +1,39 @@
+{
+ "id": "hello",
+ "name": "hello",
+ "exams": {
+  "exam_01": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "hello.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : hello\nExpected files    : hello.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that displays\n\n  Hello World!\n\nfollowed by a newline.\n\nYour program takes no arguments; any it receives are ignored.\n",
+ "subject_th": "ชื่อโจทย์     : hello\nไฟล์ที่ต้องส่ง  : hello.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่แสดงข้อความ\n\n  Hello World!\n\nแล้วขึ้นบรรทัดใหม่\n\nโปรแกรมนี้ไม่รับอาร์กิวเมนต์ หากมีอาร์กิวเมนต์ส่งเข้ามาให้ละเว้นทั้งหมด\n",
+ "hints": [
+  "write(1, s, n) sends n bytes of s to standard output.",
+  "Count the bytes including the '\\n' -- \"Hello World!\\n\" is 13."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Hello World!\n"
+  },
+  {
+   "argv": [
+    "ignored"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Hello World!\n"
+  }
+ ]
+}

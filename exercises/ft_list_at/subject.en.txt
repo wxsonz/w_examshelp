@@ -1,0 +1,12 @@
+Write a function that returns the element at index nbr in the list, counting the
+head as index 0.
+
+If there is no such element, return NULL.
+
+You must also submit ft_list.h, defining the list type:
+
+  typedef struct s_list
+  {
+      struct s_list *next;
+      void          *data;
+  } t_list;

@@ -1,0 +1,8 @@
+Write a function that displays 'N' if the integer passed as argument is negative,
+and 'P' if it is positive or zero. The character is followed by a newline.
+
+Examples:
+
+  is_negative(-42)  ->  N
+  is_negative(0)    ->  P
+  is_negative(42)   ->  P

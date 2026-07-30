@@ -1,0 +1,75 @@
+{
+ "id": "ft_list_at",
+ "name": "ft_list_at",
+ "exams": {
+  "exam_03": 2,
+  "exam_04": 0
+ },
+ "source": "added",
+ "kind": "function",
+ "expected_files": [
+  "ft_list_at.c",
+  "ft_list.h"
+ ],
+ "allowed_functions": [],
+ "prototype": "t_list *ft_list_at(t_list *begin_list, unsigned int nbr);",
+ "subject": "Assignment name   : ft_list_at\nExpected files    : ft_list_at.c, ft_list.h\nAllowed functions : None\nPrototype         : t_list *ft_list_at(t_list *begin_list, unsigned int nbr);\n--------------------------------------------------------------------------------\n\nWrite a function that returns the element at index nbr in the list, counting the\nhead as index 0.\n\nIf there is no such element, return NULL.\n\nYou must also submit ft_list.h, defining the list type:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "subject_th": "ชื่อโจทย์     : ft_list_at\nไฟล์ที่ต้องส่ง  : ft_list_at.c, ft_list.h\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : t_list *ft_list_at(t_list *begin_list, unsigned int nbr);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่คืนค่าสมาชิกที่ตำแหน่ง nbr ในลิสต์ โดยนับหัวลิสต์เป็นตำแหน่งที่ 0\n\nถ้าไม่มีสมาชิกที่ตำแหน่งนั้น ให้คืนค่า NULL\n\nคุณต้องส่งไฟล์ ft_list.h ที่นิยามชนิดข้อมูลของลิสต์ด้วย:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "hints": [
+  "Index 0 is the head, so compare before you advance.",
+  "Running off the end means returning NULL, not the last element."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"ft_list.h\"\n\n__attribute__((unused)) static t_list\t*new_node(void *data)\n{\n\tt_list\t*node;\n\n\tnode = malloc(sizeof(t_list));\n\tnode->data = data;\n\tnode->next = 0;\n\treturn (node);\n}\n\n__attribute__((unused)) static t_list\t*build_list(int count, char **items)\n{\n\tt_list\t*head;\n\tt_list\t**tail;\n\tint\t\ti;\n\n\thead = 0;\n\ttail = &head;\n\ti = 0;\n\twhile (i < count)\n\t{\n\t\t*tail = new_node(items[i]);\n\t\ttail = &(*tail)->next;\n\t\ti++;\n\t}\n\treturn (head);\n}\n\n__attribute__((unused)) static void\tprint_list(t_list *list)\n{\n\twhile (list)\n\t{\n\t\tprintf(\"[%s]\", (char *)list->data);\n\t\tlist = list->next;\n\t}\n\tprintf(\"\\n\");\n}\n\nt_list\t*ft_list_at(t_list *begin_list, unsigned int nbr);\n\nint\tmain(int argc, char **argv)\n{\n\tt_list\t\t\t*list;\n\tt_list\t\t\t*found;\n\tunsigned int\tindex;\n\n\tif (argc < 2)\n\t\treturn (0);\n\tindex = (unsigned int)atoi(argv[1]);\n\tlist = build_list(argc - 2, argv + 2);\n\tfound = ft_list_at(list, index);\n\tif (found)\n\t\tprintf(\"[%s]\\n\", (char *)found->data);\n\telse\n\t\tprintf(\"(null)\\n\");\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "0",
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a]\n"
+  },
+  {
+   "argv": [
+    "2",
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[c]\n"
+  },
+  {
+   "argv": [
+    "3",
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "(null)\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "(null)\n"
+  },
+  {
+   "argv": [
+    "1",
+    "only"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "(null)\n"
+  }
+ ]
+}

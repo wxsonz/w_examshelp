@@ -1,0 +1,89 @@
+{
+ "id": "first_word",
+ "name": "first_word",
+ "exams": {
+  "exam_01": 6,
+  "exam_02": 2
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "first_word.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : first_word\nExpected files    : first_word.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays its first word, followed by a\nnewline.\n\nA word is a sequence of characters that are neither spaces nor tabs. Leading\nwhitespace is skipped.\n\nIf the number of arguments is not 1, or if the string contains no word, the\nprogram writes only a newline.\n\nExamples:\n\n  $> ./first_word \"hello world\" | cat -e\n  hello$\n  $> ./first_word \"   lorem,ipsum  \" | cat -e\n  lorem,ipsum$\n  $> ./first_word \"   \" | cat -e\n  $\n",
+ "subject_th": "ชื่อโจทย์     : first_word\nไฟล์ที่ต้องส่ง  : first_word.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงคำแรกของข้อความนั้น ตามด้วยการขึ้นบรรทัดใหม่\n\nคำ หมายถึงลำดับของตัวอักษรที่ไม่ใช่ช่องว่างและไม่ใช่แท็บ โดยข้ามช่องว่างที่นำหน้าไป\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 หรือในข้อความไม่มีคำใดเลย\nให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./first_word \"hello world\" | cat -e\n  hello$\n  $> ./first_word \"   lorem,ipsum  \" | cat -e\n  lorem,ipsum$\n  $> ./first_word \"   \" | cat -e\n  $\n",
+ "hints": [
+  "Two loops: one to skip the leading whitespace, one to print the word.",
+  "Tabs count as whitespace, not just spaces."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "hello world"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "hello\n"
+  },
+  {
+   "argv": [
+    "   lorem,ipsum  "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "lorem,ipsum\n"
+  },
+  {
+   "argv": [
+    "   "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "single"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "single\n"
+  },
+  {
+   "argv": [
+    "\ttabbed word"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "tabbed\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "a",
+    "b"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

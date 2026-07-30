@@ -1,0 +1,66 @@
+{
+ "id": "ft_strdup",
+ "name": "ft_strdup",
+ "exams": {
+  "exam_02": 4,
+  "exam_03": 0
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_strdup.c"
+ ],
+ "allowed_functions": [
+  "malloc"
+ ],
+ "prototype": "char *ft_strdup(char *src);",
+ "subject": "Assignment name   : ft_strdup\nExpected files    : ft_strdup.c\nAllowed functions : malloc\nPrototype         : char *ft_strdup(char *src);\n--------------------------------------------------------------------------------\n\nReproduce the behaviour of strdup: allocate a new string with malloc, copy src\ninto it, and return it.\n\nThe returned string must be null-terminated. Return NULL if the allocation\nfails.\n",
+ "subject_th": "ชื่อโจทย์     : ft_strdup\nไฟล์ที่ต้องส่ง  : ft_strdup.c\nฟังก์ชันที่ใช้ได้ : malloc\nต้นแบบฟังก์ชัน : char *ft_strdup(char *src);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่ทำงานเหมือน strdup: จองหน่วยความจำใหม่ด้วย malloc\nคัดลอกข้อความ src ลงไป แล้วคืนค่าพอยน์เตอร์ที่ได้\n\nข้อความที่คืนค่าต้องปิดท้ายด้วยไบต์ null และถ้าจองหน่วยความจำไม่สำเร็จให้คืนค่า NULL\n",
+ "hints": [
+  "Count the length first, then malloc len + 1 for the '\\0'.",
+  "Returning src itself is not duplicating -- you must allocate."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nchar\t*ft_strdup(char *src);\n\nint\tmain(int argc, char **argv)\n{\n\tchar\t*copy;\n\tint\t\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tcopy = ft_strdup(argv[i]);\n\t\tif (!copy)\n\t\t\treturn (1);\n\t\t/* A different address proves it really allocated. */\n\t\tprintf(\"[%s] copied=%d\\n\", copy, copy != argv[i]);\n\t\tfree(copy);\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "hello"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[hello] copied=1\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[] copied=1\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a] copied=1\n"
+  },
+  {
+   "argv": [
+    "42born2code"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[42born2code] copied=1\n"
+  },
+  {
+   "argv": [
+    "with spaces here"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[with spaces here] copied=1\n"
+  }
+ ]
+}

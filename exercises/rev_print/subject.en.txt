@@ -1,0 +1,11 @@
+Write a program that takes a string and displays it in reverse, followed by a
+newline.
+
+If the number of arguments is not 1, the program writes only a newline.
+
+Examples:
+
+  $> ./rev_print "zonx" | cat -e
+  xnoz$
+  $> ./rev_print | cat -e
+  $

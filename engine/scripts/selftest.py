@@ -16,7 +16,6 @@ Usage:
 """
 
 import argparse
-import json
 import os
 import shutil
 import sys
@@ -26,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
+from engine import database
 from engine.evaluator import Evaluator
-from engine.exercises import load_all, spec
-from engine.state import DB_FILE
+from engine.pack import load_all, spec
 
 
 def materialise(rendu, exercise, sources):
@@ -47,11 +46,10 @@ def main():
     args = parser.parse_args()
 
     # The graded exercise dicts come from the built database, so this also
-    # catches a database that has drifted from the pack. Read straight off disk
-    # rather than through StateManager, which would migrate the real progress
-    # file of whoever is running the tests.
-    with open(DB_FILE, encoding="utf-8") as f:
-        graded = dict(json.load(f).get("exercises", {}))
+    # catches a database that has drifted from the pack. Read it straight off
+    # disk rather than through StateManager, which would migrate the real
+    # progress file of whoever is running the tests.
+    graded = database.load()["exercises"]
 
     pack = load_all()
     if args.only:

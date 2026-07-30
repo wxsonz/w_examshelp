@@ -1,0 +1,7 @@
+Write a program that displays the character 'a' on the standard output.
+
+The output is exactly one byte. There is no newline at the end -- this is one of
+the very few subjects that does not finish with one.
+
+  ./only_a | cat -e   prints   a     (a bare 'a', with no trailing '$', because
+                                      there is no newline to mark)

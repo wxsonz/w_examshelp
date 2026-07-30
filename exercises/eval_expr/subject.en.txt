@@ -1,0 +1,21 @@
+Write a program that evaluates the arithmetic expression given as its single
+argument and displays the result, followed by a newline.
+
+The expression may contain non-negative integers, the binary operators +, -, *, /
+and %, parentheses, and spaces. Standard precedence applies: * / % bind tighter
+than + -, parentheses override everything, and operators of equal precedence
+associate to the left. A '-' directly in front of a value negates it.
+
+All arithmetic is integer arithmetic. You may assume the expression is valid and
+that no division or modulo by zero occurs.
+
+If the number of arguments is not 1, the program writes only a newline.
+
+Examples:
+
+  $> ./eval_expr "1 + 2 * 3" | cat -e
+  7$
+  $> ./eval_expr "(1 + 2) * 3" | cat -e
+  9$
+  $> ./eval_expr "10 - 2 - 3" | cat -e
+  5$

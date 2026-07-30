@@ -1,0 +1,3 @@
+Two loops: one to skip the leading whitespace, one to print the word.
+
+Tabs count as whitespace, not just spaces.

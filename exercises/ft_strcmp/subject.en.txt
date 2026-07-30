@@ -1,0 +1,5 @@
+Reproduce the behaviour of strcmp: compare the two strings and return the
+difference between the first pair of bytes that differ, or 0 if the strings are
+equal.
+
+The comparison must treat the bytes as unsigned char values.

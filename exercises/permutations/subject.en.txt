@@ -1,0 +1,14 @@
+Write a program that takes a string of distinct alphabetical characters and
+displays every permutation of it in lexicographic order, one per line.
+
+If the number of arguments is not 1, the program writes only a newline.
+
+Example:
+
+  $> ./permutations abc | cat -e
+  abc$
+  acb$
+  bac$
+  bca$
+  cab$
+  cba$

@@ -1,0 +1,5 @@
+Read the two failure cases carefully: they do NOT behave the same.
+
+No 'a' in the string writes only a newline, but a wrong argument count writes 'a' first.
+
+Stop at the FIRST 'a' -- do not keep scanning once you have written it.

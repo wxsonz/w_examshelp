@@ -1,0 +1,31 @@
+{
+ "id": "ft_countdown",
+ "name": "ft_countdown",
+ "exams": {
+  "exam_01": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "ft_countdown.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : ft_countdown\nExpected files    : ft_countdown.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that displays all digits in descending order, followed by a\nnewline.\n\nExample:\n\n  $> ./ft_countdown | cat -e\n  9876543210$\n",
+ "subject_th": "ชื่อโจทย์     : ft_countdown\nไฟล์ที่ต้องส่ง  : ft_countdown.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่แสดงตัวเลขทั้งหมดเรียงจากมากไปน้อย ตามด้วยการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./ft_countdown | cat -e\n  9876543210$\n",
+ "hints": [
+  "write() sends characters, not integers: '9' is the character, 9 is the number.",
+  "You can add '0' to a digit to get its character, or just loop over char values."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "9876543210\n"
+  }
+ ]
+}

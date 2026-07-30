@@ -1,0 +1,7 @@
+Place one queen per column, and recurse to the next column.
+
+Two queens share a diagonal when row - column matches, or when row + column matches.
+
+Trying rows in ascending order at every column produces lexicographic output naturally.
+
+n = 2 and n = 3 have no solutions, so printing nothing is the correct answer.

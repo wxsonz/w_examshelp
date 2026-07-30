@@ -1,0 +1,72 @@
+{
+ "id": "expand_str",
+ "name": "expand_str",
+ "exams": {
+  "exam_03": 3,
+  "exam_04": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "expand_str.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : expand_str\nExpected files    : expand_str.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays it with exactly three spaces\nbetween words, and no leading or trailing whitespace, followed by a newline.\n\nA word is a sequence of characters that are neither spaces nor tabs.\n\nIf the number of arguments is not 1, or if the string contains no word, the\nprogram writes only a newline.\n\nExamples:\n\n  $> ./expand_str \"  lorem   ipsum  dolor  \" | cat -e\n  lorem   ipsum   dolor$\n  $> ./expand_str \"solo\" | cat -e\n  solo$\n",
+ "subject_th": "ชื่อโจทย์     : expand_str\nไฟล์ที่ต้องส่ง  : expand_str.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงข้อความนั้นโดยให้มีช่องว่างระหว่างคำ\nสามช่องพอดี และไม่มีช่องว่างนำหน้าหรือต่อท้าย ตามด้วยการขึ้นบรรทัดใหม่\n\nคำ หมายถึงลำดับของตัวอักษรที่ไม่ใช่ช่องว่างและไม่ใช่แท็บ\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 หรือในข้อความไม่มีคำใดเลย\nให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./expand_str \"  lorem   ipsum  dolor  \" | cat -e\n  lorem   ipsum   dolor$\n  $> ./expand_str \"solo\" | cat -e\n  solo$\n",
+ "hints": [
+  "This is epur_str with a 3-byte separator instead of a 1-byte one.",
+  "Still no separator before the first word or after the last."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "  lorem   ipsum  dolor  "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "lorem   ipsum   dolor\n"
+  },
+  {
+   "argv": [
+    "solo"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "solo\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "   "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "a\tb"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a   b\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

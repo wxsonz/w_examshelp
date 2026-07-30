@@ -1,0 +1,81 @@
+{
+ "id": "print_hex",
+ "name": "print_hex",
+ "exams": {
+  "exam_03": 2,
+  "exam_04": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "print_hex.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : print_hex\nExpected files    : print_hex.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a positive decimal number and displays it in\nlowercase hexadecimal, followed by a newline.\n\nIf the number of arguments is not 1, the program writes only a newline.\nYou may assume the argument is a valid positive integer.\n\nExamples:\n\n  $> ./print_hex \"255\" | cat -e\n  ff$\n  $> ./print_hex \"0\" | cat -e\n  0$\n",
+ "subject_th": "ชื่อโจทย์     : print_hex\nไฟล์ที่ต้องส่ง  : print_hex.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับจำนวนเต็มบวกในระบบฐานสิบ แล้วแสดงค่าในระบบเลขฐานสิบหก\nแบบตัวพิมพ์เล็ก ตามด้วยการขึ้นบรรทัดใหม่\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\nสามารถสมมติได้ว่าอาร์กิวเมนต์เป็นจำนวนเต็มบวกที่ถูกต้อง\n\nตัวอย่าง:\n\n  $> ./print_hex \"255\" | cat -e\n  ff$\n  $> ./print_hex \"0\" | cat -e\n  0$\n",
+ "hints": [
+  "A lookup string \"0123456789abcdef\" saves you a branch.",
+  "Recurse on n / 16 first so the digits come out in the right order."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "255"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "ff\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [
+    "16"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "10\n"
+  },
+  {
+   "argv": [
+    "4294967295"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "ffffffff\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "1",
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

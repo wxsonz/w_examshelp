@@ -1,0 +1,10 @@
+Write a program that displays the alphabet, with even letters in uppercase and
+odd letters in lowercase, followed by a newline.
+
+Letters are counted from 1, so 'a' is the first letter -- odd, and therefore
+lowercase.
+
+Example:
+
+  $> ./maff_alpha | cat -e
+  aBcDeFgHiJkLmNoPqRsTuVwXyZ$

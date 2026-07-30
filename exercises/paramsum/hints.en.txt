@@ -1,0 +1,3 @@
+argc counts the program name, so the answer is argc - 1.
+
+Cast argv to (void) if you never use it, or -Werror will stop you.

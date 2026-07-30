@@ -1,0 +1,3 @@
+One shift each way, then OR them together.
+
+Returning unsigned char truncates for you, so no mask is strictly needed.

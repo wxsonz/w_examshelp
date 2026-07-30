@@ -1,0 +1,62 @@
+{
+ "id": "paramsum",
+ "name": "paramsum",
+ "exams": {
+  "exam_03": 3,
+  "exam_04": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "paramsum.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : paramsum\nExpected files    : paramsum.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that displays the number of arguments it received, followed by a\nnewline. The program name itself does not count.\n\nExamples:\n\n  $> ./paramsum 1 2 3 | cat -e\n  3$\n  $> ./paramsum | cat -e\n  0$\n",
+ "subject_th": "ชื่อโจทย์     : paramsum\nไฟล์ที่ต้องส่ง  : paramsum.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่แสดงจำนวนอาร์กิวเมนต์ที่ได้รับ ตามด้วยการขึ้นบรรทัดใหม่\nโดยไม่นับชื่อโปรแกรมเอง\n\nตัวอย่าง:\n\n  $> ./paramsum 1 2 3 | cat -e\n  3$\n  $> ./paramsum | cat -e\n  0$\n",
+ "hints": [
+  "argc counts the program name, so the answer is argc - 1.",
+  "Cast argv to (void) if you never use it, or -Werror will stop you."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "1",
+    "2",
+    "3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "3\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  }
+ ]
+}

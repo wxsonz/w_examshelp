@@ -1,0 +1,80 @@
+{
+ "id": "flood_fill",
+ "name": "flood_fill",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "flood_fill.c",
+  "flood_fill.h"
+ ],
+ "allowed_functions": [],
+ "prototype": "void flood_fill(char **tab, t_point size, t_point begin);",
+ "subject": "Assignment name   : flood_fill\nExpected files    : flood_fill.c, flood_fill.h\nAllowed functions : None\nPrototype         : void flood_fill(char **tab, t_point size, t_point begin);\n--------------------------------------------------------------------------------\n\nWrite a function that fills, with the character 'F', the whole zone of the 2D map\n`tab` that contains the position `begin`.\n\nA zone is the set of positions reachable from begin by moving only up, down, left\nor right (never diagonally) across positions holding the same character as\ntab[begin.y][begin.x].\n\nsize.x is the width of the map and size.y its height. The map is modified in\nplace.\n\nYou must also submit flood_fill.h, defining:\n\n  typedef struct s_point\n  {\n      int x;\n      int y;\n  } t_point;\n",
+ "subject_th": "ชื่อโจทย์     : flood_fill\nไฟล์ที่ต้องส่ง  : flood_fill.c, flood_fill.h\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : void flood_fill(char **tab, t_point size, t_point begin);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่เติมตัวอักษร 'F' ลงในพื้นที่ทั้งผืนของแผนที่สองมิติ tab\nที่มีตำแหน่ง begin อยู่\n\nพื้นที่ผืนหนึ่ง หมายถึงกลุ่มตำแหน่งที่เดินไปถึงได้จาก begin\nโดยเดินได้เฉพาะขึ้น ลง ซ้าย ขวา (ห้ามเดินทแยง)\nและตำแหน่งที่เดินผ่านต้องมีตัวอักษรเดียวกับ tab[begin.y][begin.x]\n\nsize.x คือความกว้างของแผนที่ และ size.y คือความสูง\nโดยแก้ไขแผนที่ในตัวเดิม\n\nคุณต้องส่งไฟล์ flood_fill.h ที่นิยามชนิดข้อมูลนี้ด้วย:\n\n  typedef struct s_point\n  {\n      int x;\n      int y;\n  } t_point;\n",
+ "hints": [
+  "Recursion is the short route: paint the current cell, then recurse in the four directions.",
+  "Check the bounds BEFORE reading tab[y][x], or you will read outside the map.",
+  "Painting the cell before recursing is what stops the recursion from looping forever.",
+  "Note that size.x is the width, so it bounds x, which indexes the inner string."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n#include \"flood_fill.h\"\n\nvoid\tflood_fill(char **tab, t_point size, t_point begin);\n\nint\tmain(int argc, char **argv)\n{\n\tchar\trows[5][8] = {\n\t\t\"1111111\",\n\t\t\"1001001\",\n\t\t\"1001001\",\n\t\t\"1000001\",\n\t\t\"1111111\",\n\t};\n\tchar\t*tab[5];\n\tt_point\tsize;\n\tt_point\tbegin;\n\tint\t\ti;\n\n\tif (argc != 3)\n\t\treturn (0);\n\ti = 0;\n\twhile (i < 5)\n\t{\n\t\ttab[i] = rows[i];\n\t\ti++;\n\t}\n\tsize.x = 7;\n\tsize.y = 5;\n\tbegin.x = atoi(argv[1]);\n\tbegin.y = atoi(argv[2]);\n\tflood_fill(tab, size, begin);\n\ti = 0;\n\twhile (i < 5)\n\t{\n\t\tprintf(\"%s\\n\", tab[i]);\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "1",
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1111111\n1FF1FF1\n1FF1FF1\n1FFFFF1\n1111111\n"
+  },
+  {
+   "argv": [
+    "0",
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "FFFFFFF\nF00F00F\nF00F00F\nF00000F\nFFFFFFF\n"
+  },
+  {
+   "argv": [
+    "3",
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "FFFFFFF\nF00F00F\nF00F00F\nF00000F\nFFFFFFF\n"
+  },
+  {
+   "argv": [
+    "1",
+    "3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1111111\n1FF1FF1\n1FF1FF1\n1FFFFF1\n1111111\n"
+  },
+  {
+   "argv": [
+    "99",
+    "99"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1111111\n1001001\n1001001\n1000001\n1111111\n"
+  },
+  {
+   "argv": [
+    "-1",
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1111111\n1001001\n1001001\n1000001\n1111111\n"
+  }
+ ]
+}

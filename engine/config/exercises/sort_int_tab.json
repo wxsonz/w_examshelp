@@ -1,0 +1,80 @@
+{
+ "id": "sort_int_tab",
+ "name": "sort_int_tab",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "sort_int_tab.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "void sort_int_tab(int *tab, unsigned int size);",
+ "subject": "Assignment name   : sort_int_tab\nExpected files    : sort_int_tab.c\nAllowed functions : None\nPrototype         : void sort_int_tab(int *tab, unsigned int size);\n--------------------------------------------------------------------------------\n\nWrite a function that sorts the array tab of size integers into ascending order,\nin place.\n",
+ "subject_th": "ชื่อโจทย์     : sort_int_tab\nไฟล์ที่ต้องส่ง  : sort_int_tab.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : void sort_int_tab(int *tab, unsigned int size);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่เรียงลำดับสมาชิกในอาเรย์ tab ซึ่งมีสมาชิก size ตัว\nจากน้อยไปมาก โดยเรียงในตัวอาเรย์เดิม\n",
+ "hints": [
+  "size is unsigned: `i - 1` underflows to a huge number. Compare i + 1 < size instead.",
+  "Any correct sort is fine -- bubble sort is plenty for the exam."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nvoid\tsort_int_tab(int *tab, unsigned int size);\n\nint\tmain(int argc, char **argv)\n{\n\tint\t\t\t\ttab[256];\n\tunsigned int\ti;\n\tunsigned int\tsize;\n\n\tsize = 0;\n\twhile (size + 1 < (unsigned int)argc && size < 256)\n\t{\n\t\ttab[size] = atoi(argv[size + 1]);\n\t\tsize++;\n\t}\n\tsort_int_tab(tab, size);\n\ti = 0;\n\twhile (i < size)\n\t{\n\t\tprintf(\"%d\", tab[i]);\n\t\tif (i + 1 < size)\n\t\t\tprintf(\" \");\n\t\ti++;\n\t}\n\tprintf(\"\\n\");\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "3",
+    "1",
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1 2 3\n"
+  },
+  {
+   "argv": [
+    "5",
+    "4",
+    "3",
+    "2",
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1 2 3 4 5\n"
+  },
+  {
+   "argv": [
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "-1",
+    "5",
+    "-10",
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-10 -1 0 5\n"
+  },
+  {
+   "argv": [
+    "2",
+    "2",
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1 2 2\n"
+  }
+ ]
+}

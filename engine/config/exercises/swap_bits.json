@@ -1,0 +1,72 @@
+{
+ "id": "swap_bits",
+ "name": "swap_bits",
+ "exams": {
+  "exam_02": 5,
+  "exam_03": 0
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "swap_bits.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "unsigned char swap_bits(unsigned char octet);",
+ "subject": "Assignment name   : swap_bits\nExpected files    : swap_bits.c\nAllowed functions : None\nPrototype         : unsigned char swap_bits(unsigned char octet);\n--------------------------------------------------------------------------------\n\nWrite a function that takes a byte and returns it with its two halves (its two\nnibbles of 4 bits) swapped.\n\nExample:\n\n  swap_bits(1)  ->  16   (00000001 becomes 00010000)\n",
+ "subject_th": "ชื่อโจทย์     : swap_bits\nไฟล์ที่ต้องส่ง  : swap_bits.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : unsigned char swap_bits(unsigned char octet);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่รับข้อมูลขนาดหนึ่งไบต์ แล้วคืนค่าไบต์นั้นโดยสลับครึ่งบน\nกับครึ่งล่าง (นิบเบิลขนาด 4 บิตทั้งสองส่วน)\n\nตัวอย่าง:\n\n  swap_bits(1)  ->  16   (00000001 กลายเป็น 00010000)\n",
+ "hints": [
+  "One shift each way, then OR them together.",
+  "Returning unsigned char truncates for you, so no mask is strictly needed."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nunsigned char\tswap_bits(unsigned char octet);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tprintf(\"%d\\n\", swap_bits((unsigned char)atoi(argv[i])));\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "16\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "255"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "255\n"
+  },
+  {
+   "argv": [
+    "16"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [
+    "170"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "170\n"
+  },
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "162\n"
+  }
+ ]
+}

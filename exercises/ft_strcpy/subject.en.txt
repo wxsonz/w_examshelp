@@ -1,0 +1,4 @@
+Reproduce the behaviour of strcpy: copy the string s2, including its terminating
+null byte, into the buffer s1. Return s1.
+
+You may assume s1 is large enough to hold s2.

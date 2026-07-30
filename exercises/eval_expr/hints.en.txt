@@ -1,0 +1,5 @@
+Three mutually recursive levels: sums call products, products call values, values can call sums inside parentheses.
+
+Left associativity comes from looping at each level, not from recursing on the right.
+
+Keep the read position in one place (a global or a char ** you pass around).

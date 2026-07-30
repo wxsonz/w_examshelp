@@ -1,0 +1,83 @@
+{
+ "id": "ft_strjoin",
+ "name": "ft_strjoin",
+ "exams": {
+  "exam_03": 3,
+  "exam_04": 1
+ },
+ "source": "added",
+ "kind": "function",
+ "expected_files": [
+  "ft_strjoin.c"
+ ],
+ "allowed_functions": [
+  "malloc"
+ ],
+ "prototype": "char *ft_strjoin(int size, char **strs, char *sep);",
+ "subject": "Assignment name   : ft_strjoin\nExpected files    : ft_strjoin.c\nAllowed functions : malloc\nPrototype         : char *ft_strjoin(int size, char **strs, char *sep);\n--------------------------------------------------------------------------------\n\nWrite a function that concatenates the `size` strings of the array strs,\nseparating each pair with sep, and returns the result as a freshly allocated\nnull-terminated string.\n\nIf size is 0, return an empty allocated string. Return NULL if the allocation\nfails.\n\nExample:\n\n  strs = {\"Hello\", \"world\"}, sep = \", \"  ->  \"Hello, world\"\n",
+ "subject_th": "ชื่อโจทย์     : ft_strjoin\nไฟล์ที่ต้องส่ง  : ft_strjoin.c\nฟังก์ชันที่ใช้ได้ : malloc\nต้นแบบฟังก์ชัน : char *ft_strjoin(int size, char **strs, char *sep);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่ต่อข้อความจำนวน size ชุดในอาเรย์ strs เข้าด้วยกัน\nโดยคั่นระหว่างแต่ละคู่ด้วย sep แล้วคืนค่าผลลัพธ์เป็นข้อความที่จองหน่วยความจำใหม่\nและปิดท้ายด้วยไบต์ null\n\nถ้า size เท่ากับ 0 ให้คืนค่าข้อความว่างที่จองหน่วยความจำแล้ว\nถ้าจองหน่วยความจำไม่สำเร็จให้คืนค่า NULL\n\nตัวอย่าง:\n\n  strs = {\"Hello\", \"world\"}, sep = \", \"  ->  \"Hello, world\"\n",
+ "hints": [
+  "Compute the exact total length first: all the strings plus (size - 1) separators.",
+  "With size == 0 you still malloc one byte for the '\\0'.",
+  "There is no separator after the last string."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nchar\t*ft_strjoin(int size, char **strs, char *sep);\n\nint\tmain(int argc, char **argv)\n{\n\tchar\t*joined;\n\n\tif (argc < 2)\n\t\treturn (0);\n\tjoined = ft_strjoin(argc - 2, argv + 2, argv[1]);\n\tif (!joined)\n\t\treturn (1);\n\tprintf(\"[%s]\\n\", joined);\n\tfree(joined);\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    ", ",
+    "Hello",
+    "world"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[Hello, world]\n"
+  },
+  {
+   "argv": [
+    "-",
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a-b-c]\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[]\n"
+  },
+  {
+   "argv": [
+    "sep"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[]\n"
+  },
+  {
+   "argv": [
+    "",
+    "ab",
+    "cd"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[abcd]\n"
+  },
+  {
+   "argv": [
+    "--",
+    "single"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[single]\n"
+  }
+ ]
+}

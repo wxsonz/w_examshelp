@@ -1,0 +1,11 @@
+Write a function that counts and returns the number of elements in the list.
+
+An empty list (a NULL pointer) has 0 elements.
+
+You must also submit ft_list.h, defining the list type:
+
+  typedef struct s_list
+  {
+      struct s_list *next;
+      void          *data;
+  } t_list;

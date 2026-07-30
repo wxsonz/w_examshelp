@@ -1,0 +1,5 @@
+A power of 2 has exactly one bit set.
+
+n & (n - 1) clears the lowest set bit -- if nothing is left, there was only one.
+
+Handle 0 first: it would otherwise pass the bit test.

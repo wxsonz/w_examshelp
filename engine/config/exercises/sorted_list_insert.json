@@ -1,0 +1,83 @@
+{
+ "id": "sorted_list_insert",
+ "name": "sorted_list_insert",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "added",
+ "kind": "function",
+ "expected_files": [
+  "sorted_list_insert.c",
+  "ft_list.h"
+ ],
+ "allowed_functions": [
+  "malloc"
+ ],
+ "prototype": "void sorted_list_insert(t_list **begin_list, void *data, int (*cmp)(void *, void *));",
+ "subject": "Assignment name   : sorted_list_insert\nExpected files    : sorted_list_insert.c, ft_list.h\nAllowed functions : malloc\nPrototype         : void sorted_list_insert(t_list **begin_list, void *data, int (*cmp)(void *, void *));\n--------------------------------------------------------------------------------\n\nThe list is already sorted in ascending order according to cmp. Write a function\nthat inserts a new element holding `data` at the position that keeps the list\nsorted.\n\ncmp returns a negative number, 0, or a positive number, like strcmp. When the new\ndata compares equal to an existing element, insert the new element before it.\n\nThe head may change, so the caller's pointer must be updated.\n\nYou must also submit ft_list.h, defining the list type:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "subject_th": "ชื่อโจทย์     : sorted_list_insert\nไฟล์ที่ต้องส่ง  : sorted_list_insert.c, ft_list.h\nฟังก์ชันที่ใช้ได้ : malloc\nต้นแบบฟังก์ชัน : void sorted_list_insert(t_list **begin_list, void *data, int (*cmp)(void *, void *));\n--------------------------------------------------------------------------------\n\nลิสต์ที่รับเข้ามาเรียงจากน้อยไปมากตามการเปรียบเทียบด้วย cmp อยู่แล้ว\nให้เขียนฟังก์ชันที่แทรกสมาชิกใหม่ซึ่งเก็บข้อมูล data\nลงในตำแหน่งที่ทำให้ลิสต์ยังเรียงลำดับอยู่\n\ncmp คืนค่าเป็นลบ ศูนย์ หรือบวก แบบเดียวกับ strcmp\nถ้าข้อมูลใหม่เทียบเท่ากับสมาชิกที่มีอยู่ ให้แทรกไว้ก่อนสมาชิกนั้น\n\nหัวลิสต์อาจเปลี่ยนได้ ดังนั้นต้องปรับพอยน์เตอร์ของผู้เรียกด้วย\n\nคุณต้องส่งไฟล์ ft_list.h ที่นิยามชนิดข้อมูลของลิสต์ด้วย:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "hints": [
+  "Inserting at the head is its own case: empty list, or new data <= head.",
+  "Otherwise stop at the node whose next should come after the new data.",
+  "Link the new node to cursor->next BEFORE overwriting cursor->next."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"ft_list.h\"\n\n__attribute__((unused)) static t_list\t*new_node(void *data)\n{\n\tt_list\t*node;\n\n\tnode = malloc(sizeof(t_list));\n\tnode->data = data;\n\tnode->next = 0;\n\treturn (node);\n}\n\n__attribute__((unused)) static t_list\t*build_list(int count, char **items)\n{\n\tt_list\t*head;\n\tt_list\t**tail;\n\tint\t\ti;\n\n\thead = 0;\n\ttail = &head;\n\ti = 0;\n\twhile (i < count)\n\t{\n\t\t*tail = new_node(items[i]);\n\t\ttail = &(*tail)->next;\n\t\ti++;\n\t}\n\treturn (head);\n}\n\n__attribute__((unused)) static void\tprint_list(t_list *list)\n{\n\twhile (list)\n\t{\n\t\tprintf(\"[%s]\", (char *)list->data);\n\t\tlist = list->next;\n\t}\n\tprintf(\"\\n\");\n}\n\nvoid\tsorted_list_insert(t_list **begin_list, void *data,\n\t\t\tint (*cmp)(void *, void *));\n\nstatic int\tcmp_str(void *a, void *b)\n{\n\treturn (strcmp((char *)a, (char *)b));\n}\n\nint\tmain(int argc, char **argv)\n{\n\tt_list\t*list;\n\tint\t\ti;\n\n\tlist = 0;\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tsorted_list_insert(&list, argv[i], &cmp_str);\n\t\ti++;\n\t}\n\tprint_list(list);\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "c",
+    "a",
+    "b"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a][b][c]\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a]\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "b",
+    "b",
+    "a",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a][b][b][c]\n"
+  },
+  {
+   "argv": [
+    "z",
+    "y",
+    "x"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[x][y][z]\n"
+  },
+  {
+   "argv": [
+    "a",
+    "b",
+    "c",
+    "d"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a][b][c][d]\n"
+  }
+ ]
+}

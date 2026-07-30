@@ -1,0 +1,12 @@
+Write a function that reverses the order of the elements of the list, in place,
+and updates the caller's head pointer.
+
+No node is allocated or freed -- only the next pointers change.
+
+You must also submit ft_list.h, defining the list type:
+
+  typedef struct s_list
+  {
+      struct s_list *next;
+      void          *data;
+  } t_list;

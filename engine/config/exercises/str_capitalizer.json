@@ -1,0 +1,91 @@
+{
+ "id": "str_capitalizer",
+ "name": "str_capitalizer",
+ "exams": {
+  "exam_03": 3,
+  "exam_04": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "str_capitalizer.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : str_capitalizer\nExpected files    : str_capitalizer.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes one or several strings and, for each argument,\ncapitalizes the first character of each word (if it is a letter, obviously), puts\nthe rest in lowercase, and displays the result, followed by a newline.\n\nA \"word\" is defined as a part of a string delimited either by spaces/tabs, or by\nthe start/end of the string. If a word only has one letter, it must be\ncapitalized.\n\nIf there are no arguments, the program must display a newline.\n\nExamples:\n\n  $> ./str_capitalizer \"Premier PETIT TesT\" | cat -e\n  Premier Petit Test$\n  $> ./str_capitalizer \"   attention C'EST pas dur QUAND mEmE\" | cat -e\n     Attention C'est Pas Dur Quand Meme$\n  $> ./str_capitalizer \"ALLer UN DeRNier 0123456789pour LA rouTE    E \" | cat -e\n  Aller Un Dernier 0123456789pour La Route    E $\n  $> ./str_capitalizer | cat -e\n  $\n",
+ "subject_th": "ชื่อโจทย์     : str_capitalizer\nไฟล์ที่ต้องส่ง  : str_capitalizer.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุดหรือมากกว่า แล้วสำหรับแต่ละอาร์กิวเมนต์\nให้เปลี่ยนตัวอักษรตัวแรกของแต่ละคำเป็นตัวพิมพ์ใหญ่ (เฉพาะกรณีที่เป็นตัวอักษร)\nและเปลี่ยนตัวที่เหลือเป็นตัวพิมพ์เล็ก แล้วแสดงผลตามด้วยการขึ้นบรรทัดใหม่\n\n\"คำ\" หมายถึงส่วนของข้อความที่คั่นด้วยช่องว่างหรือแท็บ หรือคั่นด้วยจุดเริ่มต้น\nและจุดสิ้นสุดของข้อความ ถ้าคำหนึ่งมีตัวอักษรเพียงตัวเดียว ก็ต้องเปลี่ยนเป็นตัวพิมพ์ใหญ่\n\nถ้าไม่มีอาร์กิวเมนต์เลย ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./str_capitalizer \"Premier PETIT TesT\" | cat -e\n  Premier Petit Test$\n  $> ./str_capitalizer \"   attention C'EST pas dur QUAND mEmE\" | cat -e\n     Attention C'est Pas Dur Quand Meme$\n  $> ./str_capitalizer \"ALLer UN DeRNier 0123456789pour LA rouTE    E \" | cat -e\n  Aller Un Dernier 0123456789pour La Route    E $\n  $> ./str_capitalizer | cat -e\n  $\n",
+ "hints": [
+  "Only spaces and tabs separate words. An apostrophe does NOT, so \"C'EST\" becomes \"C'est\" and not \"C'Est\".",
+  "A word starting with a digit has nothing to capitalize, but the letters after it are still lowercased.",
+  "Track whether you are at the start of a word with a single flag.",
+  "One newline per argument."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "Premier PETIT TesT"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Premier Petit Test\n"
+  },
+  {
+   "argv": [
+    "   attention C'EST pas dur QUAND mEmE"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "   Attention C'est Pas Dur Quand Meme\n"
+  },
+  {
+   "argv": [
+    "ALLer UN DeRNier 0123456789pour LA rouTE    E "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Aller Un Dernier 0123456789pour La Route    E \n"
+  },
+  {
+   "argv": [
+    "DeuxiEmE tEST uN PEU moinS  facile",
+    "second ARG"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Deuxieme Test Un Peu Moins  Facile\nSecond Arg\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "A\n"
+  },
+  {
+   "argv": [
+    "HELLO"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Hello\n"
+  }
+ ]
+}

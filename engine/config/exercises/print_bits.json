@@ -1,0 +1,75 @@
+{
+ "id": "print_bits",
+ "name": "print_bits",
+ "exams": {
+  "exam_02": 7,
+  "exam_03": 1
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "print_bits.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": "void print_bits(unsigned char octet);",
+ "subject": "Assignment name   : print_bits\nExpected files    : print_bits.c\nAllowed functions : write\nPrototype         : void print_bits(unsigned char octet);\n--------------------------------------------------------------------------------\n\nWrite a function that takes a byte and prints it in binary, most significant bit\nfirst. It always prints exactly 8 characters and adds NO newline.\n\nExample:\n\n  print_bits(2)  ->  00000010\n",
+ "subject_th": "ชื่อโจทย์     : print_bits\nไฟล์ที่ต้องส่ง  : print_bits.c\nฟังก์ชันที่ใช้ได้ : write\nต้นแบบฟังก์ชัน : void print_bits(unsigned char octet);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่รับข้อมูลขนาดหนึ่งไบต์ แล้วแสดงค่าในระบบเลขฐานสอง\nเริ่มจากบิตที่มีนัยสำคัญมากที่สุด โดยแสดงครบ 8 ตัวอักษรเสมอ\nและไม่ต้องขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  print_bits(2)  ->  00000010\n",
+ "hints": [
+  "Shift right by i and mask with & 1 to isolate one bit.",
+  "Count i down from 7 to 0 so the most significant bit comes first.",
+  "Add '0' to turn the bit into a printable character."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nvoid\tprint_bits(unsigned char octet);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tprint_bits((unsigned char)atoi(argv[i]));\n\t\tprintf(\"\\n\");\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "00000010\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "00000000\n"
+  },
+  {
+   "argv": [
+    "255"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "11111111\n"
+  },
+  {
+   "argv": [
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "00000001\n"
+  },
+  {
+   "argv": [
+    "128"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "10000000\n"
+  },
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "00101010\n"
+  }
+ ]
+}

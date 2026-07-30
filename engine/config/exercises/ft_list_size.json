@@ -1,0 +1,61 @@
+{
+ "id": "ft_list_size",
+ "name": "ft_list_size",
+ "exams": {
+  "exam_03": 2,
+  "exam_04": 0
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_list_size.c",
+  "ft_list.h"
+ ],
+ "allowed_functions": [],
+ "prototype": "int ft_list_size(t_list *begin_list);",
+ "subject": "Assignment name   : ft_list_size\nExpected files    : ft_list_size.c, ft_list.h\nAllowed functions : None\nPrototype         : int ft_list_size(t_list *begin_list);\n--------------------------------------------------------------------------------\n\nWrite a function that counts and returns the number of elements in the list.\n\nAn empty list (a NULL pointer) has 0 elements.\n\nYou must also submit ft_list.h, defining the list type:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "subject_th": "ชื่อโจทย์     : ft_list_size\nไฟล์ที่ต้องส่ง  : ft_list_size.c, ft_list.h\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : int ft_list_size(t_list *begin_list);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่นับและคืนค่าจำนวนสมาชิกในลิสต์\n\nลิสต์ว่าง (พอยน์เตอร์ที่เป็น NULL) มีสมาชิก 0 ตัว\n\nคุณต้องส่งไฟล์ ft_list.h ที่นิยามชนิดข้อมูลของลิสต์ด้วย:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "hints": [
+  "Walk the list with a local pointer; do not modify begin_list itself.",
+  "The loop condition is the NULL check -- no separate empty-list case needed."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"ft_list.h\"\n\n__attribute__((unused)) static t_list\t*new_node(void *data)\n{\n\tt_list\t*node;\n\n\tnode = malloc(sizeof(t_list));\n\tnode->data = data;\n\tnode->next = 0;\n\treturn (node);\n}\n\n__attribute__((unused)) static t_list\t*build_list(int count, char **items)\n{\n\tt_list\t*head;\n\tt_list\t**tail;\n\tint\t\ti;\n\n\thead = 0;\n\ttail = &head;\n\ti = 0;\n\twhile (i < count)\n\t{\n\t\t*tail = new_node(items[i]);\n\t\ttail = &(*tail)->next;\n\t\ti++;\n\t}\n\treturn (head);\n}\n\n__attribute__((unused)) static void\tprint_list(t_list *list)\n{\n\twhile (list)\n\t{\n\t\tprintf(\"[%s]\", (char *)list->data);\n\t\tlist = list->next;\n\t}\n\tprintf(\"\\n\");\n}\n\nint\tft_list_size(t_list *begin_list);\n\nint\tmain(int argc, char **argv)\n{\n\tprintf(\"%d\\n\", ft_list_size(build_list(argc - 1, argv + 1)));\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "3\n"
+  },
+  {
+   "argv": [
+    "only"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  }
+ ]
+}

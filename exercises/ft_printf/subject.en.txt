@@ -1,0 +1,15 @@
+Write a variadic function that mimics printf for a small set of conversions, and
+returns the number of characters it printed.
+
+The conversions to handle are:
+
+  %s   a string of characters
+  %d   a signed decimal integer
+  %x   an unsigned integer in lowercase hexadecimal
+  %%   a literal percent sign
+
+Any other character following a '%' is printed as-is, preceded by the '%'.
+Flags, field widths and precisions are not required. The function must handle
+INT_MIN for %d.
+
+Output goes to standard output.

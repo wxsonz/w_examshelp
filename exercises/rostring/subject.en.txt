@@ -1,0 +1,18 @@
+Write a program that takes a string and displays it with the first word moved to
+the end, followed by a newline.
+
+Words in the output are separated by exactly one space, with no leading or
+trailing whitespace. A word is a sequence of characters that are neither spaces
+nor tabs.
+
+If the number of arguments is not 1, or if the string contains no word, the
+program writes only a newline.
+
+Examples:
+
+  $> ./rostring "abc def ghi" | cat -e
+  def ghi abc$
+  $> ./rostring "  hello   world  " | cat -e
+  world hello$
+  $> ./rostring "solo" | cat -e
+  solo$

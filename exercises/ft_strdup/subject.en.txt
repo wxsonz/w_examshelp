@@ -1,0 +1,5 @@
+Reproduce the behaviour of strdup: allocate a new string with malloc, copy src
+into it, and return it.
+
+The returned string must be null-terminated. Return NULL if the allocation
+fails.

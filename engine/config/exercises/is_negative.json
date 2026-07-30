@@ -1,0 +1,66 @@
+{
+ "id": "is_negative",
+ "name": "is_negative",
+ "exams": {
+  "exam_01": 1
+ },
+ "source": "added",
+ "kind": "function",
+ "expected_files": [
+  "is_negative.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": "void is_negative(int n);",
+ "subject": "Assignment name   : is_negative\nExpected files    : is_negative.c\nAllowed functions : write\nPrototype         : void is_negative(int n);\n--------------------------------------------------------------------------------\n\nWrite a function that displays 'N' if the integer passed as argument is negative,\nand 'P' if it is positive or zero. The character is followed by a newline.\n\nExamples:\n\n  is_negative(-42)  ->  N\n  is_negative(0)    ->  P\n  is_negative(42)   ->  P\n",
+ "subject_th": "ชื่อโจทย์     : is_negative\nไฟล์ที่ต้องส่ง  : is_negative.c\nฟังก์ชันที่ใช้ได้ : write\nต้นแบบฟังก์ชัน : void is_negative(int n);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่แสดงตัวอักษร 'N' ถ้าจำนวนเต็มที่รับเข้ามาเป็นค่าลบ\nและแสดง 'P' ถ้าเป็นค่าบวกหรือศูนย์ ตามด้วยการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  is_negative(-42)  ->  N\n  is_negative(0)    ->  P\n  is_negative(42)   ->  P\n",
+ "hints": [
+  "Zero counts as positive here -- test n < 0, not n <= 0."
+ ],
+ "harness": "#include <stdlib.h>\n\nvoid\tis_negative(int n);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tis_negative(atoi(argv[i]));\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "-42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "N\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "P\n"
+  },
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "P\n"
+  },
+  {
+   "argv": [
+    "-1",
+    "0",
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "N\nP\nP\n"
+  },
+  {
+   "argv": [
+    "-2147483648"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "N\n"
+  }
+ ]
+}

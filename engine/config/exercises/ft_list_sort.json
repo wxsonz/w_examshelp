@@ -1,0 +1,82 @@
+{
+ "id": "ft_list_sort",
+ "name": "ft_list_sort",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "added",
+ "kind": "function",
+ "expected_files": [
+  "ft_list_sort.c",
+  "ft_list.h"
+ ],
+ "allowed_functions": [],
+ "prototype": "void ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *));",
+ "subject": "Assignment name   : ft_list_sort\nExpected files    : ft_list_sort.c, ft_list.h\nAllowed functions : None\nPrototype         : void ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *));\n--------------------------------------------------------------------------------\n\nWrite a function that sorts the elements of the list into ascending order\naccording to cmp, which returns a negative number, 0, or a positive number like\nstrcmp.\n\nThe sort must be done by rearranging the existing nodes -- do not allocate, do\nnot free, and do not swap the data between nodes. The caller's head pointer must\nend up pointing at the smallest element.\n\nYou must also submit ft_list.h, defining the list type:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "subject_th": "ชื่อโจทย์     : ft_list_sort\nไฟล์ที่ต้องส่ง  : ft_list_sort.c, ft_list.h\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : void ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *));\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่เรียงลำดับสมาชิกของลิสต์จากน้อยไปมากตามการเปรียบเทียบด้วย cmp\nซึ่งคืนค่าเป็นลบ ศูนย์ หรือบวก แบบเดียวกับ strcmp\n\nการเรียงลำดับต้องทำโดยจัดเรียงสมาชิกที่มีอยู่เท่านั้น ห้ามจองหน่วยความจำใหม่\nห้ามคืนหน่วยความจำ และห้ามสลับข้อมูลระหว่างสมาชิก\nเมื่อเสร็จแล้วพอยน์เตอร์หัวลิสต์ของผู้เรียกต้องชี้ไปที่สมาชิกที่มีค่าน้อยที่สุด\n\nคุณต้องส่งไฟล์ ft_list.h ที่นิยามชนิดข้อมูลของลิสต์ด้วย:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "hints": [
+  "A t_list ** cursor lets you rewrite the head and any next pointer with the same code.",
+  "Bubble sort on nodes: swap a pair, mark that something changed, repeat until a clean pass.",
+  "Relinking three pointers per swap is fiddly -- draw it before you code it."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"ft_list.h\"\n\n__attribute__((unused)) static t_list\t*new_node(void *data)\n{\n\tt_list\t*node;\n\n\tnode = malloc(sizeof(t_list));\n\tnode->data = data;\n\tnode->next = 0;\n\treturn (node);\n}\n\n__attribute__((unused)) static t_list\t*build_list(int count, char **items)\n{\n\tt_list\t*head;\n\tt_list\t**tail;\n\tint\t\ti;\n\n\thead = 0;\n\ttail = &head;\n\ti = 0;\n\twhile (i < count)\n\t{\n\t\t*tail = new_node(items[i]);\n\t\ttail = &(*tail)->next;\n\t\ti++;\n\t}\n\treturn (head);\n}\n\n__attribute__((unused)) static void\tprint_list(t_list *list)\n{\n\twhile (list)\n\t{\n\t\tprintf(\"[%s]\", (char *)list->data);\n\t\tlist = list->next;\n\t}\n\tprintf(\"\\n\");\n}\n\nvoid\tft_list_sort(t_list **begin_list, int (*cmp)(void *, void *));\n\nstatic int\tcmp_str(void *a, void *b)\n{\n\treturn (strcmp((char *)a, (char *)b));\n}\n\nint\tmain(int argc, char **argv)\n{\n\tt_list\t*list;\n\n\tlist = build_list(argc - 1, argv + 1);\n\tft_list_sort(&list, &cmp_str);\n\tprint_list(list);\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "c",
+    "a",
+    "b"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a][b][c]\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a]\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "d",
+    "c",
+    "b",
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a][b][c][d]\n"
+  },
+  {
+   "argv": [
+    "b",
+    "a",
+    "b"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a][b][b]\n"
+  },
+  {
+   "argv": [
+    "1",
+    "3",
+    "2",
+    "5",
+    "4"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[1][2][3][4][5]\n"
+  }
+ ]
+}

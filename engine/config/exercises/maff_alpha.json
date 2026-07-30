@@ -1,0 +1,40 @@
+{
+ "id": "maff_alpha",
+ "name": "maff_alpha",
+ "exams": {
+  "exam_01": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "maff_alpha.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : maff_alpha\nExpected files    : maff_alpha.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that displays the alphabet, with even letters in uppercase and\nodd letters in lowercase, followed by a newline.\n\nLetters are counted from 1, so 'a' is the first letter -- odd, and therefore\nlowercase.\n\nExample:\n\n  $> ./maff_alpha | cat -e\n  aBcDeFgHiJkLmNoPqRsTuVwXyZ$\n",
+ "subject_th": "ชื่อโจทย์     : maff_alpha\nไฟล์ที่ต้องส่ง  : maff_alpha.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่แสดงตัวอักษร a ถึง z โดยให้ตัวอักษรลำดับคู่เป็นตัวพิมพ์ใหญ่\nและตัวอักษรลำดับคี่เป็นตัวพิมพ์เล็ก แล้วขึ้นบรรทัดใหม่\n\nการนับลำดับเริ่มจาก 1 ดังนั้น a คือตัวที่ 1 ซึ่งเป็นลำดับคี่ จึงเป็นตัวพิมพ์เล็ก\n\nตัวอย่าง:\n\n  $> ./maff_alpha | cat -e\n  aBcDeFgHiJkLmNoPqRsTuVwXyZ$\n",
+ "hints": [
+  "'a' + i walks the alphabet; you never need to write the 26 letters out.",
+  "Uppercase is lowercase minus 32 in ASCII.",
+  "Watch the parity: the FIRST letter stays lowercase, so it is the odd-numbered ones that are left alone."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "aBcDeFgHiJkLmNoPqRsTuVwXyZ\n"
+  },
+  {
+   "argv": [
+    "ignored"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "aBcDeFgHiJkLmNoPqRsTuVwXyZ\n"
+  }
+ ]
+}

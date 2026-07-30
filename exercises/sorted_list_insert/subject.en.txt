@@ -1,0 +1,16 @@
+The list is already sorted in ascending order according to cmp. Write a function
+that inserts a new element holding `data` at the position that keeps the list
+sorted.
+
+cmp returns a negative number, 0, or a positive number, like strcmp. When the new
+data compares equal to an existing element, insert the new element before it.
+
+The head may change, so the caller's pointer must be updated.
+
+You must also submit ft_list.h, defining the list type:
+
+  typedef struct s_list
+  {
+      struct s_list *next;
+      void          *data;
+  } t_list;

@@ -1,0 +1,72 @@
+{
+ "id": "rotone",
+ "name": "rotone",
+ "exams": {
+  "exam_01": 7,
+  "exam_02": 3
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "rotone.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : rotone\nExpected files    : rotone.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays it with each alphabetical\ncharacter shifted forward by one letter, followed by a newline.\n\n'z' wraps around to 'a' and 'Z' to 'A'. Non-alphabetical characters are left\nunchanged.\n\nIf the number of arguments is not 1, the program writes only a newline.\n\nExamples:\n\n  $> ./rotone \"abc\" | cat -e\n  bcd$\n  $> ./rotone \"Zz!\" | cat -e\n  Aa!$\n",
+ "subject_th": "ชื่อโจทย์     : rotone\nไฟล์ที่ต้องส่ง  : rotone.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงข้อความนั้นโดยเลื่อนตัวอักษรภาษาอังกฤษ\nไปข้างหน้าหนึ่งตำแหน่ง ตามด้วยการขึ้นบรรทัดใหม่\n\nตัวอักษร 'z' จะวนกลับไปเป็น 'a' และ 'Z' วนกลับไปเป็น 'A'\nตัวอักษรที่ไม่ใช่ตัวอักษรภาษาอังกฤษให้คงไว้ตามเดิม\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./rotone \"abc\" | cat -e\n  bcd$\n  $> ./rotone \"Zz!\" | cat -e\n  Aa!$\n",
+ "hints": [
+  "Handle the wrap cases 'z' and 'Z' before the generic +1 case.",
+  "Digits, spaces and punctuation pass through untouched."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "bcd\n"
+  },
+  {
+   "argv": [
+    "Zz!"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Aa!\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "Hello World"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Ifmmp Xpsme\n"
+  },
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "42\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

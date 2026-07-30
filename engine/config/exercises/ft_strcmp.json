@@ -1,0 +1,87 @@
+{
+ "id": "ft_strcmp",
+ "name": "ft_strcmp",
+ "exams": {
+  "exam_02": 6,
+  "exam_03": 1
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_strcmp.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "int ft_strcmp(char *s1, char *s2);",
+ "subject": "Assignment name   : ft_strcmp\nExpected files    : ft_strcmp.c\nAllowed functions : None\nPrototype         : int ft_strcmp(char *s1, char *s2);\n--------------------------------------------------------------------------------\n\nReproduce the behaviour of strcmp: compare the two strings and return the\ndifference between the first pair of bytes that differ, or 0 if the strings are\nequal.\n\nThe comparison must treat the bytes as unsigned char values.\n",
+ "subject_th": "ชื่อโจทย์     : ft_strcmp\nไฟล์ที่ต้องส่ง  : ft_strcmp.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : int ft_strcmp(char *s1, char *s2);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่ทำงานเหมือน strcmp: เปรียบเทียบข้อความสองชุด แล้วคืนค่าผลต่าง\nของไบต์คู่แรกที่ต่างกัน หรือคืนค่า 0 ถ้าข้อความทั้งสองเหมือนกัน\n\nการเปรียบเทียบต้องมองไบต์เป็นค่าแบบ unsigned char\n",
+ "hints": [
+  "The loop stops on the first difference OR at the end of s1.",
+  "Cast to unsigned char before subtracting, or high bytes give the wrong sign."
+ ],
+ "harness": "#include <stdio.h>\n\nint\tft_strcmp(char *s1, char *s2);\n\nint\tmain(int argc, char **argv)\n{\n\tif (argc != 3)\n\t\treturn (0);\n\tprintf(\"%d\\n\", ft_strcmp(argv[1], argv[2]));\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "abc",
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "abc",
+    "abd"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-1\n"
+  },
+  {
+   "argv": [
+    "abd",
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [
+    "",
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "a",
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "97\n"
+  },
+  {
+   "argv": [
+    "",
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-97\n"
+  },
+  {
+   "argv": [
+    "abc",
+    "abcd"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-100\n"
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "id": "maff_revalpha",
+ "name": "maff_revalpha",
+ "exams": {
+  "exam_01": 3
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "maff_revalpha.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : maff_revalpha\nExpected files    : maff_revalpha.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that displays the alphabet in reverse, with even letters in\nuppercase and odd letters in lowercase, followed by a newline.\n\nLetters are counted from 1 in the order they are printed, so 'z' comes first --\nodd, and therefore lowercase.\n\nExample:\n\n  $> ./maff_revalpha | cat -e\n  zYxWvUtSrQpOnMlKjIhGfEdCbA$\n",
+ "subject_th": "ชื่อโจทย์     : maff_revalpha\nไฟล์ที่ต้องส่ง  : maff_revalpha.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่แสดงตัวอักษรจาก z ย้อนกลับไปถึง a โดยให้ตัวอักษรลำดับคู่เป็นตัวพิมพ์ใหญ่\nและตัวอักษรลำดับคี่เป็นตัวพิมพ์เล็ก แล้วขึ้นบรรทัดใหม่\n\nการนับลำดับเริ่มจาก 1 ตามลำดับที่แสดงออกมา ดังนั้น z คือตัวที่ 1 ซึ่งเป็นลำดับคี่\nจึงเป็นตัวพิมพ์เล็ก\n\nตัวอย่าง:\n\n  $> ./maff_revalpha | cat -e\n  zYxWvUtSrQpOnMlKjIhGfEdCbA$\n",
+ "hints": [
+  "This is maff_alpha counting down: 'z' - i instead of 'a' + i.",
+  "The parity follows the printing order, not the alphabet, so the last letter printed ('a') comes out uppercase."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "zYxWvUtSrQpOnMlKjIhGfEdCbA\n"
+  },
+  {
+   "argv": [
+    "ignored"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "zYxWvUtSrQpOnMlKjIhGfEdCbA\n"
+  }
+ ]
+}

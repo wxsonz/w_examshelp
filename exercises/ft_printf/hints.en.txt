@@ -1,0 +1,7 @@
+va_start, then va_arg once per conversion, then va_end.
+
+To pass the va_list to a helper, take a va_list * -- copying it is not portable.
+
+Count every character you write, including the '-' and the padding-free digits.
+
+Negating INT_MIN overflows an int, so widen to long before you negate.

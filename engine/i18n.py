@@ -163,7 +163,7 @@ MESSAGES = {
         "shell.confirm_reset": "This erases all progress AND everything in rendu/. Continue?",
         "shell.cancelled": "cancelled",
         "shell.goodbye": "See you.",
-        "shell.no_db": "No exercises found in engine/config/exercises_db.json.",
+        "shell.no_db": "No exercises found in engine/config/.",
         "shell.build_db": "Build it with: python3 engine/scripts/build_db.py",
         # updates
         "update.available": "update available: {latest} — you have {current}",
@@ -378,7 +378,7 @@ MESSAGES = {
         "shell.confirm_reset": "การทำเช่นนี้จะลบความก้าวหน้าทั้งหมดและทุกอย่างในโฟลเดอร์ rendu/ ต้องการทำต่อหรือไม่?",
         "shell.cancelled": "ยกเลิกแล้ว",
         "shell.goodbye": "เจอกันใหม่",
-        "shell.no_db": "ไม่พบโจทย์ในไฟล์ engine/config/exercises_db.json",
+        "shell.no_db": "ไม่พบโจทย์ในโฟลเดอร์ engine/config/",
         "shell.build_db": "สร้างได้ด้วยคำสั่ง: python3 engine/scripts/build_db.py",
         "update.available": "มีเวอร์ชันใหม่: {latest} — ของคุณคือ {current}",
         "update.how": "รัน git pull แล้วตามด้วย: python3 engine/scripts/build_db.py",

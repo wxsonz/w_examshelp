@@ -1,0 +1,7 @@
+Write a program that displays the character 'z' on the standard output.
+
+The output is exactly one byte. There is no newline at the end -- this is one of
+the very few subjects that does not finish with one.
+
+  ./only_z | cat -e   prints   z     (a bare 'z', with no trailing '$', because
+                                      there is no newline to mark)

@@ -1,0 +1,5 @@
+Sort the characters first -- the sorted string is the first permutation.
+
+Then repeatedly compute the NEXT permutation: find the rightmost ascent, swap, reverse the tail.
+
+That standard algorithm gives lexicographic order for free, with no recursion.

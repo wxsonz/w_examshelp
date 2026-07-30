@@ -1,0 +1,5 @@
+Negating INT_MIN overflows an int -- do the arithmetic in a long.
+
+Count the digits before you malloc, and remember the '-' and the '\0'.
+
+0 has one digit, so a count starting at 1 handles it.

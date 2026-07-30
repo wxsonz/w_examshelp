@@ -1,0 +1,7 @@
+$ 'hello world'
+$ '   lorem,ipsum  '
+$ '   '
+$ ''
+$ single
+$ 'a b\tc'
+$

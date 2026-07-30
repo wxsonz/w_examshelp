@@ -1,0 +1,7 @@
+Write a function that splits str into words and returns them as a
+NULL-terminated array of freshly allocated strings.
+
+A word is a sequence of characters that are neither spaces, tabs, nor newlines.
+An input with no words yields an array whose first element is NULL.
+
+Return NULL if an allocation fails.

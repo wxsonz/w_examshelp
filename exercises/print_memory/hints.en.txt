@@ -1,0 +1,7 @@
+Work one 16-byte line at a time; the last line is the only special case.
+
+The hex column is always 40 characters: 16 bytes * 2 digits + 8 spaces.
+
+Pad a short line with two spaces per missing byte so the columns still line up.
+
+b >> 4 is the high nibble, b & 15 the low one.

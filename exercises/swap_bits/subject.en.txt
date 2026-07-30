@@ -1,0 +1,6 @@
+Write a function that takes a byte and returns it with its two halves (its two
+nibbles of 4 bits) swapped.
+
+Example:
+
+  swap_bits(1)  ->  16   (00000001 becomes 00010000)

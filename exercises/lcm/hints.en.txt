@@ -1,0 +1,5 @@
+Nothing is allowed here -- not even write. Just compute and return.
+
+Divide before you multiply (a / hcf * b) so the value cannot overflow as easily.
+
+Handle the zero cases first: the answer is 0, not a division by zero.

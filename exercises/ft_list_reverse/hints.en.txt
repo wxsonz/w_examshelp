@@ -1,0 +1,5 @@
+Three pointers: previous, current, and the next you saved before overwriting.
+
+Save cursor->next BEFORE you point cursor->next backwards.
+
+The head ends up being the last node you visited.

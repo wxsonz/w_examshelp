@@ -1,0 +1,3 @@
+Handle the empty list first, or you will dereference NULL.
+
+Walk to the node whose next is NULL -- that is the last one.

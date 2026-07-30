@@ -1,0 +1,56 @@
+{
+ "id": "ft_strcpy",
+ "name": "ft_strcpy",
+ "exams": {
+  "exam_01": 4,
+  "exam_02": 0
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_strcpy.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "char *ft_strcpy(char *s1, char *s2);",
+ "subject": "Assignment name   : ft_strcpy\nExpected files    : ft_strcpy.c\nAllowed functions : None\nPrototype         : char *ft_strcpy(char *s1, char *s2);\n--------------------------------------------------------------------------------\n\nReproduce the behaviour of strcpy: copy the string s2, including its terminating\nnull byte, into the buffer s1. Return s1.\n\nYou may assume s1 is large enough to hold s2.\n",
+ "subject_th": "ชื่อโจทย์     : ft_strcpy\nไฟล์ที่ต้องส่ง  : ft_strcpy.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : char *ft_strcpy(char *s1, char *s2);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่ทำงานเหมือน strcpy: คัดลอกข้อความ s2 รวมไบต์ null ที่ปิดท้าย\nไปไว้ในบัฟเฟอร์ s1 แล้วคืนค่า s1\n\nสามารถสมมติได้ว่า s1 มีขนาดใหญ่พอที่จะเก็บ s2 ได้\n",
+ "hints": [
+  "Do not forget to write the terminating '\\0' -- the loop condition skips it.",
+  "Return s1, the destination, not s2."
+ ],
+ "harness": "#include <stdio.h>\n\nchar\t*ft_strcpy(char *s1, char *s2);\n\nint\tmain(int argc, char **argv)\n{\n\tchar\tbuffer[1024];\n\tint\t\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tbuffer[0] = 'X';\n\t\tprintf(\"[%s]\\n\", ft_strcpy(buffer, argv[i]));\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "hello"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[hello]\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[]\n"
+  },
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[42]\n"
+  },
+  {
+   "argv": [
+    "a longer string here"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a longer string here]\n"
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "id": "ft_swap",
+ "name": "ft_swap",
+ "exams": {
+  "exam_01": 6,
+  "exam_02": 2
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_swap.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "void ft_swap(int *a, int *b);",
+ "subject": "Assignment name   : ft_swap\nExpected files    : ft_swap.c\nAllowed functions : None\nPrototype         : void ft_swap(int *a, int *b);\n--------------------------------------------------------------------------------\n\nWrite a function that swaps the values of the two integers pointed to by its\narguments.\n",
+ "subject_th": "ชื่อโจทย์     : ft_swap\nไฟล์ที่ต้องส่ง  : ft_swap.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : void ft_swap(int *a, int *b);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่สลับค่าของจำนวนเต็มสองตัวที่พอยน์เตอร์ทั้งสองชี้อยู่\n",
+ "hints": [
+  "You need a third variable to hold one value while you overwrite it.",
+  "Dereference with * to read and write through the pointers."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nvoid\tft_swap(int *a, int *b);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ta;\n\tint\tb;\n\n\tif (argc != 3)\n\t\treturn (0);\n\ta = atoi(argv[1]);\n\tb = atoi(argv[2]);\n\tft_swap(&a, &b);\n\tprintf(\"%d %d\\n\", a, b);\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "1",
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "2 1\n"
+  },
+  {
+   "argv": [
+    "-5",
+    "5"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5 -5\n"
+  },
+  {
+   "argv": [
+    "0",
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0 0\n"
+  },
+  {
+   "argv": [
+    "42",
+    "-42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-42 42\n"
+  }
+ ]
+}

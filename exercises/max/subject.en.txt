@@ -1,0 +1,3 @@
+Write a function that returns the largest value in the array tab of len integers.
+
+If len is 0, the function returns 0.

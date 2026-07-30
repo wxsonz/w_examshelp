@@ -1,0 +1,15 @@
+Reproduce the behaviour of atoi: convert the initial numeric portion of the
+string to an int.
+
+Skip leading whitespace (spaces and tabs), then accept an optional run of '+'
+and '-' signs, then read decimal digits until a non-digit is found. If there is
+no digit, return 0.
+
+Overflow behaviour is not tested.
+
+Examples:
+
+  ft_atoi("42")        ->  42
+  ft_atoi("  -42abc")  ->  -42
+  ft_atoi("+-3")       ->  -3
+  ft_atoi("abc")       ->  0

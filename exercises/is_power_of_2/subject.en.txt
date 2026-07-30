@@ -1,0 +1,4 @@
+Write a function that returns 1 if the given number is a power of 2, and 0
+otherwise.
+
+0 is not a power of 2.

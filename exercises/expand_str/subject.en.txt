@@ -1,0 +1,14 @@
+Write a program that takes a string and displays it with exactly three spaces
+between words, and no leading or trailing whitespace, followed by a newline.
+
+A word is a sequence of characters that are neither spaces nor tabs.
+
+If the number of arguments is not 1, or if the string contains no word, the
+program writes only a newline.
+
+Examples:
+
+  $> ./expand_str "  lorem   ipsum  dolor  " | cat -e
+  lorem   ipsum   dolor$
+  $> ./expand_str "solo" | cat -e
+  solo$

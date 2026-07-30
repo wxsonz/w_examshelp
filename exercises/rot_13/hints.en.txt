@@ -1,0 +1,3 @@
+The modulo trick: 'a' + (c - 'a' + 13) % 26 keeps you inside the alphabet.
+
+Uppercase and lowercase wrap separately.

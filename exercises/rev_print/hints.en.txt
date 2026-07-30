@@ -1,0 +1,3 @@
+Find the length first, then walk the index back down to 0.
+
+The last character sits at index len - 1, not len.

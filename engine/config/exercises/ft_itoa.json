@@ -1,0 +1,90 @@
+{
+ "id": "ft_itoa",
+ "name": "ft_itoa",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_itoa.c"
+ ],
+ "allowed_functions": [
+  "malloc"
+ ],
+ "prototype": "char *ft_itoa(int nbr);",
+ "subject": "Assignment name   : ft_itoa\nExpected files    : ft_itoa.c\nAllowed functions : malloc\nPrototype         : char *ft_itoa(int nbr);\n--------------------------------------------------------------------------------\n\nWrite a function that allocates and returns the decimal representation of nbr as\na null-terminated string.\n\nNegative numbers are prefixed with '-'. The function must handle INT_MIN\n(-2147483648) correctly. Return NULL if the allocation fails.\n\nExamples:\n\n  ft_itoa(42)     ->  \"42\"\n  ft_itoa(0)      ->  \"0\"\n  ft_itoa(-42)    ->  \"-42\"\n",
+ "subject_th": "ชื่อโจทย์     : ft_itoa\nไฟล์ที่ต้องส่ง  : ft_itoa.c\nฟังก์ชันที่ใช้ได้ : malloc\nต้นแบบฟังก์ชัน : char *ft_itoa(int nbr);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่จองหน่วยความจำและคืนค่าข้อความที่แทนค่า nbr ในระบบฐานสิบ\nโดยปิดท้ายด้วยไบต์ null\n\nจำนวนลบให้นำหน้าด้วยเครื่องหมาย '-' และฟังก์ชันต้องรองรับค่า INT_MIN\n(-2147483648) ได้อย่างถูกต้อง ถ้าจองหน่วยความจำไม่สำเร็จให้คืนค่า NULL\n\nตัวอย่าง:\n\n  ft_itoa(42)     ->  \"42\"\n  ft_itoa(0)      ->  \"0\"\n  ft_itoa(-42)    ->  \"-42\"\n",
+ "hints": [
+  "Negating INT_MIN overflows an int -- do the arithmetic in a long.",
+  "Count the digits before you malloc, and remember the '-' and the '\\0'.",
+  "0 has one digit, so a count starting at 1 handles it."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nchar\t*ft_itoa(int nbr);\n\nint\tmain(int argc, char **argv)\n{\n\tchar\t*s;\n\tint\t\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\ts = ft_itoa(atoi(argv[i]));\n\t\tif (!s)\n\t\t\treturn (1);\n\t\tprintf(\"[%s]\\n\", s);\n\t\tfree(s);\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[42]\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[0]\n"
+  },
+  {
+   "argv": [
+    "-42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[-42]\n"
+  },
+  {
+   "argv": [
+    "2147483647"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[2147483647]\n"
+  },
+  {
+   "argv": [
+    "-2147483648"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[-2147483648]\n"
+  },
+  {
+   "argv": [
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[1]\n"
+  },
+  {
+   "argv": [
+    "-1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[-1]\n"
+  },
+  {
+   "argv": [
+    "100"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[100]\n"
+  }
+ ]
+}

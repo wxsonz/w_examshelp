@@ -1,0 +1,68 @@
+{
+ "id": "aff_last_param",
+ "name": "aff_last_param",
+ "exams": {
+  "exam_01": 2
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "aff_last_param.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : aff_last_param\nExpected files    : aff_last_param.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes strings as arguments and displays its last argument\nfollowed by a newline.\n\nIf it receives no arguments, the program displays only a newline.\n\nExamples:\n\n  $> ./aff_last_param \"zaz\" \"mange\" \"des\" \"chats\" | cat -e\n  chats$\n  $> ./aff_last_param \"j'aime le savon\" | cat -e\n  j'aime le savon$\n  $> ./aff_last_param | cat -e\n  $\n",
+ "subject_th": "ชื่อโจทย์     : aff_last_param\nไฟล์ที่ต้องส่ง  : aff_last_param.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความเป็นอาร์กิวเมนต์ แล้วแสดงอาร์กิวเมนต์ตัวสุดท้าย\nตามด้วยการขึ้นบรรทัดใหม่\n\nถ้าไม่ได้รับอาร์กิวเมนต์เลย ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./aff_last_param \"zaz\" \"mange\" \"des\" \"chats\" | cat -e\n  chats$\n  $> ./aff_last_param \"j'aime le savon\" | cat -e\n  j'aime le savon$\n  $> ./aff_last_param | cat -e\n  $\n",
+ "hints": [
+  "The last argument is argv[argc - 1]; with one argument that is also argv[1], which is why the single-argument case needs no special code.",
+  "argc counts the program name, so argc == 1 means no arguments at all."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "zaz",
+    "mange",
+    "des",
+    "chats"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "chats\n"
+  },
+  {
+   "argv": [
+    "j'aime le savon"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "j'aime le savon\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "first",
+    "second",
+    "third"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "third\n"
+  }
+ ]
+}

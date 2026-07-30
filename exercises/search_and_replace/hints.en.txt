@@ -1,0 +1,5 @@
+Three arguments means argc == 4: argv[0] is the program name.
+
+A single-character argument is one whose argv[n][1] is '\0' -- but check argv[n][0] first, or an empty argument sends you one byte past the end of the string.
+
+You do not have to build a new string: walk the original and write either the original byte or the replacement.

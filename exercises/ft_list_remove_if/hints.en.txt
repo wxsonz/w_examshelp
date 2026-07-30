@@ -1,0 +1,5 @@
+Strip matching nodes off the front first, then walk with a one-behind pointer.
+
+After unlinking, do NOT advance -- the next node may also match.
+
+cmp returns 0 for equal, like strcmp. Do not treat non-zero as a match.

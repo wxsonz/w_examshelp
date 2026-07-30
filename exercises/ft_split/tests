@@ -1,0 +1,7 @@
+$ 'hello world'
+$ '  leading and trailing  '
+$ ''
+$ '   '
+$ one
+$ 'a\tb\nc d'
+$ 'multiple   spaces   between'

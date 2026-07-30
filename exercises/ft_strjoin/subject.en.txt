@@ -1,0 +1,10 @@
+Write a function that concatenates the `size` strings of the array strs,
+separating each pair with sep, and returns the result as a freshly allocated
+null-terminated string.
+
+If size is 0, return an empty allocated string. Return NULL if the allocation
+fails.
+
+Example:
+
+  strs = {"Hello", "world"}, sep = ", "  ->  "Hello, world"

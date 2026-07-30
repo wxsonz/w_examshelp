@@ -1,0 +1,89 @@
+{
+ "id": "aff_a",
+ "name": "aff_a",
+ "exams": {
+  "exam_01": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "aff_a.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : aff_a\nExpected files    : aff_a.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays the first 'a' character it\nencounters in it, followed by a newline.\n\nIf there are no 'a' characters in the string, the program just writes a newline.\nIf the number of parameters is not 1, the program displays 'a' followed by a\nnewline.\n\nExamples:\n\n  $> ./aff_a \"abc\" | cat -e\n  a$\n  $> ./aff_a \"dubO a POIL\" | cat -e\n  a$\n  $> ./aff_a \"zz sent le poney\" | cat -e\n  $\n  $> ./aff_a | cat -e\n  a$\n",
+ "subject_th": "ชื่อโจทย์     : aff_a\nไฟล์ที่ต้องส่ง  : aff_a.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงตัวอักษร 'a' ตัวแรกที่พบในข้อความนั้น\nตามด้วยการขึ้นบรรทัดใหม่\n\nถ้าในข้อความไม่มีตัวอักษร 'a' ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\nแต่ถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงตัวอักษร 'a' ตามด้วยการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./aff_a \"abc\" | cat -e\n  a$\n  $> ./aff_a \"dubO a POIL\" | cat -e\n  a$\n  $> ./aff_a \"zz sent le poney\" | cat -e\n  $\n  $> ./aff_a | cat -e\n  a$\n",
+ "hints": [
+  "Read the two failure cases carefully: they do NOT behave the same.",
+  "No 'a' in the string writes only a newline, but a wrong argument count writes 'a' first.",
+  "Stop at the FIRST 'a' -- do not keep scanning once you have written it."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  },
+  {
+   "argv": [
+    "dubO a POIL"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  },
+  {
+   "argv": [
+    "zz sent le poney"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  },
+  {
+   "argv": [
+    "banana"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "one",
+    "two"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  },
+  {
+   "argv": [
+    "ZZZaZZ"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  }
+ ]
+}

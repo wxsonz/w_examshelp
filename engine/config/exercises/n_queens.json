@@ -1,0 +1,99 @@
+{
+ "id": "n_queens",
+ "name": "n_queens",
+ "exams": {
+  "extra": 1
+ },
+ "source": "extra",
+ "kind": "program",
+ "expected_files": [
+  "n_queens.c"
+ ],
+ "allowed_functions": [
+  "atoi",
+  "printf",
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : n_queens\nExpected files    : n_queens.c\nAllowed functions : atoi, printf, write\n--------------------------------------------------------------------------------\n\nWrite a program that takes an integer n and displays every solution to the\nn-queens problem: n queens placed on an n x n board so that no two of them share\na row, a column, or a diagonal.\n\nPrint one solution per line. A solution is written as the row index of the queen\nin each column, from the first column to the last, separated by single spaces.\nRows and columns are numbered from 0.\n\nSolutions must be printed in ascending lexicographic order of those index\nsequences.\n\nIf the number of arguments is not 1, or if n is not strictly positive, the\nprogram prints nothing. If there is no solution, the program prints nothing.\n\nExample:\n\n  $> ./n_queens 4 | cat -e\n  1 3 0 2$\n  2 0 3 1$\n",
+ "subject_th": "ชื่อโจทย์     : n_queens\nไฟล์ที่ต้องส่ง  : n_queens.c\nฟังก์ชันที่ใช้ได้ : atoi, printf, write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับจำนวนเต็ม n แล้วแสดงคำตอบทุกรูปแบบของปัญหา n ควีน\nคือการวางควีน n ตัวบนกระดานขนาด n x n โดยไม่มีควีนคู่ใดอยู่ในแถวเดียวกัน\nคอลัมน์เดียวกัน หรือแนวทแยงเดียวกัน\n\nแสดงคำตอบบรรทัดละหนึ่งรูปแบบ โดยเขียนเป็นหมายเลขแถวของควีนในแต่ละคอลัมน์\nไล่จากคอลัมน์แรกไปคอลัมน์สุดท้าย คั่นด้วยช่องว่างหนึ่งช่อง\nโดยนับหมายเลขแถวและคอลัมน์เริ่มจาก 0\n\nคำตอบต้องแสดงเรียงตามลำดับพจนานุกรมของลำดับหมายเลขเหล่านั้นจากน้อยไปมาก\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 หรือ n ไม่เป็นจำนวนเต็มบวก\nให้โปรแกรมไม่แสดงอะไรเลย และถ้าไม่มีคำตอบก็ไม่ต้องแสดงอะไรเช่นกัน\n\nตัวอย่าง:\n\n  $> ./n_queens 4 | cat -e\n  1 3 0 2$\n  2 0 3 1$\n",
+ "hints": [
+  "Place one queen per column, and recurse to the next column.",
+  "Two queens share a diagonal when row - column matches, or when row + column matches.",
+  "Trying rows in ascending order at every column produces lexicographic output naturally.",
+  "n = 2 and n = 3 have no solutions, so printing nothing is the correct answer."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "4"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1 3 0 2\n2 0 3 1\n"
+  },
+  {
+   "argv": [
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": ""
+  },
+  {
+   "argv": [
+    "3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": ""
+  },
+  {
+   "argv": [
+    "5"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0 2 4 1 3\n0 3 1 4 2\n1 3 0 2 4\n1 4 2 0 3\n2 0 3 1 4\n2 4 1 3 0\n3 0 2 4 1\n3 1 4 2 0\n4 1 3 0 2\n4 2 0 3 1\n"
+  },
+  {
+   "argv": [
+    "6"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1 3 5 0 2 4\n2 5 1 4 0 3\n3 0 4 1 5 2\n4 2 0 5 3 1\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": ""
+  },
+  {
+   "argv": [
+    "-1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": ""
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": ""
+  }
+ ]
+}

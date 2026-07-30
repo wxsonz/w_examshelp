@@ -1,0 +1,57 @@
+{
+ "id": "ft_list_foreach",
+ "name": "ft_list_foreach",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_list_foreach.c",
+  "ft_list.h"
+ ],
+ "allowed_functions": [],
+ "prototype": "void ft_list_foreach(t_list *begin_list, void (*f)(void *));",
+ "subject": "Assignment name   : ft_list_foreach\nExpected files    : ft_list_foreach.c, ft_list.h\nAllowed functions : None\nPrototype         : void ft_list_foreach(t_list *begin_list, void (*f)(void *));\n--------------------------------------------------------------------------------\n\nWrite a function that applies the function f to the data of every element of the\nlist, in order, from the head onwards.\n\nYou must also submit ft_list.h, defining the list type:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "subject_th": "ชื่อโจทย์     : ft_list_foreach\nไฟล์ที่ต้องส่ง  : ft_list_foreach.c, ft_list.h\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : void ft_list_foreach(t_list *begin_list, void (*f)(void *));\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่เรียกใช้ฟังก์ชัน f กับข้อมูลของสมาชิกทุกตัวในลิสต์\nโดยไล่ตามลำดับจากหัวลิสต์ไปท้ายลิสต์\n\nคุณต้องส่งไฟล์ ft_list.h ที่นิยามชนิดข้อมูลของลิสต์ด้วย:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "hints": [
+  "Call f on the DATA, not on the node.",
+  "f(begin_list->data) is how you invoke a function pointer -- no extra syntax needed."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"ft_list.h\"\n\n__attribute__((unused)) static t_list\t*new_node(void *data)\n{\n\tt_list\t*node;\n\n\tnode = malloc(sizeof(t_list));\n\tnode->data = data;\n\tnode->next = 0;\n\treturn (node);\n}\n\n__attribute__((unused)) static t_list\t*build_list(int count, char **items)\n{\n\tt_list\t*head;\n\tt_list\t**tail;\n\tint\t\ti;\n\n\thead = 0;\n\ttail = &head;\n\ti = 0;\n\twhile (i < count)\n\t{\n\t\t*tail = new_node(items[i]);\n\t\ttail = &(*tail)->next;\n\t\ti++;\n\t}\n\treturn (head);\n}\n\n__attribute__((unused)) static void\tprint_list(t_list *list)\n{\n\twhile (list)\n\t{\n\t\tprintf(\"[%s]\", (char *)list->data);\n\t\tlist = list->next;\n\t}\n\tprintf(\"\\n\");\n}\n\nvoid\tft_list_foreach(t_list *begin_list, void (*f)(void *));\n\nstatic void\tshout(void *data)\n{\n\tprintf(\"<%s>\", (char *)data);\n}\n\nint\tmain(int argc, char **argv)\n{\n\tft_list_foreach(build_list(argc - 1, argv + 1), &shout);\n\tprintf(\"\\n\");\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "<a><b><c>\n"
+  },
+  {
+   "argv": [
+    "only"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "<only>\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "1",
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "<1><2>\n"
+  }
+ ]
+}

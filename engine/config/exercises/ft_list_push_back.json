@@ -1,0 +1,60 @@
+{
+ "id": "ft_list_push_back",
+ "name": "ft_list_push_back",
+ "exams": {
+  "exam_03": 2,
+  "exam_04": 0
+ },
+ "source": "added",
+ "kind": "function",
+ "expected_files": [
+  "ft_list_push_back.c",
+  "ft_list.h"
+ ],
+ "allowed_functions": [
+  "malloc"
+ ],
+ "prototype": "void ft_list_push_back(t_list **begin_list, void *data);",
+ "subject": "Assignment name   : ft_list_push_back\nExpected files    : ft_list_push_back.c, ft_list.h\nAllowed functions : malloc\nPrototype         : void ft_list_push_back(t_list **begin_list, void *data);\n--------------------------------------------------------------------------------\n\nWrite a function that adds a new element holding `data` at the END of the list.\n\nIf the list is empty, the new element becomes the head, so the caller's pointer\nmust be updated.\n\nYou must also submit ft_list.h, defining the list type:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "subject_th": "ชื่อโจทย์     : ft_list_push_back\nไฟล์ที่ต้องส่ง  : ft_list_push_back.c, ft_list.h\nฟังก์ชันที่ใช้ได้ : malloc\nต้นแบบฟังก์ชัน : void ft_list_push_back(t_list **begin_list, void *data);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่เพิ่มสมาชิกใหม่ซึ่งเก็บข้อมูล data ไว้ที่ท้ายลิสต์\n\nถ้าลิสต์ว่าง สมาชิกใหม่จะกลายเป็นหัวลิสต์\nดังนั้นต้องปรับพอยน์เตอร์ของผู้เรียกด้วย\n\nคุณต้องส่งไฟล์ ft_list.h ที่นิยามชนิดข้อมูลของลิสต์ด้วย:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "hints": [
+  "Handle the empty list first, or you will dereference NULL.",
+  "Walk to the node whose next is NULL -- that is the last one."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"ft_list.h\"\n\n__attribute__((unused)) static t_list\t*new_node(void *data)\n{\n\tt_list\t*node;\n\n\tnode = malloc(sizeof(t_list));\n\tnode->data = data;\n\tnode->next = 0;\n\treturn (node);\n}\n\n__attribute__((unused)) static t_list\t*build_list(int count, char **items)\n{\n\tt_list\t*head;\n\tt_list\t**tail;\n\tint\t\ti;\n\n\thead = 0;\n\ttail = &head;\n\ti = 0;\n\twhile (i < count)\n\t{\n\t\t*tail = new_node(items[i]);\n\t\ttail = &(*tail)->next;\n\t\ti++;\n\t}\n\treturn (head);\n}\n\n__attribute__((unused)) static void\tprint_list(t_list *list)\n{\n\twhile (list)\n\t{\n\t\tprintf(\"[%s]\", (char *)list->data);\n\t\tlist = list->next;\n\t}\n\tprintf(\"\\n\");\n}\n\nvoid\tft_list_push_back(t_list **begin_list, void *data);\n\nint\tmain(int argc, char **argv)\n{\n\tt_list\t*list;\n\tint\t\ti;\n\n\tlist = 0;\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tft_list_push_back(&list, argv[i]);\n\t\ti++;\n\t}\n\tprint_list(list);\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a][b][c]\n"
+  },
+  {
+   "argv": [
+    "only"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[only]\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "1",
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[1][2]\n"
+  }
+ ]
+}

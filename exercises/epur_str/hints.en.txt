@@ -1,0 +1,3 @@
+Write the separating space BEFORE a word, but only if a word came before it.
+
+That flag is what keeps the leading space from being printed.

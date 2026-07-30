@@ -1,0 +1,11 @@
+Write a program that takes a string and displays it with the case of every
+alphabetical character inverted, followed by a newline.
+
+Non-alphabetical characters are left unchanged.
+
+If the number of arguments is not 1, the program writes only a newline.
+
+Example:
+
+  $> ./ulstr "Hello World! 42" | cat -e
+  hELLO wORLD! 42$

@@ -1,0 +1,5 @@
+Trial division up to d * d <= n is fast enough and avoids needing sqrt.
+
+1 is not prime, and neither is 0 or any negative number.
+
+Only write is allowed, so you need your own number printer.

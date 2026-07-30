@@ -1,0 +1,39 @@
+{
+ "id": "only_a",
+ "name": "only_a",
+ "exams": {
+  "exam_01": 3
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "only_a.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : only_a\nExpected files    : only_a.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that displays the character 'a' on the standard output.\n\nThe output is exactly one byte. There is no newline at the end -- this is one of\nthe very few subjects that does not finish with one.\n\n  ./only_a | cat -e   prints   a     (a bare 'a', with no trailing '$', because\n                                      there is no newline to mark)\n",
+ "subject_th": "ชื่อโจทย์     : only_a\nไฟล์ที่ต้องส่ง  : only_a.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่แสดงตัวอักษร 'a' ออกทางเอาต์พุตมาตรฐาน\n\nผลลัพธ์มีความยาวหนึ่งไบต์พอดี และไม่มีการขึ้นบรรทัดใหม่ต่อท้าย\nข้อนี้เป็นหนึ่งในไม่กี่ข้อที่ไม่จบด้วยการขึ้นบรรทัดใหม่\n\n  ./only_a | cat -e   ได้   a     (มีแค่ตัว a ไม่มีเครื่องหมาย $ ต่อท้าย\n                                   เพราะไม่มีการขึ้นบรรทัดใหม่ให้ cat -e แสดง)\n",
+ "hints": [
+  "One call to write, one byte, and nothing else.",
+  "Resist the reflex to add '\\n' -- here it would be a wrong answer."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a"
+  },
+  {
+   "argv": [
+    "ignored"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a"
+  }
+ ]
+}

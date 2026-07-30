@@ -1,0 +1,3 @@
+Build the result by shifting it left and pulling bits off the input right.
+
+Exactly 8 iterations -- one per bit.

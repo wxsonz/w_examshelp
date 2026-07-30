@@ -1,0 +1,7 @@
+Write a function that displays a string on the standard output.
+
+The pointer passed to the function holds the address of the string's first
+character.
+
+The function adds nothing of its own: no newline, no return value. An empty
+string displays nothing at all.

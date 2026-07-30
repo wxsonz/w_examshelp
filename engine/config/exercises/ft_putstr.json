@@ -1,0 +1,69 @@
+{
+ "id": "ft_putstr",
+ "name": "ft_putstr",
+ "exams": {
+  "exam_01": 6,
+  "exam_02": 2
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_putstr.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": "void ft_putstr(char *str);",
+ "subject": "Assignment name   : ft_putstr\nExpected files    : ft_putstr.c\nAllowed functions : write\nPrototype         : void ft_putstr(char *str);\n--------------------------------------------------------------------------------\n\nWrite a function that displays a string on the standard output.\n\nThe pointer passed to the function holds the address of the string's first\ncharacter.\n\nThe function adds nothing of its own: no newline, no return value. An empty\nstring displays nothing at all.\n",
+ "subject_th": "ชื่อโจทย์     : ft_putstr\nไฟล์ที่ต้องส่ง  : ft_putstr.c\nฟังก์ชันที่ใช้ได้ : write\nต้นแบบฟังก์ชัน : void ft_putstr(char *str);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่แสดงข้อความออกทางเอาต์พุตมาตรฐาน\n\nพอยน์เตอร์ที่ส่งเข้ามาเก็บตำแหน่งของตัวอักษรตัวแรกในข้อความนั้น\n\nฟังก์ชันนี้ไม่ต้องเพิ่มอะไรเองทั้งสิ้น ไม่ต้องขึ้นบรรทัดใหม่ และไม่ต้องคืนค่าใด ๆ\nถ้าข้อความว่าง ก็ไม่ต้องแสดงอะไรเลย\n",
+ "hints": [
+  "Stop at the '\\0'; it is not part of the string and must not be written.",
+  "write() takes an address, so pass &str[i] -- not str[i], which is a single char value.",
+  "The grader supplies main(), so your file must not define one."
+ ],
+ "harness": "#include <unistd.h>\n\nvoid\tft_putstr(char *str);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tft_putstr(argv[i]);\n\t\twrite(1, \"\\n\", 1);\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "hello"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "hello\n"
+  },
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "42\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "one",
+    "two",
+    "three"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "one\ntwo\nthree\n"
+  },
+  {
+   "argv": [
+    "  spaces kept  "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "  spaces kept  \n"
+  }
+ ]
+}

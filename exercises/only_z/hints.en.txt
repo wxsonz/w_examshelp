@@ -1,0 +1,3 @@
+One call to write, one byte, and nothing else.
+
+Resist the reflex to add '\n' -- here it would be a wrong answer.

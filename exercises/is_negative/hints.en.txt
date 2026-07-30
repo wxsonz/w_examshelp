@@ -1,0 +1,1 @@
+Zero counts as positive here -- test n < 0, not n <= 0.

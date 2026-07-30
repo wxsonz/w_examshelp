@@ -1,0 +1,25 @@
+Write a program called search_and_replace that takes three arguments: a string,
+the character to search for, and the character to replace it with.
+
+It displays the string with every occurrence of the second argument replaced by
+the third, followed by a newline.
+
+If the number of arguments is not 3, the program displays only a newline. The
+same happens if the search or the replacement argument is not exactly one
+character long -- "art" is not a character.
+
+If the search character does not appear in the string, the string is simply
+rewritten unchanged.
+
+Examples:
+
+  $> ./search_and_replace "Papache est un sabre" "a" "o" | cat -e
+  Popoche est un sobre$
+  $> ./search_and_replace "zaz" "art" "zul" | cat -e
+  $
+  $> ./search_and_replace "zaz" "r" "u" | cat -e
+  zaz$
+  $> ./search_and_replace "jacob" "a" "b" "c" "e" | cat -e
+  $
+  $> ./search_and_replace "ZoZ eT Dovid oiME le METol." "o" "a" | cat -e
+  ZaZ eT David aiME le METal.$

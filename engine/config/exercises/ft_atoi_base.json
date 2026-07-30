@@ -1,0 +1,161 @@
+{
+ "id": "ft_atoi_base",
+ "name": "ft_atoi_base",
+ "exams": {
+  "exam_03": 3,
+  "exam_04": 1
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_atoi_base.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "int ft_atoi_base(const char *str, int str_base);",
+ "subject": "Assignment name   : ft_atoi_base\nExpected files    : ft_atoi_base.c\nAllowed functions : None\nPrototype         : int ft_atoi_base(const char *str, int str_base);\n--------------------------------------------------------------------------------\n\nWrite a function that converts the string argument str (base N <= 16) to an\ninteger (base 10) and returns it.\n\nThe characters recognized in the input are: 0123456789abcdef\nThose are, of course, to be trimmed according to the requested base. For example,\nbase 4 recognizes \"0123\" and base 16 recognizes \"0123456789abcdef\".\n\nUppercase letters must also be recognized: \"12fdb3\" is the same as \"12FDB3\".\n\nMinus signs ('-') are interpreted only if they are the first character of the\nstring.\n\nReading stops at the first character that is not valid for the requested base.\nIf str_base is less than 2 or greater than 16, the function returns 0.\n\nExamples:\n\n  ft_atoi_base(\"101\", 2)      ->  5\n  ft_atoi_base(\"FF\", 16)      ->  255\n  ft_atoi_base(\"-42\", 10)     ->  -42\n  ft_atoi_base(\"123\", 4)      ->  27\n",
+ "subject_th": "ชื่อโจทย์     : ft_atoi_base\nไฟล์ที่ต้องส่ง  : ft_atoi_base.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : int ft_atoi_base(const char *str, int str_base);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่แปลงข้อความ str ซึ่งเขียนอยู่ในระบบเลขฐาน N (โดย N <= 16)\nให้เป็นจำนวนเต็มฐานสิบ แล้วคืนค่านั้น\n\nอักขระที่รับรู้ในข้อความคือ 0123456789abcdef\nโดยตัดให้เหลือเท่าที่ฐานนั้นใช้ ตัวอย่างเช่น ฐาน 4 รับรู้เฉพาะ \"0123\"\nและฐาน 16 รับรู้ \"0123456789abcdef\"\n\nต้องรับรู้ตัวพิมพ์ใหญ่ด้วย โดย \"12fdb3\" มีค่าเท่ากับ \"12FDB3\"\n\nเครื่องหมายลบ ('-') จะมีผลเฉพาะเมื่ออยู่เป็นอักขระตัวแรกของข้อความเท่านั้น\n\nการอ่านจะหยุดที่อักขระตัวแรกที่ไม่ถูกต้องสำหรับฐานที่กำหนด\nและถ้า str_base น้อยกว่า 2 หรือมากกว่า 16 ให้คืนค่า 0\n\nตัวอย่าง:\n\n  ft_atoi_base(\"101\", 2)      ->  5\n  ft_atoi_base(\"FF\", 16)      ->  255\n  ft_atoi_base(\"-42\", 10)     ->  -42\n  ft_atoi_base(\"123\", 4)      ->  27\n",
+ "hints": [
+  "Validate the base first: outside 2..16 the answer is 0.",
+  "One digit-value helper handles digits, lowercase and uppercase in one place.",
+  "A digit is only valid if its value is LESS than the base -- 'f' is invalid in base 10.",
+  "The minus sign counts only at index 0, so do not loop over signs."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nint\tft_atoi_base(const char *str, int str_base);\n\nint\tmain(int argc, char **argv)\n{\n\tif (argc != 3)\n\t\treturn (0);\n\tprintf(\"%d\\n\", ft_atoi_base(argv[1], atoi(argv[2])));\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "101",
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  },
+  {
+   "argv": [
+    "FF",
+    "16"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "255\n"
+  },
+  {
+   "argv": [
+    "ff",
+    "16"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "255\n"
+  },
+  {
+   "argv": [
+    "12fdb3",
+    "16"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1244595\n"
+  },
+  {
+   "argv": [
+    "12FDB3",
+    "16"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1244595\n"
+  },
+  {
+   "argv": [
+    "-42",
+    "10"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-42\n"
+  },
+  {
+   "argv": [
+    "123",
+    "4"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "27\n"
+  },
+  {
+   "argv": [
+    "0",
+    "10"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "",
+    "10"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "-",
+    "10"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "12a34",
+    "10"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "12\n"
+  },
+  {
+   "argv": [
+    "zzz",
+    "16"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "101",
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "101",
+    "17"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "-ff",
+    "16"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-255\n"
+  }
+ ]
+}

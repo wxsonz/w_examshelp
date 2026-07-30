@@ -1,0 +1,14 @@
+Write a program that takes a string and displays it with each alphabetical
+character shifted forward by one letter, followed by a newline.
+
+'z' wraps around to 'a' and 'Z' to 'A'. Non-alphabetical characters are left
+unchanged.
+
+If the number of arguments is not 1, the program writes only a newline.
+
+Examples:
+
+  $> ./rotone "abc" | cat -e
+  bcd$
+  $> ./rotone "Zz!" | cat -e
+  Aa!$

@@ -31,10 +31,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-from engine.exercises import load_all, spec
+from engine import database
+from engine.pack import load_all, spec
 from engine.tracks import EXTRA, PISCINE_2026, TRACKS
 
-DB_PATH = os.path.join(BASE_DIR, "engine", "config", "exercises_db.json")
 CFLAGS = ["-Wall", "-Wextra", "-Werror"]
 RUN_TIMEOUT = 5
 
@@ -284,9 +284,9 @@ def main():
         return 1
 
     tracks = _index_tracks(entries)
-    database = {
+    built = {
         "generated_by": "engine/scripts/build_db.py",
-        "warning": "Generated file. Edit engine/exercises/, then rebuild.",
+        "warning": database.WARNING,
         "total_exercises": len(entries),
         "total_tests": total_tests,
         "tracks": tracks,
@@ -301,16 +301,15 @@ def main():
         return 0
 
     if args.only:
-        # Writing now would replace the whole database with this one exercise.
+        # Writing now would prune every exercise but this one.
         print("\n--only verifies but never writes; rerun without it to rebuild.")
         return 0
 
-    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
-    with open(DB_PATH, "w", encoding="utf-8") as f:
-        json.dump(database, f, indent=1, ensure_ascii=False)
-        f.write("\n")
+    removed = database.write(built)
 
-    print(f"\nwrote {DB_PATH}")
+    print(f"\nwrote {database.index_path()} and {len(entries)} exercise files")
+    if removed:
+        print(f"removed {len(removed)} stale file(s): {', '.join(removed)}")
     print(f"{len(entries)} exercises, {total_tests} tests")
     for track, data in tracks.items():
         counts = " ".join(

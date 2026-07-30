@@ -1,0 +1,212 @@
+{
+ "generated_by": "engine/scripts/build_db.py",
+ "warning": "Generated file. Edit exercises/, then run engine/scripts/build_db.py.",
+ "total_exercises": 75,
+ "total_tests": 437,
+ "tracks": {
+  "exam_01": {
+   "source": "piscine_2026",
+   "total_levels": 8,
+   "levels": {
+    "0": [
+     "aff_a",
+     "ft_countdown",
+     "ft_print_numbers",
+     "ft_putchar"
+    ],
+    "1": [
+     "hello",
+     "is_negative",
+     "maff_alpha"
+    ],
+    "2": [
+     "aff_first_param",
+     "aff_last_param",
+     "aff_z"
+    ],
+    "3": [
+     "maff_revalpha",
+     "only_a",
+     "only_z"
+    ],
+    "4": [
+     "ft_strcpy",
+     "ft_strlen"
+    ],
+    "5": [
+     "repeat_alpha",
+     "search_and_replace",
+     "ulstr"
+    ],
+    "6": [
+     "first_word",
+     "ft_putstr",
+     "ft_swap"
+    ],
+    "7": [
+     "fizzbuzz",
+     "rev_print",
+     "rot_13",
+     "rotone"
+    ]
+   }
+  },
+  "exam_02": {
+   "source": "piscine_2026",
+   "total_levels": 8,
+   "levels": {
+    "0": [
+     "ft_strcpy",
+     "ft_strlen",
+     "repeat_alpha"
+    ],
+    "1": [
+     "search_and_replace",
+     "ulstr"
+    ],
+    "2": [
+     "first_word",
+     "ft_putstr",
+     "ft_swap"
+    ],
+    "3": [
+     "fizzbuzz",
+     "rev_print",
+     "rot_13",
+     "rotone"
+    ],
+    "4": [
+     "ft_atoi",
+     "ft_strdup",
+     "inter"
+    ],
+    "5": [
+     "last_word",
+     "reverse_bits",
+     "swap_bits",
+     "union"
+    ],
+    "6": [
+     "alpha_mirror",
+     "do_op",
+     "ft_strcmp",
+     "ft_strrev"
+    ],
+    "7": [
+     "ft_strspn",
+     "is_power_of_2",
+     "max",
+     "print_bits",
+     "wdmatch"
+    ]
+   }
+  },
+  "exam_03": {
+   "source": "piscine_2026",
+   "total_levels": 4,
+   "levels": {
+    "0": [
+     "ft_atoi",
+     "ft_strdup",
+     "inter",
+     "last_word",
+     "reverse_bits",
+     "swap_bits",
+     "union"
+    ],
+    "1": [
+     "alpha_mirror",
+     "do_op",
+     "ft_strcmp",
+     "ft_strrev",
+     "ft_strspn",
+     "is_power_of_2",
+     "max",
+     "print_bits",
+     "wdmatch"
+    ],
+    "2": [
+     "add_prime_sum",
+     "epur_str",
+     "ft_list_at",
+     "ft_list_push_back",
+     "ft_list_push_front",
+     "ft_list_size",
+     "ft_rrange",
+     "hidenp",
+     "pgcd",
+     "print_hex"
+    ],
+    "3": [
+     "expand_str",
+     "ft_atoi_base",
+     "ft_list_reverse",
+     "ft_range",
+     "ft_strjoin",
+     "lcm",
+     "paramsum",
+     "str_capitalizer",
+     "tab_mult"
+    ]
+   }
+  },
+  "exam_04": {
+   "source": "piscine_2026",
+   "total_levels": 4,
+   "levels": {
+    "0": [
+     "add_prime_sum",
+     "epur_str",
+     "ft_list_at",
+     "ft_list_push_back",
+     "ft_list_push_front",
+     "ft_list_size",
+     "ft_rrange",
+     "hidenp",
+     "pgcd",
+     "print_hex"
+    ],
+    "1": [
+     "expand_str",
+     "ft_atoi_base",
+     "ft_list_reverse",
+     "ft_range",
+     "ft_strjoin",
+     "lcm",
+     "paramsum",
+     "str_capitalizer",
+     "tab_mult"
+    ],
+    "2": [
+     "flood_fill",
+     "ft_itoa",
+     "ft_list_foreach",
+     "ft_list_remove_if",
+     "ft_list_sort",
+     "ft_sort_string_tab",
+     "ft_split",
+     "rostring",
+     "sort_int_tab",
+     "sorted_list_insert"
+    ],
+    "3": [
+     "eval_expr",
+     "permutations",
+     "print_memory"
+    ]
+   }
+  },
+  "extra": {
+   "source": "extra",
+   "total_levels": 2,
+   "levels": {
+    "0": [
+     "ft_printf"
+    ],
+    "1": [
+     "n_queens"
+    ]
+   }
+  }
+ }
+}

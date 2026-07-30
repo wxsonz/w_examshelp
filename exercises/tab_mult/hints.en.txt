@@ -1,0 +1,3 @@
+Only write is allowed, so you need your own number printer.
+
+Recursion is the shortest route: print n / 10 first, then the last digit.

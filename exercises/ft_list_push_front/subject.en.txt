@@ -1,0 +1,12 @@
+Write a function that adds a new element holding `data` at the FRONT of the list,
+and updates the caller's head pointer to point at it.
+
+The list may be empty, in which case *begin_list is NULL.
+
+You must also submit ft_list.h, defining the list type:
+
+  typedef struct s_list
+  {
+      struct s_list *next;
+      void          *data;
+  } t_list;

@@ -1,0 +1,72 @@
+{
+ "id": "rot_13",
+ "name": "rot_13",
+ "exams": {
+  "exam_01": 7,
+  "exam_02": 3
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "rot_13.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : rot_13\nExpected files    : rot_13.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays it with each alphabetical\ncharacter shifted forward by 13 letters, wrapping around within its own case,\nfollowed by a newline.\n\nNon-alphabetical characters are left unchanged.\n\nIf the number of arguments is not 1, the program writes only a newline.\n\nExamples:\n\n  $> ./rot_13 \"abc\" | cat -e\n  nop$\n  $> ./rot_13 \"My horse is Amazing.\" | cat -e\n  Zl ubefr vf Nznmvat.$\n",
+ "subject_th": "ชื่อโจทย์     : rot_13\nไฟล์ที่ต้องส่ง  : rot_13.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงข้อความนั้นโดยเลื่อนตัวอักษรภาษาอังกฤษ\nไปข้างหน้า 13 ตำแหน่ง และวนกลับภายในกลุ่มตัวพิมพ์เดียวกัน\nตามด้วยการขึ้นบรรทัดใหม่\n\nตัวอักษรที่ไม่ใช่ตัวอักษรภาษาอังกฤษให้คงไว้ตามเดิม\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./rot_13 \"abc\" | cat -e\n  nop$\n  $> ./rot_13 \"My horse is Amazing.\" | cat -e\n  Zl ubefr vf Nznmvat.$\n",
+ "hints": [
+  "The modulo trick: 'a' + (c - 'a' + 13) % 26 keeps you inside the alphabet.",
+  "Uppercase and lowercase wrap separately."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "nop\n"
+  },
+  {
+   "argv": [
+    "My horse is Amazing."
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Zl ubefr vf Nznmvat.\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "nop"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "abc\n"
+  },
+  {
+   "argv": [
+    "Zz"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Mm\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

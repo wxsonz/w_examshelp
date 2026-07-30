@@ -1,0 +1,13 @@
+เขียนโปรแกรมที่รับข้อความเป็นอาร์กิวเมนต์ แล้วแสดงอาร์กิวเมนต์ตัวแรก
+ตามด้วยการขึ้นบรรทัดใหม่
+
+ถ้าไม่ได้รับอาร์กิวเมนต์เลย ให้แสดงเฉพาะการขึ้นบรรทัดใหม่
+
+ตัวอย่าง:
+
+  $> ./aff_first_param vincent mit "l'ane" dans un pre et "s'en" vint | cat -e
+  vincent$
+  $> ./aff_first_param "j'aime le fromage de chevre" | cat -e
+  j'aime le fromage de chevre$
+  $> ./aff_first_param | cat -e
+  $

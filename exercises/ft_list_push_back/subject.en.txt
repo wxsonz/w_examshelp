@@ -1,0 +1,12 @@
+Write a function that adds a new element holding `data` at the END of the list.
+
+If the list is empty, the new element becomes the head, so the caller's pointer
+must be updated.
+
+You must also submit ft_list.h, defining the list type:
+
+  typedef struct s_list
+  {
+      struct s_list *next;
+      void          *data;
+  } t_list;

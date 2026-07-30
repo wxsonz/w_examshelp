@@ -1,0 +1,80 @@
+{
+ "id": "permutations",
+ "name": "permutations",
+ "exams": {
+  "exam_04": 3
+ },
+ "source": "added",
+ "kind": "program",
+ "expected_files": [
+  "permutations.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : permutations\nExpected files    : permutations.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string of distinct alphabetical characters and\ndisplays every permutation of it in lexicographic order, one per line.\n\nIf the number of arguments is not 1, the program writes only a newline.\n\nExample:\n\n  $> ./permutations abc | cat -e\n  abc$\n  acb$\n  bac$\n  bca$\n  cab$\n  cba$\n",
+ "subject_th": "ชื่อโจทย์     : permutations\nไฟล์ที่ต้องส่ง  : permutations.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความที่ประกอบด้วยตัวอักษรที่ไม่ซ้ำกัน\nแล้วแสดงการเรียงสับเปลี่ยนทุกรูปแบบของข้อความนั้นตามลำดับพจนานุกรม\nบรรทัดละหนึ่งรูปแบบ\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./permutations abc | cat -e\n  abc$\n  acb$\n  bac$\n  bca$\n  cab$\n  cba$\n",
+ "hints": [
+  "Sort the characters first -- the sorted string is the first permutation.",
+  "Then repeatedly compute the NEXT permutation: find the rightmost ascent, swap, reverse the tail.",
+  "That standard algorithm gives lexicographic order for free, with no recursion."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "abc\nacb\nbac\nbca\ncab\ncba\n"
+  },
+  {
+   "argv": [
+    "ab"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "ab\nba\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "abcd"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "abcd\nabdc\nacbd\nacdb\nadbc\nadcb\nbacd\nbadc\nbcad\nbcda\nbdac\nbdca\ncabd\ncadb\ncbad\ncbda\ncdab\ncdba\ndabc\ndacb\ndbac\ndbca\ndcab\ndcba\n"
+  },
+  {
+   "argv": [
+    "cba"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "abc\nacb\nbac\nbca\ncab\ncba\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

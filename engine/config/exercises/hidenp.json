@@ -1,0 +1,86 @@
+{
+ "id": "hidenp",
+ "name": "hidenp",
+ "exams": {
+  "exam_03": 2,
+  "exam_04": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "hidenp.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : hidenp\nExpected files    : hidenp.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes two strings and displays 1 if the first is a hidden\nsubsequence of the second, and 0 otherwise, followed by a newline.\n\nA string s1 is hidden in s2 if its characters can be found in s2 in the same\norder, not necessarily adjacent. The empty string is hidden in any string.\n\nIf the number of arguments is not 2, the program writes only a newline.\n\nExamples:\n\n  $> ./hidenp \"fgex.;\" \"tyf34gdgex.;.;\" | cat -e\n  1$\n  $> ./hidenp \"abc\" \"acb\" | cat -e\n  0$\n",
+ "subject_th": "ชื่อโจทย์     : hidenp\nไฟล์ที่ต้องส่ง  : hidenp.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความสองชุด แล้วแสดงเลข 1 ถ้าข้อความชุดแรกซ่อนอยู่ใน\nข้อความชุดที่สอง และแสดงเลข 0 ถ้าไม่ใช่ ตามด้วยการขึ้นบรรทัดใหม่\n\nข้อความ s1 ถือว่าซ่อนอยู่ใน s2 ถ้าสามารถหาตัวอักษรของ s1 ได้ใน s2\nโดยเรียงตามลำดับเดิม แต่ไม่จำเป็นต้องอยู่ติดกัน\nข้อความว่างถือว่าซ่อนอยู่ในทุกข้อความ\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 2 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./hidenp \"fgex.;\" \"tyf34gdgex.;.;\" | cat -e\n  1$\n  $> ./hidenp \"abc\" \"acb\" | cat -e\n  0$\n",
+ "hints": [
+  "Same two-index walk as wdmatch -- only the output differs.",
+  "Reaching the end of s1 means success, so test argv[1][i] afterwards."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "fgex.;",
+    "tyf34gdgex.;.;"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [
+    "abc",
+    "acb"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "",
+    "anything"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [
+    "abc",
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "abc",
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [
+    "aaa",
+    "aa"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

@@ -1,0 +1,64 @@
+{
+ "id": "ft_strlen",
+ "name": "ft_strlen",
+ "exams": {
+  "exam_01": 4,
+  "exam_02": 0
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_strlen.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "int ft_strlen(char *str);",
+ "subject": "Assignment name   : ft_strlen\nExpected files    : ft_strlen.c\nAllowed functions : None\nPrototype         : int ft_strlen(char *str);\n--------------------------------------------------------------------------------\n\nWrite a function that counts and returns the number of characters in a string,\nnot counting the terminating null byte.\n",
+ "subject_th": "ชื่อโจทย์     : ft_strlen\nไฟล์ที่ต้องส่ง  : ft_strlen.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : int ft_strlen(char *str);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่นับและคืนค่าจำนวนตัวอักษรในข้อความ\nโดยไม่นับไบต์ null ที่ปิดท้ายข้อความ\n",
+ "hints": [
+  "Stop when you reach '\\0'. Do not count it.",
+  "An empty string has length 0."
+ ],
+ "harness": "#include <stdio.h>\n\nint\tft_strlen(char *str);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tprintf(\"%d\\n\", ft_strlen(argv[i]));\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "hello"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [
+    "hello world"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "11\n"
+  },
+  {
+   "argv": [
+    "42born2code"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "11\n"
+  }
+ ]
+}

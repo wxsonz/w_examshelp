@@ -1,0 +1,3 @@
+The same seen[] array carries over from the first string to the second.
+
+That single shared array is what makes the union work in one pass each.

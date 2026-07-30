@@ -1,0 +1,12 @@
+Write a program that takes a positive decimal number and displays it in
+lowercase hexadecimal, followed by a newline.
+
+If the number of arguments is not 1, the program writes only a newline.
+You may assume the argument is a valid positive integer.
+
+Examples:
+
+  $> ./print_hex "255" | cat -e
+  ff$
+  $> ./print_hex "0" | cat -e
+  0$

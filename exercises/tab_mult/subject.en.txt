@@ -1,0 +1,23 @@
+Write a program that takes a positive integer and displays its multiplication
+table from 1 to 9, one line per row, in the form:
+
+  1 x n = n
+  2 x n = 2n
+  ...
+  9 x n = 9n
+
+If the number of arguments is not 1, the program writes only a newline.
+You may assume the argument is a valid positive integer.
+
+Example:
+
+  $> ./tab_mult 9 | cat -e
+  1 x 9 = 9$
+  2 x 9 = 18$
+  3 x 9 = 27$
+  4 x 9 = 36$
+  5 x 9 = 45$
+  6 x 9 = 54$
+  7 x 9 = 63$
+  8 x 9 = 72$
+  9 x 9 = 81$

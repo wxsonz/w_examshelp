@@ -1,0 +1,10 @@
+Write a function that applies the function f to the data of every element of the
+list, in order, from the head onwards.
+
+You must also submit ft_list.h, defining the list type:
+
+  typedef struct s_list
+  {
+      struct s_list *next;
+      void          *data;
+  } t_list;

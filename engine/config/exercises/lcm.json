@@ -1,0 +1,97 @@
+{
+ "id": "lcm",
+ "name": "lcm",
+ "exams": {
+  "exam_03": 3,
+  "exam_04": 1
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "lcm.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "unsigned int lcm(unsigned int a, unsigned int b);",
+ "subject": "Assignment name   : lcm\nExpected files    : lcm.c\nAllowed functions : None\nPrototype         : unsigned int lcm(unsigned int a, unsigned int b);\n--------------------------------------------------------------------------------\n\nWrite a function that takes two unsigned int as parameters and returns the\ncomputed LCM of those parameters.\n\nLCM (Lowest Common Multiple) of two non-zero integers is the smallest positive\ninteger divisible by both integers.\n\nA LCM can be calculated in two ways:\n\n- You can calculate every multiple of each integer until you have a common\n  multiple other than 0\n\n- You can use the HCF (Highest Common Factor) of these two integers and\n  calculate as follows:\n\n        LCM(x, y) = | x * y | / HCF(x, y)\n\n  | x * y | means \"Absolute value of the product of x by y\"\n\nIf at least one integer is null, LCM is equal to 0.\n",
+ "subject_th": "ชื่อโจทย์     : lcm\nไฟล์ที่ต้องส่ง  : lcm.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : unsigned int lcm(unsigned int a, unsigned int b);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่รับพารามิเตอร์เป็น unsigned int สองตัว\nแล้วคืนค่าตัวคูณร่วมน้อย (LCM) ของสองจำนวนนั้น\n\nตัวคูณร่วมน้อยของจำนวนเต็มที่ไม่เป็นศูนย์สองจำนวน\nคือจำนวนเต็มบวกที่น้อยที่สุดซึ่งหารด้วยทั้งสองจำนวนได้ลงตัว\n\nคำนวณได้สองวิธี:\n\n- ไล่หาพหุคูณของแต่ละจำนวนไปเรื่อย ๆ จนพบพหุคูณร่วมที่ไม่ใช่ 0\n\n- ใช้ตัวหารร่วมมาก (HCF) ของสองจำนวนนั้น แล้วคำนวณตามสูตร:\n\n        LCM(x, y) = | x * y | / HCF(x, y)\n\n  โดย | x * y | หมายถึงค่าสัมบูรณ์ของผลคูณของ x กับ y\n\nถ้ามีจำนวนใดจำนวนหนึ่งเป็นศูนย์ ค่า LCM จะเท่ากับ 0\n",
+ "hints": [
+  "Nothing is allowed here -- not even write. Just compute and return.",
+  "Divide before you multiply (a / hcf * b) so the value cannot overflow as easily.",
+  "Handle the zero cases first: the answer is 0, not a division by zero."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nunsigned int\tlcm(unsigned int a, unsigned int b);\n\nint\tmain(int argc, char **argv)\n{\n\tunsigned int\ta;\n\tunsigned int\tb;\n\n\tif (argc != 3)\n\t\treturn (0);\n\ta = (unsigned int)strtoul(argv[1], 0, 10);\n\tb = (unsigned int)strtoul(argv[2], 0, 10);\n\tprintf(\"%u\\n\", lcm(a, b));\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "4",
+    "6"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "12\n"
+  },
+  {
+   "argv": [
+    "3",
+    "7"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "21\n"
+  },
+  {
+   "argv": [
+    "10",
+    "10"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "10\n"
+  },
+  {
+   "argv": [
+    "1",
+    "5"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  },
+  {
+   "argv": [
+    "0",
+    "5"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "5",
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "0",
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "12",
+    "18"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "36\n"
+  }
+ ]
+}

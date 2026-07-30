@@ -1,0 +1,88 @@
+{
+ "id": "epur_str",
+ "name": "epur_str",
+ "exams": {
+  "exam_03": 2,
+  "exam_04": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "epur_str.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : epur_str\nExpected files    : epur_str.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays it with exactly one space\nbetween words, and no leading or trailing whitespace, followed by a newline.\n\nA word is a sequence of characters that are neither spaces nor tabs.\n\nIf the number of arguments is not 1, the program writes only a newline.\n\nExamples:\n\n  $> ./epur_str \"  lorem   ipsum  dolor  \" | cat -e\n  lorem ipsum dolor$\n  $> ./epur_str \"  \" | cat -e\n  $\n",
+ "subject_th": "ชื่อโจทย์     : epur_str\nไฟล์ที่ต้องส่ง  : epur_str.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงข้อความนั้นโดยให้มีช่องว่างระหว่างคำ\nเพียงหนึ่งช่องเท่านั้น และไม่มีช่องว่างนำหน้าหรือต่อท้าย\nตามด้วยการขึ้นบรรทัดใหม่\n\nคำ หมายถึงลำดับของตัวอักษรที่ไม่ใช่ช่องว่างและไม่ใช่แท็บ\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./epur_str \"  lorem   ipsum  dolor  \" | cat -e\n  lorem ipsum dolor$\n  $> ./epur_str \"  \" | cat -e\n  $\n",
+ "hints": [
+  "Write the separating space BEFORE a word, but only if a word came before it.",
+  "That flag is what keeps the leading space from being printed."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "  lorem   ipsum  dolor  "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "lorem ipsum dolor\n"
+  },
+  {
+   "argv": [
+    "  "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "single"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "single\n"
+  },
+  {
+   "argv": [
+    "a\t\tb"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a b\n"
+  },
+  {
+   "argv": [
+    "   leading"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "leading\n"
+  },
+  {
+   "argv": [
+    "trailing   "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "trailing\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

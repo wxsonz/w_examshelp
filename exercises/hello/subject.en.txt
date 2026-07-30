@@ -1,0 +1,7 @@
+Write a program that displays
+
+  Hello World!
+
+followed by a newline.
+
+Your program takes no arguments; any it receives are ignored.

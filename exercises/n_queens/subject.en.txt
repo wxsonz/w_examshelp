@@ -1,0 +1,19 @@
+Write a program that takes an integer n and displays every solution to the
+n-queens problem: n queens placed on an n x n board so that no two of them share
+a row, a column, or a diagonal.
+
+Print one solution per line. A solution is written as the row index of the queen
+in each column, from the first column to the last, separated by single spaces.
+Rows and columns are numbered from 0.
+
+Solutions must be printed in ascending lexicographic order of those index
+sequences.
+
+If the number of arguments is not 1, or if n is not strictly positive, the
+program prints nothing. If there is no solution, the program prints nothing.
+
+Example:
+
+  $> ./n_queens 4 | cat -e
+  1 3 0 2$
+  2 0 3 1$

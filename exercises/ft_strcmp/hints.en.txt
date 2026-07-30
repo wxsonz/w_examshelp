@@ -1,0 +1,3 @@
+The loop stops on the first difference OR at the end of s1.
+
+Cast to unsigned char before subtracting, or high bytes give the wrong sign.

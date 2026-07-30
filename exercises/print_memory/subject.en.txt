@@ -1,0 +1,21 @@
+Write a function that dumps `size` bytes starting at addr, 16 bytes per line.
+
+Each line has exactly this shape:
+
+  - the hex column: for each of the 16 bytes, two lowercase hex digits, with a
+    single space after every second byte (so eight groups of four hex digits,
+    each group followed by a space -- 40 characters in total),
+  - the character column: one character per byte, the byte itself if it is
+    printable (32 to 126 inclusive), otherwise a dot,
+  - a newline.
+
+On a final, incomplete line the hex column is still padded to its full 40
+characters, and the character column shows only the bytes that exist.
+
+If size is 0, the function prints nothing.
+
+Example, dumping the 20 bytes of "Bonjour les amin" plus "ches":
+
+  $> ./a.out "Bonjour les aminches" | cat -e
+  426f 6e6a 6f75 7220 6c65 7320 616d 696e Bonjour les amin$
+  6368 6573                               ches$

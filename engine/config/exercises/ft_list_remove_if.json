@@ -1,0 +1,89 @@
+{
+ "id": "ft_list_remove_if",
+ "name": "ft_list_remove_if",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_list_remove_if.c",
+  "ft_list.h"
+ ],
+ "allowed_functions": [
+  "free"
+ ],
+ "prototype": "void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());",
+ "subject": "Assignment name   : ft_list_remove_if\nExpected files    : ft_list_remove_if.c, ft_list.h\nAllowed functions : free\nPrototype         : void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());\n--------------------------------------------------------------------------------\n\nWrite a function that removes from the list every element whose data is\nconsidered equal to data_ref, and frees the removed nodes with free().\n\nTwo data are equal when cmp returns 0, the same convention strcmp uses.\n\nThe head may itself be removed, so the caller's pointer must be updated. The\ndata pointed to by the nodes must NOT be freed -- only the nodes.\n\nNote the prototype: `int (*cmp)()` really is written without parameter types,\nexactly as the exam gives it. Declare it that way -- if you write\n`int (*cmp)(void *, void *)` instead, your definition conflicts with the\ngrader's declaration and will not compile.\n\nYou must also submit ft_list.h, defining the list type:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "subject_th": "ชื่อโจทย์     : ft_list_remove_if\nไฟล์ที่ต้องส่ง  : ft_list_remove_if.c, ft_list.h\nฟังก์ชันที่ใช้ได้ : free\nต้นแบบฟังก์ชัน : void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่ลบสมาชิกทุกตัวที่มีข้อมูลเทียบเท่ากับ data_ref ออกจากลิสต์\nและคืนหน่วยความจำของสมาชิกที่ลบด้วย free()\n\nข้อมูลสองชุดถือว่าเท่ากันเมื่อ cmp คืนค่า 0 ซึ่งเป็นแบบเดียวกับ strcmp\n\nหัวลิสต์เองก็อาจถูกลบได้ ดังนั้นต้องปรับพอยน์เตอร์ของผู้เรียกด้วย\nและห้ามคืนหน่วยความจำของข้อมูลที่สมาชิกชี้อยู่ ให้คืนเฉพาะตัวสมาชิกเท่านั้น\n\nสังเกตต้นแบบฟังก์ชัน: `int (*cmp)()` เขียนโดยไม่ระบุชนิดพารามิเตอร์จริง ๆ\nตามที่ข้อสอบให้มา ให้ประกาศแบบนั้น ถ้าเขียนเป็น `int (*cmp)(void *, void *)`\nจะขัดแย้งกับการประกาศของตัวตรวจ และคอมไพล์ไม่ผ่าน\n\nคุณต้องส่งไฟล์ ft_list.h ที่นิยามชนิดข้อมูลของลิสต์ด้วย:\n\n  typedef struct s_list\n  {\n      struct s_list *next;\n      void          *data;\n  } t_list;\n",
+ "hints": [
+  "Strip matching nodes off the front first, then walk with a one-behind pointer.",
+  "After unlinking, do NOT advance -- the next node may also match.",
+  "cmp returns 0 for equal, like strcmp. Do not treat non-zero as a match."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"ft_list.h\"\n\n__attribute__((unused)) static t_list\t*new_node(void *data)\n{\n\tt_list\t*node;\n\n\tnode = malloc(sizeof(t_list));\n\tnode->data = data;\n\tnode->next = 0;\n\treturn (node);\n}\n\n__attribute__((unused)) static t_list\t*build_list(int count, char **items)\n{\n\tt_list\t*head;\n\tt_list\t**tail;\n\tint\t\ti;\n\n\thead = 0;\n\ttail = &head;\n\ti = 0;\n\twhile (i < count)\n\t{\n\t\t*tail = new_node(items[i]);\n\t\ttail = &(*tail)->next;\n\t\ti++;\n\t}\n\treturn (head);\n}\n\n__attribute__((unused)) static void\tprint_list(t_list *list)\n{\n\twhile (list)\n\t{\n\t\tprintf(\"[%s]\", (char *)list->data);\n\t\tlist = list->next;\n\t}\n\tprintf(\"\\n\");\n}\n\nvoid\tft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());\n\nstatic int\tcmp_str(void *a, void *b)\n{\n\treturn (strcmp((char *)a, (char *)b));\n}\n\nint\tmain(int argc, char **argv)\n{\n\tt_list\t*list;\n\n\tif (argc < 2)\n\t\treturn (0);\n\tlist = build_list(argc - 2, argv + 2);\n\tft_list_remove_if(&list, argv[1], &cmp_str);\n\tprint_list(list);\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "b",
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a][c]\n"
+  },
+  {
+   "argv": [
+    "a",
+    "a",
+    "a",
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "z",
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a][b][c]\n"
+  },
+  {
+   "argv": [
+    "a",
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "b",
+    "b",
+    "b",
+    "a",
+    "b"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a]\n"
+  }
+ ]
+}

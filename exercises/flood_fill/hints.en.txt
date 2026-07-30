@@ -1,0 +1,7 @@
+Recursion is the short route: paint the current cell, then recurse in the four directions.
+
+Check the bounds BEFORE reading tab[y][x], or you will read outside the map.
+
+Painting the cell before recursing is what stops the recursion from looping forever.
+
+Note that size.x is the width, so it bounds x, which indexes the inner string.

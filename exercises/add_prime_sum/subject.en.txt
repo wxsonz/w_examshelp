@@ -1,0 +1,12 @@
+Write a program that takes a positive integer and displays the sum of all prime
+numbers less than or equal to it, followed by a newline.
+
+If the number of arguments is not 1, or if the argument is not a valid positive
+integer, the program displays 0 followed by a newline.
+
+Examples:
+
+  $> ./add_prime_sum 5 | cat -e
+  10$
+  $> ./add_prime_sum 7 | cat -e
+  17$

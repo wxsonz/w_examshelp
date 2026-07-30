@@ -1,0 +1,7 @@
+Validate the base first: outside 2..16 the answer is 0.
+
+One digit-value helper handles digits, lowercase and uppercase in one place.
+
+A digit is only valid if its value is LESS than the base -- 'f' is invalid in base 10.
+
+The minus sign counts only at index 0, so do not loop over signs.

@@ -1,0 +1,15 @@
+Write a function that sorts the elements of the list into ascending order
+according to cmp, which returns a negative number, 0, or a positive number like
+strcmp.
+
+The sort must be done by rearranging the existing nodes -- do not allocate, do
+not free, and do not swap the data between nodes. The caller's head pointer must
+end up pointing at the smallest element.
+
+You must also submit ft_list.h, defining the list type:
+
+  typedef struct s_list
+  {
+      struct s_list *next;
+      void          *data;
+  } t_list;

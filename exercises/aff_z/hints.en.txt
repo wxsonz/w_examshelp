@@ -1,0 +1,5 @@
+Read every branch before you write code: the character printed is 'z' in all three of them.
+
+That means the output never actually varies -- which is the joke of this exercise, and it is easy to over-think.
+
+It looks like aff_a but it is NOT: aff_a's no-match case prints only a newline.

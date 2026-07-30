@@ -1,0 +1,17 @@
+Write a function that fills, with the character 'F', the whole zone of the 2D map
+`tab` that contains the position `begin`.
+
+A zone is the set of positions reachable from begin by moving only up, down, left
+or right (never diagonally) across positions holding the same character as
+tab[begin.y][begin.x].
+
+size.x is the width of the map and size.y its height. The map is modified in
+place.
+
+You must also submit flood_fill.h, defining:
+
+  typedef struct s_point
+  {
+      int x;
+      int y;
+  } t_point;

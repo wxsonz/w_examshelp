@@ -41,7 +41,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-from engine.exercises import load_all, spec
+from engine.pack import load_all, spec
 from engine.scripts.build_db import compile_solution, run_test
 from engine.tracks import EXTRA, PISCINE_2026
 

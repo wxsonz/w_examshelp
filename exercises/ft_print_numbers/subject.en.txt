@@ -1,0 +1,7 @@
+Write a function that displays all digits from 0 to 9 in ascending order, with no
+separator between them, followed by a newline.
+
+Expected output:
+
+  $> ./a.out | cat -e
+  0123456789$

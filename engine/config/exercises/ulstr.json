@@ -1,0 +1,72 @@
+{
+ "id": "ulstr",
+ "name": "ulstr",
+ "exams": {
+  "exam_01": 5,
+  "exam_02": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "ulstr.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : ulstr\nExpected files    : ulstr.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays it with the case of every\nalphabetical character inverted, followed by a newline.\n\nNon-alphabetical characters are left unchanged.\n\nIf the number of arguments is not 1, the program writes only a newline.\n\nExample:\n\n  $> ./ulstr \"Hello World! 42\" | cat -e\n  hELLO wORLD! 42$\n",
+ "subject_th": "ชื่อโจทย์     : ulstr\nไฟล์ที่ต้องส่ง  : ulstr.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงข้อความนั้นโดยสลับตัวพิมพ์เล็กพิมพ์ใหญ่\nของตัวอักษรภาษาอังกฤษทุกตัว ตามด้วยการขึ้นบรรทัดใหม่\n\nตัวอักษรที่ไม่ใช่ตัวอักษรภาษาอังกฤษให้คงไว้ตามเดิม\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./ulstr \"Hello World! 42\" | cat -e\n  hELLO wORLD! 42$\n",
+ "hints": [
+  "'a' - 'A' is 32, so adding or subtracting 32 flips the case.",
+  "Check the range before flipping, or you will corrupt digits and punctuation."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "Hello World! 42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "hELLO wORLD! 42\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "ABC\n"
+  },
+  {
+   "argv": [
+    "ABC"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "abc\n"
+  },
+  {
+   "argv": [
+    "123"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "123\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

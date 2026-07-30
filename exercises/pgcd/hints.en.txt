@@ -1,0 +1,3 @@
+Euclid's algorithm: replace (a, b) with (b, a % b) until b is 0.
+
+The answer is whatever is left in a.

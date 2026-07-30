@@ -1,0 +1,67 @@
+{
+ "id": "ft_putchar",
+ "name": "ft_putchar",
+ "exams": {
+  "exam_01": 0
+ },
+ "source": "added",
+ "kind": "function",
+ "expected_files": [
+  "ft_putchar.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": "void ft_putchar(char c);",
+ "subject": "Assignment name   : ft_putchar\nExpected files    : ft_putchar.c\nAllowed functions : write\nPrototype         : void ft_putchar(char c);\n--------------------------------------------------------------------------------\n\nWrite a function that displays the character passed as argument. It writes\nexactly one byte and adds no newline.\n",
+ "subject_th": "ชื่อโจทย์     : ft_putchar\nไฟล์ที่ต้องส่ง  : ft_putchar.c\nฟังก์ชันที่ใช้ได้ : write\nต้นแบบฟังก์ชัน : void ft_putchar(char c);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่แสดงตัวอักษรที่รับเข้ามาเป็นอาร์กิวเมนต์\nโดยเขียนออกเพียง 1 ไบต์ และไม่ต้องขึ้นบรรทัดใหม่\n",
+ "hints": [
+  "write() needs an ADDRESS, so pass &c, not c.",
+  "One byte only -- no newline of your own."
+ ],
+ "harness": "#include <unistd.h>\n\nvoid\tft_putchar(char c);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tif (argv[i][0])\n\t\t\tft_putchar(argv[i][0]);\n\t\ti++;\n\t}\n\twrite(1, \"\\n\", 1);\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "A"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "A\n"
+  },
+  {
+   "argv": [
+    "z"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "z\n"
+  },
+  {
+   "argv": [
+    "4"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "4\n"
+  },
+  {
+   "argv": [
+    "a",
+    "b",
+    "c"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "abc\n"
+  },
+  {
+   "argv": [
+    "!"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "!\n"
+  }
+ ]
+}

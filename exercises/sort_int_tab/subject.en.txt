@@ -1,0 +1,2 @@
+Write a function that sorts the array tab of size integers into ascending order,
+in place.

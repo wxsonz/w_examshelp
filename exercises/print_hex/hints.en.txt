@@ -1,0 +1,3 @@
+A lookup string "0123456789abcdef" saves you a branch.
+
+Recurse on n / 16 first so the digits come out in the right order.

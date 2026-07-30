@@ -1,0 +1,72 @@
+{
+ "id": "aff_first_param",
+ "name": "aff_first_param",
+ "exams": {
+  "exam_01": 2
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "aff_first_param.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : aff_first_param\nExpected files    : aff_first_param.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes strings as arguments and displays its first argument\nfollowed by a newline.\n\nIf it receives no arguments, the program displays only a newline.\n\nExamples:\n\n  $> ./aff_first_param vincent mit \"l'ane\" dans un pre et \"s'en\" vint | cat -e\n  vincent$\n  $> ./aff_first_param \"j'aime le fromage de chevre\" | cat -e\n  j'aime le fromage de chevre$\n  $> ./aff_first_param | cat -e\n  $\n",
+ "subject_th": "ชื่อโจทย์     : aff_first_param\nไฟล์ที่ต้องส่ง  : aff_first_param.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความเป็นอาร์กิวเมนต์ แล้วแสดงอาร์กิวเมนต์ตัวแรก\nตามด้วยการขึ้นบรรทัดใหม่\n\nถ้าไม่ได้รับอาร์กิวเมนต์เลย ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./aff_first_param vincent mit \"l'ane\" dans un pre et \"s'en\" vint | cat -e\n  vincent$\n  $> ./aff_first_param \"j'aime le fromage de chevre\" | cat -e\n  j'aime le fromage de chevre$\n  $> ./aff_first_param | cat -e\n  $\n",
+ "hints": [
+  "The first argument is argv[1] -- argv[0] is the program's own name.",
+  "The newline is printed in every case, including the no-argument one, so write it after the branch rather than inside it."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "vincent",
+    "mit",
+    "l'ane",
+    "dans",
+    "un",
+    "pre",
+    "et",
+    "s'en",
+    "vint"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "vincent\n"
+  },
+  {
+   "argv": [
+    "j'aime le fromage de chevre"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "j'aime le fromage de chevre\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "first",
+    "second"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "first\n"
+  }
+ ]
+}

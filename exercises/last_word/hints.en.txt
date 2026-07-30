@@ -1,0 +1,3 @@
+Walk backwards from the end: skip trailing whitespace first, then find the start of the word.
+
+Guard your index against going below 0 on an all-whitespace string.

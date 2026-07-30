@@ -1,0 +1,2 @@
+Write a function that displays the character passed as argument. It writes
+exactly one byte and adds no newline.

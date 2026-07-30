@@ -1,0 +1,6 @@
+Write a function that takes a byte and prints it in binary, most significant bit
+first. It always prints exactly 8 characters and adds NO newline.
+
+Example:
+
+  print_bits(2)  ->  00000010

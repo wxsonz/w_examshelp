@@ -1,0 +1,15 @@
+Write a program that takes three arguments -- a number, an operator, and another
+number -- and displays the result of the operation, followed by a newline.
+
+The operators to handle are +, -, *, / and %.
+
+If the number of arguments is not 3, the program writes only a newline.
+You may assume the operator is always one of the five listed, and that division
+and modulo by zero will not be tested.
+
+Examples:
+
+  $> ./do_op 42 "+" 21 | cat -e
+  63$
+  $> ./do_op 42 "/" 21 | cat -e
+  2$

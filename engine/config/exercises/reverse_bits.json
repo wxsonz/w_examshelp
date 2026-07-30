@@ -1,0 +1,72 @@
+{
+ "id": "reverse_bits",
+ "name": "reverse_bits",
+ "exams": {
+  "exam_02": 5,
+  "exam_03": 0
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "reverse_bits.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "unsigned char reverse_bits(unsigned char octet);",
+ "subject": "Assignment name   : reverse_bits\nExpected files    : reverse_bits.c\nAllowed functions : None\nPrototype         : unsigned char reverse_bits(unsigned char octet);\n--------------------------------------------------------------------------------\n\nWrite a function that takes a byte and returns it with its bits in reverse order.\n\nExample:\n\n  reverse_bits(1)  ->  128   (00000001 becomes 10000000)\n",
+ "subject_th": "ชื่อโจทย์     : reverse_bits\nไฟล์ที่ต้องส่ง  : reverse_bits.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : unsigned char reverse_bits(unsigned char octet);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่รับข้อมูลขนาดหนึ่งไบต์ แล้วคืนค่าไบต์นั้นโดยกลับลำดับบิตทั้งหมด\n\nตัวอย่าง:\n\n  reverse_bits(1)  ->  128   (00000001 กลายเป็น 10000000)\n",
+ "hints": [
+  "Build the result by shifting it left and pulling bits off the input right.",
+  "Exactly 8 iterations -- one per bit."
+ ],
+ "harness": "#include <stdio.h>\n#include <stdlib.h>\n\nunsigned char\treverse_bits(unsigned char octet);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tprintf(\"%d\\n\", reverse_bits((unsigned char)atoi(argv[i])));\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "128\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "255"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "255\n"
+  },
+  {
+   "argv": [
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "64\n"
+  },
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "84\n"
+  },
+  {
+   "argv": [
+    "128"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  }
+ ]
+}

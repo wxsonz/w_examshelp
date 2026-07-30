@@ -1,0 +1,85 @@
+{
+ "id": "print_memory",
+ "name": "print_memory",
+ "exams": {
+  "exam_04": 3
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "print_memory.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": "void print_memory(const void *addr, size_t size);",
+ "subject": "Assignment name   : print_memory\nExpected files    : print_memory.c\nAllowed functions : write\nPrototype         : void print_memory(const void *addr, size_t size);\n--------------------------------------------------------------------------------\n\nWrite a function that dumps `size` bytes starting at addr, 16 bytes per line.\n\nEach line has exactly this shape:\n\n  - the hex column: for each of the 16 bytes, two lowercase hex digits, with a\n    single space after every second byte (so eight groups of four hex digits,\n    each group followed by a space -- 40 characters in total),\n  - the character column: one character per byte, the byte itself if it is\n    printable (32 to 126 inclusive), otherwise a dot,\n  - a newline.\n\nOn a final, incomplete line the hex column is still padded to its full 40\ncharacters, and the character column shows only the bytes that exist.\n\nIf size is 0, the function prints nothing.\n\nExample, dumping the 20 bytes of \"Bonjour les amin\" plus \"ches\":\n\n  $> ./a.out \"Bonjour les aminches\" | cat -e\n  426f 6e6a 6f75 7220 6c65 7320 616d 696e Bonjour les amin$\n  6368 6573                               ches$\n",
+ "subject_th": "ชื่อโจทย์     : print_memory\nไฟล์ที่ต้องส่ง  : print_memory.c\nฟังก์ชันที่ใช้ได้ : write\nต้นแบบฟังก์ชัน : void print_memory(const void *addr, size_t size);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่แสดงข้อมูลในหน่วยความจำจำนวน size ไบต์ เริ่มจากตำแหน่ง addr\nบรรทัดละ 16 ไบต์\n\nแต่ละบรรทัดมีรูปแบบดังนี้:\n\n  - คอลัมน์เลขฐานสิบหก: แต่ละไบต์ใน 16 ไบต์แสดงด้วยเลขฐานสิบหกตัวพิมพ์เล็ก 2 ตัว\n    และเว้นวรรคหนึ่งช่องหลังทุก 2 ไบต์ (ได้ 8 กลุ่ม กลุ่มละ 4 ตัวอักษร\n    แต่ละกลุ่มตามด้วยช่องว่าง รวมทั้งหมด 40 ตัวอักษร)\n  - คอลัมน์ตัวอักษร: หนึ่งตัวอักษรต่อหนึ่งไบต์ ถ้าไบต์นั้นแสดงผลได้\n    (ค่า 32 ถึง 126) ให้แสดงตัวอักษรนั้น ถ้าไม่ได้ให้แสดงจุด\n  - แล้วขึ้นบรรทัดใหม่\n\nบรรทัดสุดท้ายที่ไม่ครบ 16 ไบต์ ยังต้องเว้นคอลัมน์เลขฐานสิบหกให้ครบ 40 ตัวอักษร\nและคอลัมน์ตัวอักษรแสดงเฉพาะไบต์ที่มีอยู่จริง\n\nถ้า size เท่ากับ 0 ฟังก์ชันไม่ต้องแสดงอะไรเลย\n\nตัวอย่าง การแสดงข้อมูล 20 ไบต์ของ \"Bonjour les aminches\":\n\n  $> ./a.out \"Bonjour les aminches\" | cat -e\n  426f 6e6a 6f75 7220 6c65 7320 616d 696e Bonjour les amin$\n  6368 6573                               ches$\n",
+ "hints": [
+  "Work one 16-byte line at a time; the last line is the only special case.",
+  "The hex column is always 40 characters: 16 bytes * 2 digits + 8 spaces.",
+  "Pad a short line with two spaces per missing byte so the columns still line up.",
+  "b >> 4 is the high nibble, b & 15 the low one."
+ ],
+ "harness": "#include <stdlib.h>\n#include <string.h>\n\nvoid\tprint_memory(const void *addr, size_t size);\n\nint\tmain(int argc, char **argv)\n{\n\tsize_t\tsize;\n\n\tif (argc < 2)\n\t\treturn (0);\n\tsize = strlen(argv[1]);\n\tif (argc > 2)\n\t\tsize = (size_t)atoi(argv[2]);\n\tprint_memory(argv[1], size);\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "Bonjour les aminches"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "426f 6e6a 6f75 7220 6c65 7320 616d 696e Bonjour les amin\n6368 6573                               ches\n"
+  },
+  {
+   "argv": [
+    "A"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "41                                      A\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": ""
+  },
+  {
+   "argv": [
+    "0123456789abcdef"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "3031 3233 3435 3637 3839 6162 6364 6566 0123456789abcdef\n"
+  },
+  {
+   "argv": [
+    "0123456789abcdefg"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "3031 3233 3435 3637 3839 6162 6364 6566 0123456789abcdef\n67                                      g\n"
+  },
+  {
+   "argv": [
+    "tab\there",
+    "8"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "7461 6209 6865 7265                     tab.here\n"
+  },
+  {
+   "argv": [
+    "Bonjour les aminches",
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": ""
+  }
+ ]
+}

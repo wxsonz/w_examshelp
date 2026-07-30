@@ -1,0 +1,33 @@
+{
+ "id": "fizzbuzz",
+ "name": "fizzbuzz",
+ "exams": {
+  "exam_01": 7,
+  "exam_02": 3
+ },
+ "source": "added",
+ "kind": "program",
+ "expected_files": [
+  "fizzbuzz.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : fizzbuzz\nExpected files    : fizzbuzz.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that prints the numbers from 1 to 100, each separated by a\nnewline.\n\nIf the number is a multiple of 3, it prints 'fizz' instead.\n\nIf the number is a multiple of 5, it prints 'buzz' instead.\n\nIf the number is both a multiple of 3 and a multiple of 5, it prints 'fizzbuzz'\ninstead.\n",
+ "subject_th": "ชื่อโจทย์     : fizzbuzz\nไฟล์ที่ต้องส่ง  : fizzbuzz.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่แสดงตัวเลขจาก 1 ถึง 100 โดยคั่นแต่ละตัวด้วยการขึ้นบรรทัดใหม่\n\nถ้าตัวเลขเป็นพหุคูณของ 3 ให้แสดงคำว่า 'fizz' แทน\n\nถ้าตัวเลขเป็นพหุคูณของ 5 ให้แสดงคำว่า 'buzz' แทน\n\nถ้าตัวเลขเป็นพหุคูณของทั้ง 3 และ 5 ให้แสดงคำว่า 'fizzbuzz' แทน\n",
+ "hints": [
+  "Test the divisible-by-both case FIRST, or 15 prints 'fizz'.",
+  "Divisible by both 3 and 5 means divisible by 15.",
+  "Only write is allowed, so you need your own number printer -- printf is not available here."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n2\nfizz\n4\nbuzz\nfizz\n7\n8\nfizz\nbuzz\n11\nfizz\n13\n14\nfizzbuzz\n16\n17\nfizz\n19\nbuzz\nfizz\n22\n23\nfizz\nbuzz\n26\nfizz\n28\n29\nfizzbuzz\n31\n32\nfizz\n34\nbuzz\nfizz\n37\n38\nfizz\nbuzz\n41\nfizz\n43\n44\nfizzbuzz\n46\n47\nfizz\n49\nbuzz\nfizz\n52\n53\nfizz\nbuzz\n56\nfizz\n58\n59\nfizzbuzz\n61\n62\nfizz\n64\nbuzz\nfizz\n67\n68\nfizz\nbuzz\n71\nfizz\n73\n74\nfizzbuzz\n76\n77\nfizz\n79\nbuzz\nfizz\n82\n83\nfizz\nbuzz\n86\nfizz\n88\n89\nfizzbuzz\n91\n92\nfizz\n94\nbuzz\nfizz\n97\n98\nfizz\nbuzz\n"
+  }
+ ]
+}

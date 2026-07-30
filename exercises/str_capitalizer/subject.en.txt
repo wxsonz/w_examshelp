@@ -1,0 +1,20 @@
+Write a program that takes one or several strings and, for each argument,
+capitalizes the first character of each word (if it is a letter, obviously), puts
+the rest in lowercase, and displays the result, followed by a newline.
+
+A "word" is defined as a part of a string delimited either by spaces/tabs, or by
+the start/end of the string. If a word only has one letter, it must be
+capitalized.
+
+If there are no arguments, the program must display a newline.
+
+Examples:
+
+  $> ./str_capitalizer "Premier PETIT TesT" | cat -e
+  Premier Petit Test$
+  $> ./str_capitalizer "   attention C'EST pas dur QUAND mEmE" | cat -e
+     Attention C'est Pas Dur Quand Meme$
+  $> ./str_capitalizer "ALLer UN DeRNier 0123456789pour LA rouTE    E " | cat -e
+  Aller Un Dernier 0123456789pour La Route    E $
+  $> ./str_capitalizer | cat -e
+  $

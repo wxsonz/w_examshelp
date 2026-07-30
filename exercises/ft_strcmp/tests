@@ -1,0 +1,7 @@
+$ abc abc
+$ abc abd
+$ abd abc
+$ '' ''
+$ a ''
+$ '' a
+$ abc abcd

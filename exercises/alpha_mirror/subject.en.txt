@@ -1,0 +1,12 @@
+Write a program that takes a string and displays it with every alphabetical
+character replaced by its mirror image in the alphabet, followed by a newline.
+
+'a' becomes 'z', 'b' becomes 'y', 'A' becomes 'Z', and so on. Case is preserved
+and non-alphabetical characters are left unchanged.
+
+If the number of arguments is not 1, the program writes only a newline.
+
+Example:
+
+  $> ./alpha_mirror "abc xyz." | cat -e
+  zyx cba.$

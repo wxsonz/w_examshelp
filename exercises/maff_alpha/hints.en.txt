@@ -1,0 +1,5 @@
+'a' + i walks the alphabet; you never need to write the 26 letters out.
+
+Uppercase is lowercase minus 32 in ASCII.
+
+Watch the parity: the FIRST letter stays lowercase, so it is the odd-numbered ones that are left alone.

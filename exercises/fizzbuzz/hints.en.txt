@@ -1,0 +1,5 @@
+Test the divisible-by-both case FIRST, or 15 prints 'fizz'.
+
+Divisible by both 3 and 5 means divisible by 15.
+
+Only write is allowed, so you need your own number printer -- printf is not available here.

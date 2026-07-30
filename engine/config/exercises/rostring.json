@@ -1,0 +1,81 @@
+{
+ "id": "rostring",
+ "name": "rostring",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "rostring.c"
+ ],
+ "allowed_functions": [
+  "free",
+  "malloc",
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : rostring\nExpected files    : rostring.c\nAllowed functions : free, malloc, write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays it with the first word moved to\nthe end, followed by a newline.\n\nWords in the output are separated by exactly one space, with no leading or\ntrailing whitespace. A word is a sequence of characters that are neither spaces\nnor tabs.\n\nIf the number of arguments is not 1, or if the string contains no word, the\nprogram writes only a newline.\n\nExamples:\n\n  $> ./rostring \"abc def ghi\" | cat -e\n  def ghi abc$\n  $> ./rostring \"  hello   world  \" | cat -e\n  world hello$\n  $> ./rostring \"solo\" | cat -e\n  solo$\n",
+ "subject_th": "ชื่อโจทย์     : rostring\nไฟล์ที่ต้องส่ง  : rostring.c\nฟังก์ชันที่ใช้ได้ : free, malloc, write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงข้อความนั้นโดยย้ายคำแรกไปไว้ท้ายสุด\nตามด้วยการขึ้นบรรทัดใหม่\n\nคำในผลลัพธ์ให้คั่นด้วยช่องว่างหนึ่งช่องเท่านั้น และไม่มีช่องว่างนำหน้าหรือต่อท้าย\nคำ หมายถึงลำดับของตัวอักษรที่ไม่ใช่ช่องว่างและไม่ใช่แท็บ\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 หรือในข้อความไม่มีคำใดเลย\nให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./rostring \"abc def ghi\" | cat -e\n  def ghi abc$\n  $> ./rostring \"  hello   world  \" | cat -e\n  world hello$\n  $> ./rostring \"solo\" | cat -e\n  solo$\n",
+ "hints": [
+  "Remember where the first word starts, print everything after it, then print it last.",
+  "The separator logic is the same as epur_str: one space before a word, but not the first."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "abc def ghi"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "def ghi abc\n"
+  },
+  {
+   "argv": [
+    "  hello   world  "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "world hello\n"
+  },
+  {
+   "argv": [
+    "solo"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "solo\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "   "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "a b"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "b a\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

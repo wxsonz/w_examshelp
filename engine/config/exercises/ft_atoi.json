@@ -1,0 +1,97 @@
+{
+ "id": "ft_atoi",
+ "name": "ft_atoi",
+ "exams": {
+  "exam_02": 4,
+  "exam_03": 0
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_atoi.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "int ft_atoi(const char *str);",
+ "subject": "Assignment name   : ft_atoi\nExpected files    : ft_atoi.c\nAllowed functions : None\nPrototype         : int ft_atoi(const char *str);\n--------------------------------------------------------------------------------\n\nReproduce the behaviour of atoi: convert the initial numeric portion of the\nstring to an int.\n\nSkip leading whitespace (spaces and tabs), then accept an optional run of '+'\nand '-' signs, then read decimal digits until a non-digit is found. If there is\nno digit, return 0.\n\nOverflow behaviour is not tested.\n\nExamples:\n\n  ft_atoi(\"42\")        ->  42\n  ft_atoi(\"  -42abc\")  ->  -42\n  ft_atoi(\"+-3\")       ->  -3\n  ft_atoi(\"abc\")       ->  0\n",
+ "subject_th": "ชื่อโจทย์     : ft_atoi\nไฟล์ที่ต้องส่ง  : ft_atoi.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : int ft_atoi(const char *str);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่ทำงานเหมือน atoi: แปลงส่วนที่เป็นตัวเลขตอนต้นของข้อความ\nให้เป็นค่า int\n\nให้ข้ามช่องว่างที่นำหน้า (ช่องว่างและแท็บ) จากนั้นรับเครื่องหมาย '+' และ '-'\nที่อาจมีติดกันหลายตัว แล้วอ่านตัวเลขฐานสิบไปจนพบตัวอักษรที่ไม่ใช่ตัวเลข\nถ้าไม่มีตัวเลขเลย ให้คืนค่า 0\n\nไม่มีการทดสอบกรณีค่าเกินขอบเขตของ int\n\nตัวอย่าง:\n\n  ft_atoi(\"42\")        ->  42\n  ft_atoi(\"  -42abc\")  ->  -42\n  ft_atoi(\"+-3\")       ->  -3\n  ft_atoi(\"abc\")       ->  0\n",
+ "hints": [
+  "Three phases in order: whitespace, signs, digits.",
+  "Multiple signs multiply together: \"+-3\" is -3 and \"--5\" is 5.",
+  "str[i] - '0' converts a digit character to its value."
+ ],
+ "harness": "#include <stdio.h>\n\nint\tft_atoi(const char *str);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tprintf(\"%d\\n\", ft_atoi(argv[i]));\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "42\n"
+  },
+  {
+   "argv": [
+    "  -42abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-42\n"
+  },
+  {
+   "argv": [
+    "+-3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "-3\n"
+  },
+  {
+   "argv": [
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "   +42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "42\n"
+  },
+  {
+   "argv": [
+    "--5"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "5\n"
+  },
+  {
+   "argv": [
+    "12a34"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "12\n"
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+Write a function that removes from the list every element whose data is
+considered equal to data_ref, and frees the removed nodes with free().
+
+Two data are equal when cmp returns 0, the same convention strcmp uses.
+
+The head may itself be removed, so the caller's pointer must be updated. The
+data pointed to by the nodes must NOT be freed -- only the nodes.
+
+Note the prototype: `int (*cmp)()` really is written without parameter types,
+exactly as the exam gives it. Declare it that way -- if you write
+`int (*cmp)(void *, void *)` instead, your definition conflicts with the
+grader's declaration and will not compile.
+
+You must also submit ft_list.h, defining the list type:
+
+  typedef struct s_list
+  {
+      struct s_list *next;
+      void          *data;
+  } t_list;

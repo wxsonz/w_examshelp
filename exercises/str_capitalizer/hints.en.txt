@@ -1,0 +1,7 @@
+Only spaces and tabs separate words. An apostrophe does NOT, so "C'EST" becomes "C'est" and not "C'Est".
+
+A word starting with a digit has nothing to capitalize, but the letters after it are still lowercased.
+
+Track whether you are at the start of a word with a single flag.
+
+One newline per argument.

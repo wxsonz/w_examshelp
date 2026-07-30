@@ -1,0 +1,3 @@
+Two indices walking towards each other, swapping as they go.
+
+Stop when they meet -- swapping past the middle undoes your work.

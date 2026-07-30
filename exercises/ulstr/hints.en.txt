@@ -1,0 +1,3 @@
+'a' - 'A' is 32, so adding or subtracting 32 flips the case.
+
+Check the range before flipping, or you will corrupt digits and punctuation.

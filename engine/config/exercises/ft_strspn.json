@@ -1,0 +1,78 @@
+{
+ "id": "ft_strspn",
+ "name": "ft_strspn",
+ "exams": {
+  "exam_02": 7,
+  "exam_03": 1
+ },
+ "source": "added",
+ "kind": "function",
+ "expected_files": [
+  "ft_strspn.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "size_t ft_strspn(const char *s, const char *accept);",
+ "subject": "Assignment name   : ft_strspn\nExpected files    : ft_strspn.c\nAllowed functions : None\nPrototype         : size_t ft_strspn(const char *s, const char *accept);\n--------------------------------------------------------------------------------\n\nReproduce the behaviour of strspn: return the length of the initial segment of s\nthat consists entirely of characters from accept.\n\nExamples:\n\n  ft_strspn(\"42abc\", \"0123456789\")   ->  2\n  ft_strspn(\"abc\", \"xyz\")            ->  0\n",
+ "subject_th": "ชื่อโจทย์     : ft_strspn\nไฟล์ที่ต้องส่ง  : ft_strspn.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : size_t ft_strspn(const char *s, const char *accept);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่ทำงานเหมือน strspn: คืนค่าความยาวของส่วนต้นของข้อความ s\nที่ประกอบด้วยตัวอักษรที่อยู่ใน accept ทั้งหมด\n\nตัวอย่าง:\n\n  ft_strspn(\"42abc\", \"0123456789\")   ->  2\n  ft_strspn(\"abc\", \"xyz\")            ->  0\n",
+ "hints": [
+  "Stop at the first character of s that is NOT in accept.",
+  "An empty accept set means the answer is always 0."
+ ],
+ "harness": "#include <stdio.h>\n\nsize_t\tft_strspn(const char *s, const char *accept);\n\nint\tmain(int argc, char **argv)\n{\n\tif (argc != 3)\n\t\treturn (0);\n\tprintf(\"%zu\\n\", ft_strspn(argv[1], argv[2]));\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "42abc",
+    "0123456789"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "2\n"
+  },
+  {
+   "argv": [
+    "abc",
+    "xyz"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "",
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "abc",
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "aaabbb",
+    "ab"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "6\n"
+  },
+  {
+   "argv": [
+    "hello",
+    "hel"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "4\n"
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+Write a function that takes a byte and returns it with its bits in reverse order.
+
+Example:
+
+  reverse_bits(1)  ->  128   (00000001 becomes 10000000)

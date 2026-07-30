@@ -1,0 +1,87 @@
+{
+ "id": "ft_sort_string_tab",
+ "name": "ft_sort_string_tab",
+ "exams": {
+  "exam_04": 2
+ },
+ "source": "added",
+ "kind": "function",
+ "expected_files": [
+  "ft_sort_string_tab.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "void ft_sort_string_tab(char **tab);",
+ "subject": "Assignment name   : ft_sort_string_tab\nExpected files    : ft_sort_string_tab.c\nAllowed functions : None\nPrototype         : void ft_sort_string_tab(char **tab);\n--------------------------------------------------------------------------------\n\nWrite a function that sorts a NULL-terminated array of strings into ascending\norder, in place, comparing them as strcmp does.\n\nOnly the pointers move -- the strings themselves are not modified.\n",
+ "subject_th": "ชื่อโจทย์     : ft_sort_string_tab\nไฟล์ที่ต้องส่ง  : ft_sort_string_tab.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : void ft_sort_string_tab(char **tab);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่เรียงลำดับอาเรย์ของข้อความที่ปิดท้ายด้วย NULL\nจากน้อยไปมากในตัวอาเรย์เดิม โดยเปรียบเทียบแบบเดียวกับ strcmp\n\nให้สลับเฉพาะพอยน์เตอร์ ไม่ต้องแก้ไขตัวข้อความ\n",
+ "hints": [
+  "argv is already NULL-terminated, which is why it makes a convenient test subject.",
+  "Guard against an empty array before you read tab[0].",
+  "Swap the pointers, not the string contents."
+ ],
+ "harness": "#include <stdio.h>\n\nvoid\tft_sort_string_tab(char **tab);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\t(void)argc;\n\tft_sort_string_tab(argv + 1);\n\ti = 1;\n\twhile (argv[i])\n\t{\n\t\tprintf(\"%s\\n\", argv[i]);\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "c",
+    "a",
+    "b"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\nb\nc\n"
+  },
+  {
+   "argv": [
+    "banana",
+    "apple",
+    "cherry"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "apple\nbanana\ncherry\n"
+  },
+  {
+   "argv": [
+    "one"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "one\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": ""
+  },
+  {
+   "argv": [
+    "b",
+    "B",
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "B\na\nb\n"
+  },
+  {
+   "argv": [
+    "",
+    "a",
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n\na\n"
+  },
+  {
+   "argv": [
+    "ab",
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\nab\n"
+  }
+ ]
+}

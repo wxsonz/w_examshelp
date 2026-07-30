@@ -1,0 +1,80 @@
+{
+ "id": "last_word",
+ "name": "last_word",
+ "exams": {
+  "exam_02": 5,
+  "exam_03": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "last_word.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : last_word\nExpected files    : last_word.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays its last word, followed by a\nnewline.\n\nA word is a sequence of characters that are neither spaces nor tabs. Trailing\nwhitespace is ignored.\n\nIf the number of arguments is not 1, or if the string contains no word, the\nprogram writes only a newline.\n\nExamples:\n\n  $> ./last_word \"hello world\" | cat -e\n  world$\n  $> ./last_word \"   lorem,ipsum  \" | cat -e\n  lorem,ipsum$\n",
+ "subject_th": "ชื่อโจทย์     : last_word\nไฟล์ที่ต้องส่ง  : last_word.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงคำสุดท้ายของข้อความนั้น\nตามด้วยการขึ้นบรรทัดใหม่\n\nคำ หมายถึงลำดับของตัวอักษรที่ไม่ใช่ช่องว่างและไม่ใช่แท็บ โดยละเว้นช่องว่างที่ต่อท้าย\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 หรือในข้อความไม่มีคำใดเลย\nให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./last_word \"hello world\" | cat -e\n  world$\n  $> ./last_word \"   lorem,ipsum  \" | cat -e\n  lorem,ipsum$\n",
+ "hints": [
+  "Walk backwards from the end: skip trailing whitespace first, then find the start of the word.",
+  "Guard your index against going below 0 on an all-whitespace string."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "hello world"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "world\n"
+  },
+  {
+   "argv": [
+    "   lorem,ipsum  "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "lorem,ipsum\n"
+  },
+  {
+   "argv": [
+    "   "
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "single"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "single\n"
+  },
+  {
+   "argv": [
+    "a b\tc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "c\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

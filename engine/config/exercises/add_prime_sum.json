@@ -1,0 +1,90 @@
+{
+ "id": "add_prime_sum",
+ "name": "add_prime_sum",
+ "exams": {
+  "exam_03": 2,
+  "exam_04": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "add_prime_sum.c"
+ ],
+ "allowed_functions": [
+  "exit",
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : add_prime_sum\nExpected files    : add_prime_sum.c\nAllowed functions : exit, write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a positive integer and displays the sum of all prime\nnumbers less than or equal to it, followed by a newline.\n\nIf the number of arguments is not 1, or if the argument is not a valid positive\ninteger, the program displays 0 followed by a newline.\n\nExamples:\n\n  $> ./add_prime_sum 5 | cat -e\n  10$\n  $> ./add_prime_sum 7 | cat -e\n  17$\n",
+ "subject_th": "ชื่อโจทย์     : add_prime_sum\nไฟล์ที่ต้องส่ง  : add_prime_sum.c\nฟังก์ชันที่ใช้ได้ : exit, write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับจำนวนเต็มบวกหนึ่งจำนวน แล้วแสดงผลรวมของจำนวนเฉพาะทุกจำนวน\nที่น้อยกว่าหรือเท่ากับจำนวนนั้น ตามด้วยการขึ้นบรรทัดใหม่\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 หรืออาร์กิวเมนต์ไม่ใช่จำนวนเต็มบวกที่ถูกต้อง\nให้แสดงเลข 0 ตามด้วยการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./add_prime_sum 5 | cat -e\n  10$\n  $> ./add_prime_sum 7 | cat -e\n  17$\n",
+ "hints": [
+  "Trial division up to d * d <= n is fast enough and avoids needing sqrt.",
+  "1 is not prime, and neither is 0 or any negative number.",
+  "Only write is allowed, so you need your own number printer."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "5"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "10\n"
+  },
+  {
+   "argv": [
+    "7"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "17\n"
+  },
+  {
+   "argv": [
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "2"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "2\n"
+  },
+  {
+   "argv": [
+    "0"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [
+    "100"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1060\n"
+  },
+  {
+   "argv": [
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "0\n"
+  }
+ ]
+}

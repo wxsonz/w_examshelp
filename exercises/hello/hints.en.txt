@@ -1,0 +1,3 @@
+write(1, s, n) sends n bytes of s to standard output.
+
+Count the bytes including the '\n' -- "Hello World!\n" is 13.

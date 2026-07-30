@@ -1,0 +1,3 @@
+Same length calculation as ft_range -- only the write index changes.
+
+Fill out[len - 1 - i] instead of out[i].

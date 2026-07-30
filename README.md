@@ -102,9 +102,20 @@ Quitting archives your session to `history/<session-name>/` but **leaves
 
 ## Adding or changing exercises
 
-`engine/config/exercises_db.json` is generated — don't edit it. The source of
-truth is `engine/exercises/`. Add an entry with its subject, reference solution,
-harness, test inputs and its `exams={"exam_01": 5, ...}` placement, then:
+One exercise is one directory of ordinary files under `exercises/` — a real `.c`
+reference, plain-text subjects, a small config, one test per line. No Python and
+no escaping, and adding one touches nobody else's files.
+
+```bash
+python3 engine/scripts/new_exercise.py alen --exams exam_01/4
+python3 engine/scripts/build_db.py --only alen
+```
+
+The skeleton already builds, so you can watch it pass and then change one thing
+at a time. **[CONTRIBUTING.md](CONTRIBUTING.md) is the full format** — it is
+short.
+
+`engine/config/` is generated; don't edit it.
 
 ```bash
 python3 engine/scripts/build_db.py            # rebuild and verify

@@ -1,0 +1,14 @@
+Write a program that takes a string and displays it with each alphabetical
+character shifted forward by 13 letters, wrapping around within its own case,
+followed by a newline.
+
+Non-alphabetical characters are left unchanged.
+
+If the number of arguments is not 1, the program writes only a newline.
+
+Examples:
+
+  $> ./rot_13 "abc" | cat -e
+  nop$
+  $> ./rot_13 "My horse is Amazing." | cat -e
+  Zl ubefr vf Nznmvat.$

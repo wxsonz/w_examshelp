@@ -1,0 +1,3 @@
+Walk the list with a local pointer; do not modify begin_list itself.
+
+The loop condition is the NULL check -- no separate empty-list case needed.

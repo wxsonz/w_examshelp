@@ -1,0 +1,72 @@
+{
+ "id": "ft_strrev",
+ "name": "ft_strrev",
+ "exams": {
+  "exam_02": 6,
+  "exam_03": 1
+ },
+ "source": "piscine_2026",
+ "kind": "function",
+ "expected_files": [
+  "ft_strrev.c"
+ ],
+ "allowed_functions": [],
+ "prototype": "char *ft_strrev(char *str);",
+ "subject": "Assignment name   : ft_strrev\nExpected files    : ft_strrev.c\nAllowed functions : None\nPrototype         : char *ft_strrev(char *str);\n--------------------------------------------------------------------------------\n\nWrite a function that reverses a string in place and returns a pointer to it.\n\nThe function must not allocate: it swaps the characters of the buffer it was\ngiven.\n",
+ "subject_th": "ชื่อโจทย์     : ft_strrev\nไฟล์ที่ต้องส่ง  : ft_strrev.c\nฟังก์ชันที่ใช้ได้ : None\nต้นแบบฟังก์ชัน : char *ft_strrev(char *str);\n--------------------------------------------------------------------------------\n\nเขียนฟังก์ชันที่กลับลำดับตัวอักษรในข้อความโดยแก้ในบัฟเฟอร์เดิม\nแล้วคืนค่าพอยน์เตอร์ที่ชี้ไปยังข้อความนั้น\n\nฟังก์ชันนี้ต้องไม่จองหน่วยความจำใหม่ ให้สลับตัวอักษรภายในบัฟเฟอร์ที่รับเข้ามา\n",
+ "hints": [
+  "Two indices walking towards each other, swapping as they go.",
+  "Stop when they meet -- swapping past the middle undoes your work."
+ ],
+ "harness": "#include <stdio.h>\n\nchar\t*ft_strrev(char *str);\n\nint\tmain(int argc, char **argv)\n{\n\tint\ti;\n\n\ti = 1;\n\twhile (i < argc)\n\t{\n\t\tprintf(\"[%s]\\n\", ft_strrev(argv[i]));\n\t\ti++;\n\t}\n\treturn (0);\n}\n",
+ "tests": [
+  {
+   "argv": [
+    "hello"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[olleh]\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[]\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[a]\n"
+  },
+  {
+   "argv": [
+    "ab"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[ba]\n"
+  },
+  {
+   "argv": [
+    "racecar"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[racecar]\n"
+  },
+  {
+   "argv": [
+    "42born2code"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "[edoc2nrob24]\n"
+  }
+ ]
+}

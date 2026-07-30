@@ -1,0 +1,4 @@
+Write a function that sorts a NULL-terminated array of strings into ascending
+order, in place, comparing them as strcmp does.
+
+Only the pointers move -- the strings themselves are not modified.

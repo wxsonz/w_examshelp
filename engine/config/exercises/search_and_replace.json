@@ -1,0 +1,116 @@
+{
+ "id": "search_and_replace",
+ "name": "search_and_replace",
+ "exams": {
+  "exam_01": 5,
+  "exam_02": 1
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "search_and_replace.c"
+ ],
+ "allowed_functions": [
+  "write",
+  "exit"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : search_and_replace\nExpected files    : search_and_replace.c\nAllowed functions : write, exit\n--------------------------------------------------------------------------------\n\nWrite a program called search_and_replace that takes three arguments: a string,\nthe character to search for, and the character to replace it with.\n\nIt displays the string with every occurrence of the second argument replaced by\nthe third, followed by a newline.\n\nIf the number of arguments is not 3, the program displays only a newline. The\nsame happens if the search or the replacement argument is not exactly one\ncharacter long -- \"art\" is not a character.\n\nIf the search character does not appear in the string, the string is simply\nrewritten unchanged.\n\nExamples:\n\n  $> ./search_and_replace \"Papache est un sabre\" \"a\" \"o\" | cat -e\n  Popoche est un sobre$\n  $> ./search_and_replace \"zaz\" \"art\" \"zul\" | cat -e\n  $\n  $> ./search_and_replace \"zaz\" \"r\" \"u\" | cat -e\n  zaz$\n  $> ./search_and_replace \"jacob\" \"a\" \"b\" \"c\" \"e\" | cat -e\n  $\n  $> ./search_and_replace \"ZoZ eT Dovid oiME le METol.\" \"o\" \"a\" | cat -e\n  ZaZ eT David aiME le METal.$\n",
+ "subject_th": "ชื่อโจทย์     : search_and_replace\nไฟล์ที่ต้องส่ง  : search_and_replace.c\nฟังก์ชันที่ใช้ได้ : write, exit\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมชื่อ search_and_replace ที่รับอาร์กิวเมนต์สามตัว ได้แก่ ข้อความ\nตัวอักษรที่ต้องการค้นหา และตัวอักษรที่ต้องการนำไปแทนที่\n\nโปรแกรมจะแสดงข้อความนั้นโดยแทนที่ตัวอักษรตัวที่สองทุกตำแหน่งด้วยตัวอักษรตัวที่สาม\nแล้วขึ้นบรรทัดใหม่\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 3 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\nและถ้าอาร์กิวเมนต์ตัวที่สองหรือตัวที่สามยาวไม่ใช่หนึ่งตัวอักษรพอดี ก็ให้ทำแบบเดียวกัน\nเพราะ \"art\" ไม่ใช่ตัวอักษรตัวเดียว\n\nถ้าไม่พบตัวอักษรที่ค้นหาในข้อความ ให้แสดงข้อความเดิมตามที่เป็นอยู่\n\nตัวอย่าง:\n\n  $> ./search_and_replace \"Papache est un sabre\" \"a\" \"o\" | cat -e\n  Popoche est un sobre$\n  $> ./search_and_replace \"zaz\" \"art\" \"zul\" | cat -e\n  $\n  $> ./search_and_replace \"zaz\" \"r\" \"u\" | cat -e\n  zaz$\n  $> ./search_and_replace \"jacob\" \"a\" \"b\" \"c\" \"e\" | cat -e\n  $\n  $> ./search_and_replace \"ZoZ eT Dovid oiME le METol.\" \"o\" \"a\" | cat -e\n  ZaZ eT David aiME le METal.$\n",
+ "hints": [
+  "Three arguments means argc == 4: argv[0] is the program name.",
+  "A single-character argument is one whose argv[n][1] is '\\0' -- but check argv[n][0] first, or an empty argument sends you one byte past the end of the string.",
+  "You do not have to build a new string: walk the original and write either the original byte or the replacement."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "Papache est un sabre",
+    "a",
+    "o"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "Popoche est un sobre\n"
+  },
+  {
+   "argv": [
+    "zaz",
+    "art",
+    "zul"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "zaz",
+    "r",
+    "u"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "zaz\n"
+  },
+  {
+   "argv": [
+    "jacob",
+    "a",
+    "b",
+    "c",
+    "e"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "ZoZ eT Dovid oiME le METol.",
+    "o",
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "ZaZ eT David aiME le METal.\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "abc",
+    "",
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "aaa",
+    "a",
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "aaa\n"
+  },
+  {
+   "argv": [
+    "",
+    "a",
+    "b"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

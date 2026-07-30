@@ -1,0 +1,77 @@
+{
+ "id": "inter",
+ "name": "inter",
+ "exams": {
+  "exam_02": 4,
+  "exam_03": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "inter.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : inter\nExpected files    : inter.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes two strings and displays, without duplicates, the\ncharacters that appear in both, in the order they appear in the first string.\nThe output is followed by a newline.\n\nIf the number of arguments is not 2, the program writes only a newline.\n\nExample:\n\n  $> ./inter \"padinton\" \"paqefwtdjetyiytjneytjoeyjnejeyj\" | cat -e\n  padinto$\n",
+ "subject_th": "ชื่อโจทย์     : inter\nไฟล์ที่ต้องส่ง  : inter.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความสองชุด แล้วแสดงตัวอักษรที่ปรากฏอยู่ในทั้งสองข้อความ\nโดยไม่แสดงซ้ำ และเรียงตามลำดับที่ปรากฏในข้อความชุดแรก\nตามด้วยการขึ้นบรรทัดใหม่\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 2 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./inter \"padinton\" \"paqefwtdjetyiytjneytjoeyjnejeyj\" | cat -e\n  padinto$\n",
+ "hints": [
+  "A 256-entry flag array is the easy way to suppress duplicates.",
+  "Index that array with (unsigned char) so negative bytes cannot escape it."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "padinton",
+    "paqefwtdjetyiytjneytjoeyjnejeyj"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "padinto\n"
+  },
+  {
+   "argv": [
+    "ddf6vewg64f",
+    "gtwdb"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "dwg\n"
+  },
+  {
+   "argv": [
+    "",
+    "abc"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "abc",
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "aaa",
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

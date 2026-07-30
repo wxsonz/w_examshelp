@@ -1,0 +1,80 @@
+{
+ "id": "pgcd",
+ "name": "pgcd",
+ "exams": {
+  "exam_03": 2,
+  "exam_04": 0
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "pgcd.c"
+ ],
+ "allowed_functions": [
+  "atoi",
+  "free",
+  "malloc",
+  "printf"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : pgcd\nExpected files    : pgcd.c\nAllowed functions : atoi, free, malloc, printf\n--------------------------------------------------------------------------------\n\nWrite a program that takes two strictly positive integers and displays their\ngreatest common divisor, followed by a newline.\n\nIf the number of arguments is not 2, the program writes only a newline.\nYou may assume both arguments are valid strictly positive integers.\n\nExample:\n\n  $> ./pgcd 42 10 | cat -e\n  2$\n",
+ "subject_th": "ชื่อโจทย์     : pgcd\nไฟล์ที่ต้องส่ง  : pgcd.c\nฟังก์ชันที่ใช้ได้ : atoi, free, malloc, printf\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับจำนวนเต็มบวกสองจำนวน แล้วแสดงตัวหารร่วมมากของสองจำนวนนั้น\nตามด้วยการขึ้นบรรทัดใหม่\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 2 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\nสามารถสมมติได้ว่าอาร์กิวเมนต์ทั้งสองเป็นจำนวนเต็มบวกที่ถูกต้อง\n\nตัวอย่าง:\n\n  $> ./pgcd 42 10 | cat -e\n  2$\n",
+ "hints": [
+  "Euclid's algorithm: replace (a, b) with (b, a % b) until b is 0.",
+  "The answer is whatever is left in a."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "42",
+    "10"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "2\n"
+  },
+  {
+   "argv": [
+    "7",
+    "3"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [
+    "42",
+    "42"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "42\n"
+  },
+  {
+   "argv": [
+    "100",
+    "10"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "10\n"
+  },
+  {
+   "argv": [
+    "1",
+    "1"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "1\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}

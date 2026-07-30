@@ -1,0 +1,64 @@
+{
+ "id": "rev_print",
+ "name": "rev_print",
+ "exams": {
+  "exam_01": 7,
+  "exam_02": 3
+ },
+ "source": "piscine_2026",
+ "kind": "program",
+ "expected_files": [
+  "rev_print.c"
+ ],
+ "allowed_functions": [
+  "write"
+ ],
+ "prototype": null,
+ "subject": "Assignment name   : rev_print\nExpected files    : rev_print.c\nAllowed functions : write\n--------------------------------------------------------------------------------\n\nWrite a program that takes a string and displays it in reverse, followed by a\nnewline.\n\nIf the number of arguments is not 1, the program writes only a newline.\n\nExamples:\n\n  $> ./rev_print \"zonx\" | cat -e\n  xnoz$\n  $> ./rev_print | cat -e\n  $\n",
+ "subject_th": "ชื่อโจทย์     : rev_print\nไฟล์ที่ต้องส่ง  : rev_print.c\nฟังก์ชันที่ใช้ได้ : write\n--------------------------------------------------------------------------------\n\nเขียนโปรแกรมที่รับข้อความหนึ่งชุด แล้วแสดงข้อความนั้นกลับหลัง\nตามด้วยการขึ้นบรรทัดใหม่\n\nถ้าจำนวนอาร์กิวเมนต์ไม่เท่ากับ 1 ให้แสดงเฉพาะการขึ้นบรรทัดใหม่\n\nตัวอย่าง:\n\n  $> ./rev_print \"zonx\" | cat -e\n  xnoz$\n  $> ./rev_print | cat -e\n  $\n",
+ "hints": [
+  "Find the length first, then walk the index back down to 0.",
+  "The last character sits at index len - 1, not len."
+ ],
+ "harness": null,
+ "tests": [
+  {
+   "argv": [
+    "zonx"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "xnoz\n"
+  },
+  {
+   "argv": [
+    "hello world"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "dlrow olleh\n"
+  },
+  {
+   "argv": [
+    ""
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  },
+  {
+   "argv": [
+    "a"
+   ],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "a\n"
+  },
+  {
+   "argv": [],
+   "stdin": "",
+   "note": "",
+   "expected_stdout": "\n"
+  }
+ ]
+}
