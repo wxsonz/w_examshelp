@@ -1,126 +1,258 @@
 #!/usr/bin/env python3
-import sys
-import os
+"""ExamsHelp -- a practice harness for the 42 exams.
+
+Run `./examshelp` for the interactive shell, or `./examshelp <command>` for a
+single command.
+"""
+
 import argparse
+import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-from engine.state import StateManager
 from engine.evaluator import Evaluator
+from engine.i18n import LANGUAGES, accepted_languages, t, track_name
+from engine.state import StateManager
+from engine.tracks import accepted_tracks, resolve_track
+from engine.ui.ansi import DIM, RESET, YELLOW
 from engine.ui.terminal import TerminalUI
 
-def run_interactive_loop(state_mgr, evaluator, ui):
-    session_name = state_mgr.get_session_name()
-    ui.print_banner(session_name)
-    ui.console.print("[dim white]Type [bold cyan]status[/bold cyan], [bold cyan]grademe[/bold cyan], [bold cyan]subject[/bold cyan], [bold cyan]hint[/bold cyan], [bold cyan]skip[/bold cyan], [bold cyan]history[/bold cyan], [bold cyan]reset[/bold cyan], [bold cyan]list[/bold cyan], or [bold cyan]exit[/bold cyan].[/dim white]\n")
-    
-    # Show initial status on launch
-    ui.display_status(state_mgr.get_progress_data())
+COMMANDS = (
+    "status", "subject", "hint", "grademe", "skip", "list", "exam",
+    "lang", "archive", "history", "reset", "help", "exit",
+)
 
-    while True:
-        try:
-            cmd = input(f"\n[examshelp ({session_name})]> ").strip().lower()
-        except (KeyboardInterrupt, EOFError):
-            ui.console.print("\n[yellow]Archiving session...[/yellow]")
-            folder, meta = state_mgr.archive_current_session(clean_workspace=True)
-            ui.display_archive_exit(meta["session_name"], folder)
-            break
 
-        if not cmd:
-            continue
+class Shell:
+    def __init__(self):
+        self.state = StateManager()
+        lang = self.state.get_language()
+        self.ui = TerminalUI(lang=lang)
+        self.evaluator = Evaluator(self.state.workspace_rendu, lang=lang)
 
-        if cmd in ["exit", "quit"]:
-            folder, meta = state_mgr.archive_current_session(clean_workspace=True)
-            ui.display_archive_exit(meta["session_name"], folder)
-            ui.console.print("[bold cyan]Goodbye! All code and subjects archived safely. ⚡[/bold cyan]")
-            break
-        elif cmd == "status":
-            ui.display_status(state_mgr.get_progress_data())
-        elif cmd == "subject":
-            ui.display_subject(state_mgr.get_current_exercise())
-        elif cmd == "grademe":
-            ex = state_mgr.get_current_exercise()
-            if not ex:
-                ui.console.print("[bold red]No active exercise found![/bold red]")
-                continue
-                
-            ui.console.print(f"[bold cyan]Compiling and grading `rendu/{ex['name']}/{ex['expected_files']}`...[/bold cyan]")
-            ui.console.print(f"[dim](Hint: No `git push` needed. Just save your file and run grademe!)[/dim]")
-            result = evaluator.evaluate(ex)
-            ui.display_eval_result(result)
-            
-            if result["success"]:
-                state_mgr.complete_current_exercise()
-        elif cmd == "hint":
-            ex = state_mgr.get_current_exercise()
-            ui.display_hints(ex)
-        elif cmd == "skip":
-            old_name, new_ex = state_mgr.skip_current_exercise()
-            ui.display_skip(old_name, new_ex)
-        elif cmd == "reset":
-            state_mgr.reset_all_progress()
-            session_name = state_mgr.get_session_name()
-            ui.display_reset(state_mgr.get_current_exercise())
-        elif cmd in ["history", "sessions"]:
-            sessions = state_mgr.session_mgr.list_saved_sessions()
-            ui.display_sessions_history(sessions)
-        elif cmd == "list":
-            ui.display_exercise_list(state_mgr.db, state_mgr.state)
-        elif cmd == "help":
-            ui.console.print("[bold cyan]Available Commands:[/bold cyan]")
-            ui.console.print("  [bold green]status[/bold green]   - Show active session, level progress bar & assignment details")
-            ui.console.print("  [bold green]grademe[/bold green]  - Compile and test your solution in `rendu/`")
-            ui.console.print("  [bold green]subject[/bold green]  - Print current exercise assignment subject")
-            ui.console.print("  [bold green]hint[/bold green]     - View targeted advice on what to look out for")
-            ui.console.print("  [bold green]skip[/bold green]     - Skip the current question and advance to the next exercise")
-            ui.console.print("  [bold green]history[/bold green]  - View all past saved sessions in `history/`")
-            ui.console.print("  [bold green]reset[/bold green]    - Reset all progress back to Level 0 and 0 completed")
-            ui.console.print("  [bold green]list[/bold green]     - List all 10 levels and unlocked exercises")
-            ui.console.print("  [bold green]exit[/bold green]     - Save and archive session to `history/<session_name>` and quit")
+    def tr(self, key, **kwargs):
+        return t(self.ui.lang, key, **kwargs)
+
+    # ------------------------------------------------------------- commands
+
+    def cmd_status(self, _args=None):
+        self.ui.display_status(self.state.get_progress_data())
+
+    def cmd_subject(self, _args=None):
+        self.ui.display_subject(
+            self.state.get_current_exercise(), self.state.get_current_track()
+        )
+
+    def cmd_hint(self, _args=None):
+        self.ui.display_hints(self.state.get_current_exercise())
+
+    def cmd_grademe(self, _args=None):
+        exercise = self.state.get_current_exercise()
+        if not exercise:
+            self.ui.err(self.tr("shell.no_exercise"))
+            return
+        files = exercise["expected_files"]
+        if isinstance(files, str):
+            files = [f.strip() for f in files.split(",")]
+        self.ui.info(
+            self.tr("grade.running", name=exercise["name"], files=", ".join(files))
+        )
+        result = self.evaluator.evaluate(exercise)
+        self.ui.display_eval_result(result, exercise)
+        if result.get("ok"):
+            self.state.complete_current_exercise()
+            following = self.state.get_current_exercise()
+            if following:
+                self.ui.ok("  " + self.tr("grade.next_up", name=following["name"]))
+
+    def cmd_skip(self, _args=None):
+        old_name, new_exercise = self.state.skip_current_exercise()
+        track = self.state.get_current_track()
+        self.ui.display_skip(old_name, new_exercise, track)
+        # Skipping is how you go looking for a different problem, so show it
+        # rather than making the reader type `subject` every single time.
+        if new_exercise:
+            self.ui.display_subject(new_exercise, track)
+
+    def cmd_list(self, args=None):
+        target = (args or "").strip()
+        if target.lower() in ("all", "*"):
+            tracks = self.state.available_tracks()
+        elif target:
+            track = self._resolve_track(target)
+            if not track:
+                return
+            tracks = [track]
         else:
-            ui.console.print(f"[red]Unknown command: `{cmd}`. Type `help` for available commands.[/red]")
+            tracks = [self.state.get_current_track()]
+        self.ui.display_exercise_list(self.state, tracks)
+
+    def cmd_exam(self, args=None):
+        target = (args or "").strip()
+        if not target:
+            self.ui.display_exams(self.state.track_summary())
+            self.ui.dim(
+                "  "
+                + self.tr(
+                    "exam.current",
+                    track=track_name(self.ui.lang, self.state.get_current_track()),
+                )
+            )
+            return
+
+        track = self.state.set_current_track(target)
+        if not track:
+            self.ui.err(
+                self.tr("exam.unknown", name=target, accepted=accepted_tracks())
+            )
+            return
+        self.ui.ok(
+            "  "
+            + self.tr(
+                "exam.set",
+                track=track_name(self.ui.lang, track),
+                level=self.state.get_level(track),
+            )
+        )
+        self.cmd_subject()
+
+    def _resolve_track(self, target):
+        """Resolve a track argument, reporting the failure to the user."""
+        track = resolve_track(target)
+        if track not in self.state.available_tracks():
+            self.ui.err(
+                self.tr("exam.unknown", name=target, accepted=accepted_tracks())
+            )
+            return None
+        return track
+
+    def cmd_lang(self, args=None):
+        target = (args or "").strip().lower()
+        if not target:
+            self.ui.info(self.tr("shell.lang_current", lang=self.ui.lang))
+            return
+        code = self.state.set_language(target)
+        if not code:
+            self.ui.err(
+                self.tr("shell.lang_unknown", lang=target,
+                        accepted=accepted_languages())
+            )
+            return
+
+        self.ui.lang = code
+        self.evaluator.lang = code
+        entry = LANGUAGES[code]
+        self.ui.ok(
+            "  " + self.tr("shell.lang_set", flag=entry["flag"], name=entry["name"])
+        )
+        self.cmd_subject()
+
+    def cmd_archive(self, _args=None):
+        folder, meta = self.state.archive_current_session(clean_workspace=False)
+        self.ui.display_archive(meta["session_name"], folder, cleaned=False)
+
+    def cmd_history(self, _args=None):
+        self.ui.display_sessions_history(self.state.session_mgr.list_saved_sessions())
+
+    def cmd_reset(self, _args=None):
+        if not self._confirm(self.tr("shell.confirm_reset")):
+            self.ui.dim("  " + self.tr("shell.cancelled"))
+            return
+        self.state.reset_all_progress()
+        self.ui.display_reset(
+            self.state.get_current_exercise(), self.state.get_current_track()
+        )
+
+    def cmd_help(self, _args=None):
+        self.ui.display_help()
+
+    def _confirm(self, question):
+        """Ask outside the buffered view -- the answer has to be live."""
+        try:
+            answer = input(f"{YELLOW}{question}{RESET} [y/N] ").strip().lower()
+        except (KeyboardInterrupt, EOFError):
+            print()
+            return False
+        return answer in ("y", "yes")
+
+    # ---------------------------------------------------------------- loops
+
+    def dispatch(self, name, args=None):
+        handler = getattr(self, f"cmd_{name}", None)
+        if handler is None:
+            return False
+        handler(args)
+        return True
+
+    def run_interactive(self):
+        self.ui.print_banner(
+            self.state.db.get("total_exercises"), self.state.db.get("total_tests")
+        )
+        self.ui.emit()
+        self.cmd_status()
+        self.ui.dim("  " + self.tr("shell.help_hint"))
+        self.ui.flush()
+
+        while True:
+            try:
+                raw = input(self.ui.prompt(self.state.get_session_name())).strip()
+            except (KeyboardInterrupt, EOFError):
+                print()
+                self._quit()
+                return
+
+            if not raw:
+                continue
+
+            name, _, args = raw.partition(" ")
+            name = name.lower()
+
+            if name in ("exit", "quit", "q"):
+                self._quit()
+                return
+
+            if not self.dispatch(name, args):
+                self.ui.err(self.tr("shell.unknown_command", name=name))
+            self.ui.flush()
+
+    def _quit(self):
+        folder, meta = self.state.archive_current_session(clean_workspace=False)
+        self.ui.display_archive(meta["session_name"], folder, cleaned=False)
+        self.ui.info(self.tr("shell.goodbye"))
+        self.ui.flush()
+
 
 def main():
-    parser = argparse.ArgumentParser(description="ExamsHelp CLI (Antigravity Edition)")
-    parser.add_argument("command", nargs="?", choices=["status", "grademe", "subject", "hint", "skip", "history", "sessions", "reset", "list"], help="CLI command to execute")
+    parser = argparse.ArgumentParser(
+        description="ExamsHelp -- practice harness for the 42 exams."
+    )
+    parser.add_argument(
+        "command", nargs="?", choices=COMMANDS, help="run one command and exit"
+    )
+    parser.add_argument("argument", nargs="?", help="argument for that command")
     args = parser.parse_args()
 
-    state_mgr = StateManager()
-    ui = TerminalUI()
-    evaluator = Evaluator(state_mgr.workspace_rendu)
+    shell = Shell()
+
+    if not shell.state.has_exercises():
+        print(shell.tr("shell.no_db"), file=sys.stderr)
+        print(f"{DIM}  {shell.tr('shell.build_db')}{RESET}", file=sys.stderr)
+        return 1
+
+    if args.command in ("exit", "quit"):
+        return 0
 
     if args.command:
-        if args.command == "status":
-            ui.display_status(state_mgr.get_progress_data())
-        elif args.command == "subject":
-            ui.display_subject(state_mgr.get_current_exercise())
-        elif args.command == "grademe":
-            ex = state_mgr.get_current_exercise()
-            if ex:
-                ui.console.print(f"[bold cyan]Compiling and grading `rendu/{ex['name']}/{ex['expected_files']}`...[/bold cyan]")
-                ui.console.print(f"[dim](Hint: No `git push` needed. Just save your file and run grademe!)[/dim]")
-                result = evaluator.evaluate(ex)
-                ui.display_eval_result(result)
-                if result["success"]:
-                    state_mgr.complete_current_exercise()
-        elif args.command == "hint":
-            ex = state_mgr.get_current_exercise()
-            ui.display_hints(ex)
-        elif args.command == "skip":
-            old_name, new_ex = state_mgr.skip_current_exercise()
-            ui.display_skip(old_name, new_ex)
-        elif args.command == "reset":
-            state_mgr.reset_all_progress()
-            ui.display_reset(state_mgr.get_current_exercise())
-        elif args.command in ["history", "sessions"]:
-            sessions = state_mgr.session_mgr.list_saved_sessions()
-            ui.display_sessions_history(sessions)
-        elif args.command == "list":
-            ui.display_exercise_list(state_mgr.db, state_mgr.state)
-    else:
-        run_interactive_loop(state_mgr, evaluator, ui)
+        shell.dispatch(args.command, args.argument)
+        shell.ui.flush()
+        return 0
+
+    shell.run_interactive()
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

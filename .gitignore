@@ -7,3 +7,7 @@ __pycache__/
 rendu/
 subjects/
 history/
+
+# Reference exam corpus: external material, contains its own .git checkout.
+# engine/scripts/audit_corpus.py reads it; nothing depends on it being present.
+references/

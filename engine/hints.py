@@ -1,110 +1,114 @@
+"""Advice attached to failures and to the `hint` command.
+
+get_exercise_hints() used to exist here and never be called -- `hint` printed the
+one-line filler stored in the database instead. It is now the source of the
+`hint` command's output, combined with the per-exercise hints from the pack.
+
+The generic advice below is translated. The per-exercise hints written in
+engine/exercises/ are English only, so a Thai session shows Thai advice followed
+by English exercise-specific notes.
+"""
+
+from engine.i18n import t
+
+
 class HintEngine:
     @staticmethod
-    def get_exercise_hints(exercise_info):
-        """
-        Generates detailed advice on what to look out for in the current question.
-        """
-        if not exercise_info:
-            return ["No active exercise selected."]
-            
-        hints = []
-        name = exercise_info["name"]
-        is_func = exercise_info.get("is_function", False)
-        proto = exercise_info.get("prototype")
-        allowed_fns = exercise_info.get("allowed_functions", "write")
-        content = exercise_info.get("subject", "").lower()
+    def get_exercise_hints(exercise, lang="en"):
+        """What to watch out for on the current exercise."""
+        if not exercise:
+            return [t(lang, "shell.no_exercise")]
 
-        # 1. Structure & Interface Checklist
-        if is_func:
-            if proto:
-                hints.append(f"Function Prototype: `{proto}`")
-                hints.append("Match exact parameter types and return type. Do NOT include a `main()` function in your submitted file!")
-            else:
-                hints.append(f"Function Exercise: Ensure your function `{name}` matches required signature.")
+        hints = []
+        name = exercise["name"]
+        is_function = exercise.get("kind", "program") == "function"
+        allowed = exercise.get("allowed_functions") or []
+        if isinstance(allowed, str):
+            allowed = [a.strip() for a in allowed.split(",") if a.strip()]
+
+        if is_function:
+            hints.append(t(lang, "hint.function_only", prototype=exercise["prototype"]))
+            hints.append(t(lang, "hint.signature_exact"))
         else:
-            hints.append("Program Exercise: Must include a standard `int main(int argc, char **argv)` function.")
-            hints.append("CLI Arguments: Check `argc`! If argc != expected count, handle it gracefully (e.g. write a newline `\\n` or return 0).")
+            hints.append(t(lang, "hint.full_program"))
+            hints.append(t(lang, "hint.check_argc"))
 
-        # 2. Allowed Functions & Constraints
-        hints.append(f"Allowed Functions: `{allowed_fns}`. Do not use unallowed standard library functions.")
+        hints.append(
+            t(lang, "hint.allowed",
+              names=", ".join(allowed) if allowed else t(lang, "hint.none"))
+        )
+        if not allowed:
+            hints.append(t(lang, "hint.nothing_allowed"))
 
-        # 3. Edge Cases & Specific Mechanics
-        if "string" in content or "char *" in content or "s1" in content or "str" in content:
-            hints.append("String Mechanics: Always check for `NULL` pointers before reading. Watch out for missing `\\0` null terminators.")
-        if "malloc" in content or "allowed functions: malloc" in content or "ft_split" in name or "strdup" in name:
-            hints.append("Memory Safety: Always check if `malloc()` returned `NULL` before dereferencing allocated memory.")
-        if "bit" in name or "bits" in content or "octet" in content:
-            hints.append("Bitwise Operations: Use bitwise operators (`&`, `|`, `^`, `<<`, `>>`). Remember 1 byte = 8 bits (`0xFF`).")
-        if "list" in name or "t_list" in content or "node" in content:
-            hints.append("Linked Lists: Always check if `head` or `*begin_list` is `NULL`. Be careful when updating `next` pointers.")
-        if "tree" in name or "bst" in content:
-            hints.append("Binary Search Trees: Use recursion or stack for tree traversal. Check for `NULL` child nodes (`left`, `right`).")
-        if "number" in content or "digit" in content or "int" in content or "atoi" in name or "itoa" in name:
-            hints.append("Numeric Edge Cases: Handle 0, negative numbers (`INT_MIN = -2147483648`), and potential integer overflows.")
+        files = exercise.get("expected_files") or []
+        if isinstance(files, str):
+            files = [f.strip() for f in files.split(",") if f.strip()]
+        if len(files) > 1:
+            hints.append(t(lang, "hint.submit_all", files=", ".join(files)))
 
-        # 4. Output Formatting Rules
-        if not is_func:
-            hints.append("Output Formatting: Make sure lines end with `\\n` exactly as shown in example outputs.")
+        # Exercise-specific advice written in the pack, which is the good stuff.
+        for hint in exercise.get("hints", []):
+            if hint not in hints:
+                hints.append(hint)
 
-        # Include custom hints stored in exercise_info if present
-        custom_hints = exercise_info.get("hints", [])
-        for ch in custom_hints:
-            if ch not in hints and not ch.startswith("Ensure your function") and not ch.startswith("Check argc!"):
-                hints.append(ch)
-
+        hints.append(t(lang, "hint.byte_compare"))
+        if name.startswith("ft_") and "malloc" in allowed:
+            hints.append(t(lang, "hint.check_malloc"))
         return hints
 
     @staticmethod
-    def get_compilation_hint(error_log):
-        log_lower = error_log.lower()
-        hints = []
-        
-        if "undeclared" in log_lower or "implicit declaration" in log_lower:
-            hints.append("Check header inclusions (`#include <unistd.h>`, `#include <stdlib.h>`, `#include <stdio.h>`) or prototype declarations.")
-        if "expected ';'" in log_lower or "expected '}'" in log_lower:
-            hints.append("Look out for missing semicolons `;` or unclosed curly braces `}`.")
-        if "type" in log_lower or "incompatible" in log_lower:
-            hints.append("Type mismatch detected. Verify function arguments and return types.")
-        if "unused variable" in log_lower or "unused parameter" in log_lower:
-            hints.append("Unused variables trigger `-Werror`. Cast unused parameters with `(void)param;` or remove unused variables.")
-            
-        if not hints:
-            hints.append("Read compiler log carefully to locate line numbers and syntax issues.")
-            
-        return hints
+    def get_compilation_hint(log, lang="en"):
+        lowered = log.lower()
+        keys = []
+
+        if "multiple definition of" in lowered and "main" in lowered:
+            keys.append("hint.compile.multiple_main")
+        if "undefined reference to" in lowered:
+            keys.append("hint.compile.undefined_ref")
+        if "implicit declaration" in lowered or "undeclared" in lowered:
+            keys.append("hint.compile.implicit")
+        if "unused variable" in lowered or "unused parameter" in lowered:
+            keys.append("hint.compile.unused")
+        if "conflicting types" in lowered or "incompatible" in lowered:
+            keys.append("hint.compile.conflicting")
+        if "expected ';'" in lowered or "expected '}'" in lowered:
+            keys.append("hint.compile.syntax")
+        if "control reaches end of non-void function" in lowered:
+            keys.append("hint.compile.no_return")
+
+        if not keys:
+            keys.append("hint.compile.read_first")
+        return [t(lang, key) for key in keys]
 
     @staticmethod
-    def get_runtime_hint(returncode, stderr, exercise_info):
-        hints = []
-        
-        if returncode in [-11, 139] or "segmentation fault" in stderr.lower():
-            hints.append("CRITICAL: Segmentation Fault detected!")
-            hints.append("1. Are you checking if pointers (e.g., `str`, `s1`, `s2`, or `malloc` output) are `NULL` before accessing?")
-            hints.append("2. Are you reading or writing array indices beyond allocated memory bounds?")
-            hints.append("3. Make sure string loops terminate at `\\0`.")
-            return hints
-            
-        if returncode in [-6, 134]:
-            hints.append("Abort signal received! Indicates double-free or memory corruption.")
-            return hints
+    def get_runtime_hint(detail, lang="en"):
+        lowered = (detail or "").lower()
 
-        if returncode == 124:
-            hints.append("Time Limit Exceeded (>5s infinite loop)! Check loop conditions and increments.")
-            return hints
-
-        return hints
-
-    @staticmethod
-    def get_mismatch_hint(actual_stdout, expected_stdout, test_case):
-        hints = []
-        
-        if not actual_stdout and expected_stdout:
-            hints.append("Your program produced NO output when output was expected. Verify logic execution path.")
-        elif actual_stdout.strip() == expected_stdout.strip() and actual_stdout != expected_stdout:
-            hints.append("Whitespace / Newline Mismatch! Text matches, but check trailing spaces or missing `\\n`.")
-        elif actual_stdout.lower() == expected_stdout.lower() and actual_stdout != expected_stdout:
-            hints.append("Letter Case Mismatch! Check uppercase vs lowercase requirements.")
+        if "sigsegv" in lowered:
+            keys = ["hint.run.segv_1", "hint.run.segv_2", "hint.run.segv_3"]
+        elif "sigabrt" in lowered:
+            keys = ["hint.run.abrt_1", "hint.run.abrt_2"]
+        elif "sigfpe" in lowered:
+            keys = ["hint.run.fpe"]
         else:
-            hints.append(f"Output mismatch.\n  Expected: {repr(expected_stdout)}\n  Got:      {repr(actual_stdout)}")
-            
-        return hints
+            return [t(lang, "hint.run.other", detail=detail)]
+        return [t(lang, key) for key in keys]
+
+    @staticmethod
+    def get_mismatch_hint(got, expected, lang="en"):
+        if got == "":
+            return [t(lang, "hint.diff.empty")]
+
+        if got.rstrip("\n") == expected.rstrip("\n"):
+            missing = expected.count("\n") - got.count("\n")
+            if missing > 0:
+                return [t(lang, "hint.diff.missing_newline", count=missing)]
+            return [t(lang, "hint.diff.extra_newline", count=-missing)]
+
+        if got.strip() == expected.strip():
+            return [t(lang, "hint.diff.whitespace")]
+        if got.lower() == expected.lower():
+            return [t(lang, "hint.diff.case")]
+        if got.replace(" ", "") == expected.replace(" ", ""):
+            return [t(lang, "hint.diff.spacing")]
+        return [t(lang, "hint.diff.compare")]

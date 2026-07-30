@@ -71,10 +71,15 @@ class SessionManager:
                     shutil.copy2(s_path, d_path)
 
         # 3. Save session metadata
+        track = state_data.get("current_track", "")
+        track_progress = state_data.get("progress", {}).get(track) or {}
         meta = {
             "session_name": session_name,
             "archived_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "current_level": state_data.get("current_level", 0),
+            "current_track": track,
+            # Kept under the old key so archives from before exams existed still
+            # list correctly; it now means "level within current_track".
+            "current_level": track_progress.get("level", 0),
             "completed_exercises": state_data.get("completed_exercises", []),
             "completed_count": len(state_data.get("completed_exercises", [])),
             "archived_rendu_files": os.listdir(archived_rendu) if os.path.exists(archived_rendu) else []

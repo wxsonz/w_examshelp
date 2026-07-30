@@ -1,310 +1,565 @@
+"""Everything the user sees.
+
+Output is collected into self.lines and then flushed with print(), so the shell
+scrolls like a normal shell. An earlier version drew a fixed full-screen layout
+that redrew in place; it read as claustrophobic in practice, so output simply
+appends now. The buffer is kept because one-shot mode and the selftest both want
+to render a command without printing it.
+"""
+
 import os
-import sys
-import textwrap
+import shlex
 
-VERSION_STRING = "v0.2.2"
+# Importing readline gives input() arrow-key history and line editing. It also
+# decides whether the prompt may use \001/\002 width markers: without readline
+# those bytes would be printed literally.
+try:
+    import readline  # noqa: F401
 
-# Standard ANSI Color Tokens
-C_RESET = "\033[0m"
-C_BOLD = "\033[1m"
-C_DIM = "\033[2m"
-
-C_CYAN = "\033[1;36m"
-C_MAGENTA = "\033[1;35m"
-C_YELLOW = "\033[1;33m"
-C_GREEN = "\033[1;32m"
-C_RED = "\033[1;31m"
-C_WHITE = "\033[1;37m"
+    HAVE_READLINE = True
+except ImportError:
+    HAVE_READLINE = False
 
 from engine.hints import HintEngine
+from engine.i18n import language_badge, other_language, t, track_name
+from engine.tracks import EXTRA
+from engine.ui.ansi import (
+    CYAN,
+    DIM,
+    GREEN,
+    MAGENTA,
+    RED,
+    RESET,
+    WHITE,
+    YELLOW,
+    box_width,
+    display_width,
+    draw_box,
+    visible,
+)
 
-class ConsoleWrapper:
-    def print(self, text=""):
-        if not text:
-            print()
-            return
-            
-        clean_text = str(text)
-        tags = [
-            ("[bold cyan]", C_CYAN), ("[/bold cyan]", C_RESET),
-            ("[bold yellow]", C_YELLOW), ("[/bold yellow]", C_RESET),
-            ("[bold green]", C_GREEN), ("[/bold green]", C_RESET),
-            ("[bold red]", C_RED), ("[/bold red]", C_RESET),
-            ("[bold magenta]", C_MAGENTA), ("[/bold magenta]", C_RESET),
-            ("[bold white]", C_WHITE), ("[/bold white]", C_RESET),
-            ("[dim white]", C_DIM), ("[/dim white]", C_RESET),
-            ("[yellow]", C_YELLOW), ("[/yellow]", C_RESET),
-            ("[green]", C_GREEN), ("[/green]", C_RESET),
-            ("[red]", C_RED), ("[/red]", C_RESET),
-            ("[cyan]", C_CYAN), ("[/cyan]", C_RESET)
-        ]
-        for tag, replacement in tags:
-            clean_text = clean_text.replace(tag, replacement)
-            
-        print(clean_text)
+VERSION = "v0.5.0"
+
+MAX_SHOWN_FAILURES = 3
+MAX_SHOWN_LINES = 8
+
 
 class TerminalUI:
-    def __init__(self):
-        self.console = ConsoleWrapper()
-        self.hint_engine = HintEngine()
+    def __init__(self, lang="en"):
+        self.lang = lang
+        self.lines = []
 
-    def _strip_ansi(self, text):
-        clean = str(text)
-        for code in [C_RESET, C_BOLD, C_DIM, C_CYAN, C_MAGENTA, C_YELLOW, C_GREEN, C_RED, C_WHITE]:
-            clean = clean.replace(code, "")
-        return clean
+    # ------------------------------------------------------------ primitives
 
-    def _visual_width(self, text):
-        # With pure 1-cell characters, visual width is exactly string length without ANSI.
-        return len(self._strip_ansi(text))
+    def tr(self, key, **kwargs):
+        return t(self.lang, key, **kwargs)
 
-    def _draw_box(self, title, content_lines, border_color=C_CYAN, subtitle=None):
-        box_width = 76
-        inner_width = box_width - 4
-        
-        clean_title = self._strip_ansi(title)
-        title_vis_w = self._visual_width(clean_title)
-        
-        title_str = f" {title} "
-        left_len = max(1, (inner_width - title_vis_w) // 2)
-        right_len = max(1, inner_width - title_vis_w - left_len)
-        header = f"{border_color}╭" + "─" * left_len + title_str + "─" * right_len + f"╮{C_RESET}"
-        print(header)
+    def clear_buffer(self):
+        self.lines = []
 
-        wrapped_lines = []
-        for line in content_lines:
-            # We must wrap based on visual width, but textwrap doesn't know ANSI codes.
-            # For simplicity in this CLI, we will wrap using textwrap.wrap 
-            # and avoid splitting mid-ANSI by just splitting raw text if there are no complex ANSI tags,
-            # or handle basic wrapping for clean lines.
-            clean = self._strip_ansi(line)
-            if len(clean) > inner_width:
-                # Basic wrap that respects ansi isn't trivial, but our long lines (like hints) don't have mid-line colors,
-                # they usually just have a color at start and reset at end, or are plain text.
-                # So we can safely use textwrap on the raw string and re-apply colors if needed,
-                # OR we just let textwrap wrap the clean string and print it plain, but we want colors.
-                # Since most long lines are plain text with a bullet, we'll do a simple chunking.
-                words = line.split(" ")
-                curr_line = ""
-                for word in words:
-                    if self._visual_width(curr_line + word + " ") <= inner_width:
-                        curr_line += word + " "
-                    else:
-                        wrapped_lines.append(curr_line.rstrip())
-                        curr_line = "  " + word + " " # Indent wrapped lines slightly
-                if curr_line:
-                    wrapped_lines.append(curr_line.rstrip())
-            else:
-                wrapped_lines.append(line)
+    def flush(self):
+        """Print everything buffered so far and empty the buffer."""
+        for line in self.lines:
+            print(line)
+        self.lines = []
 
-        for line in wrapped_lines:
-            line_vis_w = self._visual_width(line)
-            pad_len = inner_width - line_vis_w
-            if pad_len < 0:
-                pad_len = 0
-            print(f"{border_color}│{C_RESET} {line}" + " " * pad_len + f" {border_color}│{C_RESET}")
+    def emit(self, line=""):
+        self.lines.append(line)
 
-        if subtitle:
-            clean_sub = self._strip_ansi(subtitle)
-            sub_vis_w = self._visual_width(clean_sub)
-            sub_str = f" {subtitle} "
-            left_len = box_width - 3 - sub_vis_w
-            footer = f"{border_color}╰" + "─" * (left_len - 1) + sub_str + f"╯{C_RESET}"
-        else:
-            footer = f"{border_color}╰" + "─" * (box_width - 2) + f"╯{C_RESET}"
-        print(footer)
+    def plain(self, text=""):
+        self.emit(text)
 
-    def print_banner(self, session_name=None):
-        banner = f"""
-{C_CYAN} ███████╗██╗  ██╗██████╗ ███╗   ███╗███████╗██╗  ██╗███████╗██╗     ██████╗ {C_RESET}
-{C_CYAN} ██╔════╝╚██╗██╔╝██╔══██╗████╗ ████║██╔════╝██║  ██║██╔════╝██║     ██╔══██╗{C_RESET}
-{C_CYAN} █████╗   ╚███╔╝ ██████╔╝██╔████╔██║███████╗███████║█████╗  ██║     ██████╔╝{C_RESET}
-{C_CYAN} ██╔══╝   ██╔██╗ ██╔═══╝ ██║╚██╔╝██║╚════██║██╔══██║██╔══╝  ██║     ██╔═══╝ {C_RESET}
-{C_CYAN} ███████╗██╔╝ ██╗██║     ██║ ╚═╝ ██║███████╗██║  ██║███████╗███████╗██║     {C_RESET}
-{C_MAGENTA} ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     {C_RESET}
-                 {C_YELLOW}*** Antigravity Edition - Educational Examshell ***{C_RESET}
-             {C_GREEN}(Note: No git commands required! Just run `./examshelp grademe`){C_RESET}
-"""
-        print(banner)
-        if session_name:
-            print(f" {C_MAGENTA}[*] Active Session:{C_RESET} {C_YELLOW}{session_name}{C_RESET}\n")
+    def info(self, text):
+        self.emit(f"{CYAN}{text}{RESET}")
 
-    def display_status(self, progress_data):
-        session_name = progress_data.get("session_name", "active-session")
-        curr_lvl = progress_data["current_level"]
-        session_completed = progress_data.get("session_completed_count", 0)
-        total_completions = progress_data.get("total_completions", 0)
-        ex = progress_data["current_exercise"]
-        lang = progress_data.get("language", "en")
+    def ok(self, text):
+        self.emit(f"{GREEN}{text}{RESET}")
 
-        level_blocks = ""
-        for i in range(10):
-            if i < curr_lvl:
-                level_blocks += f"{C_GREEN}#{C_RESET}"
-            elif i == curr_lvl:
-                level_blocks += f"{C_YELLOW}>{C_RESET}"
-            else:
-                level_blocks += f"{C_DIM}.{C_RESET}"
+    def warn(self, text):
+        self.emit(f"{YELLOW}{text}{RESET}")
 
-        lines = [
-            f"{C_MAGENTA}{'Active Session:':<20}{C_RESET}{C_YELLOW}{session_name}{C_RESET}",
-            f"{C_MAGENTA}{'Current Level:':<20}{C_RESET}{C_YELLOW}Level {curr_lvl}/9{C_RESET}  [{level_blocks}]",
-            f"{C_MAGENTA}{'Session Progress:':<20}{C_RESET}{C_GREEN}{session_completed}{C_RESET} exercises completed in this session",
-            f"{C_MAGENTA}{'Cumulative Total:':<20}{C_RESET}{C_CYAN}{total_completions}{C_RESET} total questions completed across sessions"
-        ]
+    def err(self, text):
+        self.emit(f"{RED}{text}{RESET}")
 
-        if ex:
-            source_type = ex.get("source_type", "42_official")
-            import os
-            base_path = os.path.abspath(os.getcwd())
-            track_label = f"{C_YELLOW}[Official 42 Exam]{C_RESET}" if source_type == "42_official" else f"{C_CYAN}[ExamsHelp Extended Custom]{C_RESET}"
-            lines.append(f"{C_MAGENTA}{'Exercise Track:':<20}{C_RESET}{track_label}")
-            lines.append(f"{C_MAGENTA}{'Assignment Name:':<20}{C_RESET}{C_WHITE}{ex['name']}{C_RESET}")
-            lines.append(f"{C_MAGENTA}{'Expected File:':<20}{C_RESET}{C_YELLOW}rendu/{ex['name']}/{ex['expected_files']}{C_RESET}")
-            lines.append(f"{C_MAGENTA}{'Workspace Path:':<20}{C_RESET}{C_DIM}{base_path}/rendu/{ex['name']}/{C_RESET}")
-            lines.append(f"{C_MAGENTA}{'Allowed Functions:':<20}{C_RESET}{C_CYAN}{ex['allowed_functions']}{C_RESET}")
-            if ex.get("prototype"):
-                lines.append(f"{C_MAGENTA}{'Function Prototype:':<20}{C_RESET}{C_YELLOW}{ex['prototype']}{C_RESET}")
+    def dim(self, text):
+        self.emit(f"{DIM}{text}{RESET}")
 
-        self._draw_box(f"{C_CYAN}*** EXAMSHELP DASHBOARD ***{C_RESET}", lines, border_color=C_CYAN, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
+    def box(self, title, lines, color=CYAN, footer=None, indent="  "):
+        draw_box(title, lines, color=color, footer=footer, out=self.emit, indent=indent)
 
-    def display_subject(self, exercise_info):
-        if not exercise_info:
-            print("No active exercise selected.")
-            return
+    def _field(self, key, value, width=None, color=WHITE):
+        name = self.tr(key)
+        width = width or (18 if self.lang == "en" else 16)
+        pad_amount = max(1, width - display_width(name))
+        return f"{MAGENTA}{name}{' ' * pad_amount}{RESET}{color}{value}{RESET}"
 
-        source_type = exercise_info.get("source_type", "42_official")
-        track_title = "42 Official Exam" if source_type == "42_official" else "ExamsHelp Extended Custom"
-        
-        subj_text = exercise_info.get("subject", "No subject text available.")
+    # ---------------------------------------------------------------- prompt
 
-        box_title = f"{C_CYAN}SUBJECT: {exercise_info['name']} [{track_title}]{C_RESET}"
+    def prompt(self, session_name):
+        """The input prompt. Carries the language badge, which is why it is here.
 
-        subj_lines = subj_text.strip().split("\n")
-        lines = [f"{C_WHITE}{line}{C_RESET}" for line in subj_lines]
+        Colour escapes are wrapped in \001/\002 so readline does not count them
+        towards the line width; without that, editing a long command line makes
+        the cursor drift.
+        """
+        def invisible(sequence):
+            if not HAVE_READLINE:
+                return sequence
+            return f"\001{sequence}\002"
 
-        self._draw_box(
-            box_title,
-            lines,
-            border_color=C_MAGENTA,
-            subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}"
+        return (
+            f"\n{language_badge(self.lang)} "
+            f"{invisible(YELLOW)}{session_name}{invisible(RESET)} "
+            f"{invisible(CYAN)}❯{invisible(RESET)} "
         )
 
-    def display_eval_result(self, result):
-        if result["success"]:
-            lines = [
-                f"{C_GREEN}[+] {result['message']}{C_RESET}",
-                f"{C_GREEN}Level requirements met! New subject unlocked in `subjects/`!{C_RESET}"
-            ]
-            self._draw_box(f"{C_GREEN}PASSED - GRADEME SUCCESS{C_RESET}", lines, border_color=C_GREEN, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
+    # ---------------------------------------------------------------- banner
+
+    def print_banner(self, exercise_count=None, test_count=None):
+        art = [
+            " ███████╗██╗  ██╗██████╗ ███╗   ███╗███████╗██╗  ██╗███████╗██╗     ██████╗ ",
+            " ██╔════╝╚██╗██╔╝██╔══██╗████╗ ████║██╔════╝██║  ██║██╔════╝██║     ██╔══██╗",
+            " █████╗   ╚███╔╝ ██████╔╝██╔████╔██║███████╗███████║█████╗  ██║     ██████╔╝",
+            " ██╔══╝   ██╔██╗ ██╔═══╝ ██║╚██╔╝██║╚════██║██╔══██║██╔══╝  ██║     ██╔═══╝ ",
+            " ███████╗██╔╝ ██╗██║     ██║ ╚═╝ ██║███████╗██║  ██║███████╗███████╗██║     ",
+            " ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ",
+        ]
+        if box_width() >= 78:
+            for i, line in enumerate(art):
+                self.emit(f"{MAGENTA if i >= 5 else CYAN}{line}{RESET}")
         else:
-            stage = result.get("stage", "eval")
-            lines = [f"{C_RED}[-] {result['message']}{C_RESET}"]
-            
-            if "log" in result:
-                lines.append("")
-                lines.append(f"{C_YELLOW}Compiler Output:{C_RESET}")
-                for log_l in result["log"].split("\n"):
-                    lines.append(f"  {C_YELLOW}{log_l}{C_RESET}")
+            self.emit(f"{CYAN}=== ExamsHelp ==={RESET}")
 
-            if "got" in result:
-                lines.append("")
-                lines.append(f"{C_GREEN}Expected Output: {repr(result['expected'])}{C_RESET}")
-                lines.append(f"{C_RED}Your Output:     {repr(result['got'])}{C_RESET}")
+        subtitle = f"{self.tr('app.tagline')}  ·  {VERSION}"
+        if exercise_count:
+            subtitle += f"  ·  {exercise_count} / {test_count}"
+        self.dim(subtitle.center(box_width()))
 
-            self._draw_box(f"{C_RED}GRADEME FEEDBACK ({stage.upper()}){C_RESET}", lines, border_color=C_RED, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
+    # ---------------------------------------------------------------- status
 
-            hints = result.get("hints", [])
-            if hints:
-                hint_lines = [f"* {C_CYAN}{h}{C_RESET}" for h in hints]
-                self._draw_box(f"{C_YELLOW}[?] FRIENDLY HINT (0 PENALTY){C_RESET}", hint_lines, border_color=C_YELLOW)
+    def display_status(self, progress):
+        exercise = progress["current_exercise"]
 
-    def display_hints(self, exercise_info):
-        if not exercise_info:
-            print("No active exercise selected.")
-            return
+        lines = [
+            self._field(
+                "field.exam",
+                f"{CYAN}{track_name(self.lang, progress['track'])}{RESET}"
+                f"{DIM}  ·  {RESET}{WHITE}"
+                f"{self.tr('exam.row_level', level=progress['current_level'], total=progress['total_levels'])}"
+                f"{RESET}",
+                color="",
+            ),
+            self._field(
+                "field.completed",
+                f"{GREEN}{self.tr('progress.session', count=progress['session_completed_count'])}"
+                f"{RESET}{DIM}  ·  {RESET}{CYAN}"
+                f"{self.tr('progress.overall', done=progress['total_completions'], total=progress['total_count'])}"
+                f"{RESET}",
+                color="",
+            ),
+        ]
 
-        hints = exercise_info.get("hints", [])
-        if not hints:
-            print("No hints available for this exercise.")
-            return
+        if exercise:
+            files = _as_list(exercise["expected_files"])
+            allowed = _as_list(exercise["allowed_functions"])
+            lines += [
+                "",
+                self._field("field.exercise", exercise["name"]),
+                self._field("field.type", self.tr(f"kind.{exercise.get('kind', 'program')}"), color=CYAN),
+                self._field("field.files", ", ".join(files), color=YELLOW),
+                self._field("field.workspace", f"rendu/{exercise['name']}/", color=YELLOW),
+                self._field(
+                    "field.allowed",
+                    ", ".join(allowed) if allowed else self.tr("hint.none"),
+                    color=CYAN,
+                ),
+            ]
+            if exercise.get("prototype"):
+                lines.append(self._field("field.prototype", exercise["prototype"], color=YELLOW))
 
-        lines = []
-        for i, h in enumerate(hints, 1):
-            lines.append(f"{C_YELLOW}Hint {i}:{C_RESET} {h}")
+        lines.append("")
+        lines.append(self._field("ui.language", language_badge(self.lang), color=CYAN))
 
-        self._draw_box(
-            f"{C_CYAN}*** HINTS: {exercise_info['name']} ***{C_RESET}",
+        self.box(
+            f"{CYAN}{self.tr('ui.dashboard')}{RESET}",
             lines,
-            border_color=C_YELLOW,
-            subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}"
+            color=CYAN,
+            footer=f"{DIM}{VERSION}{RESET}",
         )
 
-    def display_skip(self, old_name, new_ex):
-        if new_ex:
-            source_type = new_ex.get("source_type", "42_official")
-            track_name = "Official 42 Exam" if source_type == "42_official" else "ExamsHelp Extended Custom"
-            lines = [
-                f"{C_YELLOW}Skipped exercise '{old_name}'.{C_RESET}",
-                f"{C_GREEN}Now on exercise: {new_ex['name']} [{track_name} - Level {new_ex.get('orig_level', 0)}]{C_RESET}",
-                f"{C_DIM}Updated `subjects/subject.en.txt` and `subjects/subject.th.txt` with new assignment specifications.{C_RESET}"
-            ]
-        else:
-            lines = [f"{C_YELLOW}Skipped exercise. All exercises in curriculum completed!{C_RESET}"]
+    # --------------------------------------------------------------- subject
 
-        self._draw_box(f"{C_YELLOW}[>] EXERCISE SKIPPED{C_RESET}", lines, border_color=C_YELLOW, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
+    def _placement(self, exercise, track):
+        """Where this exercise sits, as (track, level).
 
-    def display_reset(self, new_ex):
-        lines = [f"{C_GREEN}All progress reset to Level 0!{C_RESET}"]
-        if new_ex:
-            lines.append(f"{C_DIM}Current starting exercise:{C_RESET} {C_WHITE}{new_ex['name']}{C_RESET}")
+        An exercise appears in several exams at different levels, so the answer
+        only means something relative to the track being read.
+        """
+        exams = exercise.get("exams") or {}
+        if track in exams:
+            return track, exams[track]
+        if exams:
+            return min(exams.items(), key=lambda pair: (pair[1], pair[0]))
+        return track or EXTRA, 0
 
-        self._draw_box(f"{C_RED}[!] ALL PROGRESS RESET{C_RESET}", lines, border_color=C_RED, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
+    def display_subject(self, exercise, track=None):
+        if not exercise:
+            self.warn(self.tr("shell.no_exercise"))
+            return
 
-    def display_archive_exit(self, session_name, folder):
+        text = exercise.get("subject_th" if self.lang == "th" else "subject", "")
+        where, level = self._placement(exercise, track)
+        self.box(
+            f"{CYAN}{self.tr('ui.subject')}: {exercise['name']}{RESET}",
+            _reflow_subject(text),
+            color=MAGENTA,
+            footer=f"{DIM}"
+            f"{self.tr('subject.footer', track=track_name(self.lang, where), level=level)}"
+            f"{RESET}",
+            indent="",
+        )
+        # An off-pool exercise must never be mistaken for exam material.
+        if exercise.get("source") == EXTRA:
+            self.dim(f"  {self.tr('track.extra_note')}")
+        self.dim(f"  {self.tr('subject.switch', other=other_language(self.lang))}")
+
+    # ----------------------------------------------------------------- hints
+
+    def display_hints(self, exercise):
+        if not exercise:
+            self.warn(self.tr("shell.no_exercise"))
+            return
+        hints = HintEngine.get_exercise_hints(exercise, self.lang)
+        self.box(
+            f"{CYAN}{self.tr('ui.hints')}: {exercise['name']}{RESET}",
+            [f"{YELLOW}{i:>2}.{RESET} {h}" for i, h in enumerate(hints, 1)],
+            color=YELLOW,
+            footer=f"{DIM}{VERSION}{RESET}",
+        )
+
+    # ------------------------------------------------------------ evaluation
+
+    def display_eval_result(self, result, exercise=None):
+        stage = result.get("stage", "")
+        message = self._result_message(result)
+
+        if result.get("ok"):
+            lines = [f"{GREEN}{message}{RESET}", f"{DIM}{self.tr('grade.byte_for_byte')}{RESET}"]
+            self._advisory_lines(result, lines)
+            self.box(
+                f"{GREEN}{self.tr('grade.passed')}{RESET}",
+                lines,
+                color=GREEN,
+                footer=f"{DIM}{VERSION}{RESET}",
+            )
+            return
+
+        lines = [f"{RED}{message}{RESET}"]
+
+        if stage == "compile" and result.get("compiler_log"):
+            lines.append("")
+            lines.append(f"{YELLOW}{self.tr('grade.compiler_output')}{RESET}")
+            for log_line in result["compiler_log"].splitlines()[:14]:
+                lines.append(f"{DIM}{log_line}{RESET}")
+
+        if stage == "tests":
+            lines.append("")
+            lines.append(
+                f"{DIM}{self.tr('grade.ratio', passed=result['passed'], total=result['total'])}{RESET}"
+            )
+            failures = [r for r in result["results"] if r["status"] != "pass"]
+            for record in failures[:MAX_SHOWN_FAILURES]:
+                lines.append("")
+                lines.extend(self._failure_lines(record, exercise))
+            if len(failures) > MAX_SHOWN_FAILURES:
+                lines.append("")
+                lines.append(
+                    f"{DIM}{self.tr('grade.more_failures', count=len(failures) - MAX_SHOWN_FAILURES)}{RESET}"
+                )
+
+        self._advisory_lines(result, lines)
+
+        self.box(
+            f"{RED}{self.tr('grade.not_yet')} · {stage}{RESET}",
+            lines,
+            color=RED,
+            footer=f"{DIM}{VERSION}{RESET}",
+        )
+
+        hints = result.get("hints", [])
+        if hints:
+            self.box(
+                f"{YELLOW}{self.tr('grade.look_at')}{RESET}",
+                [f"{CYAN}·{RESET} {h}" for h in hints],
+                color=YELLOW,
+            )
+
+    def _result_message(self, result):
+        """Translate the grader's message when it gave us a key to work with."""
+        key = result.get("msg_key")
+        if key:
+            return self.tr(key, **result.get("msg_args", {}))
+        return result.get("message", "")
+
+    def _failure_lines(self, record, exercise):
+        name = exercise["name"] if exercise else "a.out"
+        command = f"./{name}"
+        if record["argv"]:
+            command += " " + " ".join(shlex.quote(a) for a in record["argv"])
+
         lines = [
-            f"{C_CYAN}Session archived safely:{C_RESET} {C_YELLOW}{session_name}{C_RESET}",
-            f"{C_DIM}Saved code & subjects to:{C_RESET} {C_GREEN}{folder}{C_RESET}",
-            f"{C_DIM}Workspace `rendu/` cleaned for your next session.{C_RESET}"
+            f"{YELLOW}{self.tr('grade.test', index=record['index'])}{RESET}"
+            f"  {DIM}{command}{RESET}"
         ]
-        self._draw_box(f"{C_YELLOW}[i] SESSION SAVED & ARCHIVED{C_RESET}", lines, border_color=C_YELLOW, subtitle=f"{C_DIM}{VERSION_STRING}{C_RESET}")
+        if record.get("note"):
+            lines.append(f"{DIM}  ({record['note']}){RESET}")
+
+        if record["status"] == "timeout":
+            lines.append(f"{RED}  {self.tr('grade.timed_out', detail=record['detail'])}{RESET}")
+            return lines
+        if record["status"] == "crash":
+            lines.append(f"{RED}  {self.tr('grade.crashed', detail=record['detail'])}{RESET}")
+            if record.get("stderr"):
+                lines.append(f"{DIM}  {self.tr('grade.stderr', text=record['stderr'])}{RESET}")
+            return lines
+
+        expect = self.tr("grade.expect")
+        got = self.tr("grade.got")
+        width = max(display_width(expect), display_width(got))
+        lines.append(
+            f"{GREEN}  {expect}{' ' * (width - display_width(expect))} {RESET}"
+            f"{self._show(record['expected'])}"
+        )
+        lines.append(
+            f"{RED}  {got}{' ' * (width - display_width(got))} {RESET}"
+            f"{self._show(record['got'])}"
+        )
+        return lines
+
+    def _advisory_lines(self, result, lines):
+        advisory = result.get("advisory")
+        if advisory:
+            lines.append("")
+            lines.append(
+                f"{YELLOW}!{RESET} {DIM}"
+                f"{self.tr('grade.substitution_note', names=', '.join(advisory))}{RESET}"
+            )
+
+    def _show(self, text):
+        """Render output for comparison, cat -e style, truncated if huge."""
+        if text == "":
+            return f"{DIM}{self.tr('grade.nothing')}{RESET}"
+        lines = visible(text).split("\n")
+        if lines and lines[-1] == "":
+            lines.pop()
+        if len(lines) == 1:
+            return lines[0]
+        shown = lines[:MAX_SHOWN_LINES]
+        suffix = ""
+        if len(lines) > MAX_SHOWN_LINES:
+            suffix = f" {DIM}(+{len(lines) - MAX_SHOWN_LINES}){RESET}"
+        return " ⏎ ".join(shown) + suffix
+
+    # ------------------------------------------------------------ navigation
+
+    def display_skip(self, old_name, new_exercise, track=None):
+        if not new_exercise:
+            self.warn(self.tr("nav.nothing_left", name=old_name))
+            return
+        where, level = self._placement(new_exercise, track)
+        self.box(
+            f"{YELLOW}{self.tr('nav.skipped_title')}{RESET}",
+            [
+                f"{YELLOW}{self.tr('nav.skipped', name=old_name)}{RESET}",
+                f"{GREEN}{self.tr('nav.now_on')}{RESET} {WHITE}{new_exercise['name']}{RESET}"
+                f"{DIM}  "
+                f"{self.tr('nav.level_note', track=track_name(self.lang, where), level=level)}"
+                f"{RESET}",
+                f"{DIM}{self.tr('nav.subjects_updated')}{RESET}",
+            ],
+            color=YELLOW,
+        )
+
+    def display_reset(self, new_exercise, track=None):
+        where, _ = self._placement(new_exercise or {}, track)
+        lines = [
+            f"{GREEN}{self.tr('nav.reset_done', track=track_name(self.lang, where))}{RESET}"
+        ]
+        if new_exercise:
+            lines.append(
+                f"{DIM}{self.tr('nav.starting_from')}{RESET} {WHITE}{new_exercise['name']}{RESET}"
+            )
+        self.box(f"{RED}{self.tr('nav.reset_title')}{RESET}", lines, color=RED)
+
+    def display_archive(self, session_name, folder, cleaned):
+        if folder is None:
+            self.dim(f"  {self.tr('nav.nothing_to_archive')}")
+            return
+        lines = [
+            f"{CYAN}{self.tr('nav.archived')}{RESET} {YELLOW}{session_name}{RESET}",
+            f"{DIM}{self.tr('nav.archived_to')}{RESET} {GREEN}{os.path.relpath(folder)}{RESET}",
+            f"{DIM}{self.tr('nav.rendu_cleared' if cleaned else 'nav.rendu_kept')}{RESET}",
+        ]
+        self.box(f"{YELLOW}{self.tr('nav.session_saved')}{RESET}", lines, color=YELLOW)
 
     def display_sessions_history(self, sessions):
         if not sessions:
-            print(f"{C_YELLOW}No archived sessions found in `history/` yet.{C_RESET}")
+            self.warn(self.tr("nav.no_sessions"))
             return
-
-        print(f"\n{C_CYAN}======================== ExamsHelp Saved Session History ========================{C_RESET}")
-        print(f"{C_YELLOW}Session Name             Date & Time          Level     Completed  Files{C_RESET}")
-        print("─" * 76)
+        header = (
+            f"{MAGENTA}{self.tr('list.col_session'):<28}"
+            f"{self.tr('list.col_archived'):<21}"
+            f"{self.tr('list.col_level'):<7}"
+            f"{self.tr('list.col_done')}{RESET}"
+        )
+        lines = [header]
         for s in sessions:
-            c_files = ", ".join(s.get("archived_rendu_files", [])) or "None"
-            print(f"[*] {s['session_name']:<21} {s.get('archived_at', 'N/A'):<20} Level {s.get('current_level', 0):<3} {s.get('completed_count', 0):<2} exs     {c_files}")
-        print("─" * 76 + "\n")
+            lines.append(
+                f"{YELLOW}{s['session_name']:<28}{RESET}"
+                f"{DIM}{s.get('archived_at', '?'):<21}{RESET}"
+                f"{s.get('current_level', 0):<7}"
+                f"{GREEN}{s.get('completed_count', 0)}{RESET}"
+            )
+        self.box(f"{CYAN}{self.tr('ui.history')}{RESET}", lines, color=CYAN)
 
-    def display_exercise_list(self, db, state):
-        print(f"\n{C_CYAN}======================== ExamsHelp Level Curriculum ========================{C_RESET}")
-        print(f"{C_MAGENTA}Lvl  Track         Exercise Name        Expected File         Status{C_RESET}")
-        print("─" * 76)
+    def display_exercise_list(self, state, tracks):
+        """The ladder for each requested track, level by level."""
+        completed = set(state.state.get("completed_exercises", []))
+        current_track = state.get_current_track()
 
-        completed_set = set(state.get("completed_exercises", []))
-        curr_lvl = state.get("current_level", 0)
+        lines = []
+        for track in tracks:
+            levels = state.track_levels(track)
+            current_level = state.get_level(track)
+            active = state.get_active_name(track)
 
-        for lvl_str in sorted(db["levels"].keys(), key=lambda x: int(x)):
-            lvl_int = int(lvl_str)
-            for ex in db["levels"][lvl_str]:
-                name = ex["name"]
-                source_type = ex.get("source_type", "42_official")
-                track_str = "42 Official" if source_type == "42_official" else "Extended"
+            if lines:
+                lines.append("")
+            heading = f"{MAGENTA}{track_name(self.lang, track)}{RESET}"
+            if track == current_track:
+                heading = f"{YELLOW}▸{RESET} {heading}"
+            if track == EXTRA:
+                heading += f"  {DIM}{self.tr('track.extra_note')}{RESET}"
+            lines.append(heading)
 
-                if name in completed_set:
-                    status = f"{C_GREEN}[COMPLETED]{C_RESET}"
-                elif lvl_int == curr_lvl and name == state.get("active_exercise_id", ""):
-                    status = f"{C_YELLOW}[CURRENT]{C_RESET}"
-                elif lvl_int <= curr_lvl:
-                    status = f"{C_GREEN}[UNLOCKED]{C_RESET}"
-                else:
-                    status = f"{C_DIM}[LOCKED]{C_RESET}"
-                    
-                print(f"{lvl_int:<4} {track_str:<13} {name:<20} {ex['expected_files']:<21} {status}")
-        print("─" * 76 + "\n")
+            for level_key in sorted(levels, key=int):
+                exercises = state.exercises_at(track, level_key)
+                if not exercises:
+                    continue
+                level = int(level_key)
+                done = sum(1 for e in exercises if e["name"] in completed)
+                locked = track == current_track and level > current_level
+                head = DIM if locked else CYAN
+                lines.append(
+                    f"{head}{self.tr('list.level', level=level)}{RESET} {DIM}"
+                    f"{self.tr('list.progress', done=done, total=len(exercises), locked=self.tr('list.locked_suffix') if locked else '')}"
+                    f"{RESET}"
+                )
+                for exercise in sorted(exercises, key=lambda e: e["name"]):
+                    name = exercise["name"]
+                    if name in completed:
+                        mark, color = "✓", GREEN
+                    elif name == active and track == current_track:
+                        mark, color = "▸", YELLOW
+                    elif locked:
+                        mark, color = "·", DIM
+                    else:
+                        mark, color = " ", RESET
+                    kind = "fn" if exercise.get("kind") == "function" else "prog"
+                    count = len(exercise.get("tests", []))
+                    key = "list.tests" if count == 1 else "list.tests_plural"
+                    lines.append(
+                        f"{color}{mark} {name:<22}{RESET}"
+                        f"{DIM}{kind:<5}{self.tr(key, count=count)}{RESET}"
+                    )
+
+        legend = (
+            f"{GREEN}✓{RESET} {self.tr('list.legend_done')}   "
+            f"{YELLOW}▸{RESET} {self.tr('list.legend_current')}   "
+            f"{DIM}·{RESET} {self.tr('list.legend_locked')}"
+        )
+        self.box(
+            f"{CYAN}{self.tr('ui.curriculum')}{RESET}",
+            lines,
+            color=CYAN,
+            footer=None,
+        )
+        self.dim("  " + legend)
+        self.dim("  " + self.tr("list.all_hint"))
+
+    def display_exams(self, rows):
+        """Every track with its progress, for the `exam` command."""
+        labels = {row["track"]: track_name(self.lang, row["track"]) for row in rows}
+        width = max((display_width(label) for label in labels.values()), default=0)
+
+        lines = []
+        for row in rows:
+            mark, color = ("▸", YELLOW) if row["current"] else (" ", RESET)
+            label = labels[row["track"]]
+            padding = " " * max(1, width - display_width(label) + 2)
+            line = (
+                f"{color}{mark} {label}{RESET}{padding}"
+                f"{DIM}{self.tr('exam.row_level', level=row['level'], total=row['total_levels'])}"
+                f"{RESET}   {GREEN}"
+                f"{self.tr('exam.row_done', done=row['done'], total=row['total'])}{RESET}"
+            )
+            lines.append(line)
+
+        self.box(f"{CYAN}{self.tr('ui.exams')}{RESET}", lines, color=CYAN)
+        # Below the box, not in the row: appended inline it overflows the box
+        # width and the wrapper collapses the column alignment.
+        if any(row["track"] == EXTRA for row in rows):
+            self.dim(f"  {track_name(self.lang, EXTRA)} — {self.tr('track.extra_note')}")
+
+    def display_help(self):
+        names = [
+            "subject", "hint", "grademe", "status", "list", "exam",
+            "skip", "lang", "archive", "history", "reset", "exit",
+        ]
+        width = 12
+        lines = [
+            f"{GREEN}{name:<{width}}{RESET}{DIM}{self.tr(f'cmd.{name}')}{RESET}"
+            for name in names
+        ]
+        self.box(
+            f"{CYAN}{self.tr('ui.commands')}{RESET}",
+            lines,
+            color=CYAN,
+            footer=f"{DIM}{VERSION}{RESET}",
+        )
+
+
+def _reflow_subject(text):
+    """Join prose into paragraphs so it re-wraps to the current terminal width.
+
+    Indented lines, shell transcripts and the metadata header are kept verbatim:
+    their line structure is part of the meaning.
+    """
+    lines = []
+    paragraph = []
+
+    def flush():
+        if paragraph:
+            lines.append(f"{WHITE}{' '.join(paragraph)}{RESET}")
+            paragraph.clear()
+
+    for raw in text.splitlines():
+        verbatim = (
+            not raw.strip()
+            or raw[:1].isspace()
+            or raw.lstrip().startswith("$>")
+            or " : " in raw
+        )
+        if verbatim:
+            flush()
+            lines.append(f"{WHITE}{raw}{RESET}" if raw.strip() else "")
+        else:
+            paragraph.append(raw.strip())
+    flush()
+    return lines
+
+
+def _as_list(value):
+    if isinstance(value, str):
+        return [v.strip() for v in value.split(",") if v.strip()]
+    return list(value or [])
